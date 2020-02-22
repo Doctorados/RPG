@@ -48,6 +48,8 @@ Partial Class Form1
         Me.TextBox13 = New System.Windows.Forms.TextBox()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
         '
         'name0
@@ -119,12 +121,12 @@ Partial Class Form1
         Me.TextBox1.BackColor = System.Drawing.Color.Black
         Me.TextBox1.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.ForeColor = System.Drawing.Color.White
-        Me.TextBox1.Location = New System.Drawing.Point(616, 12)
+        Me.TextBox1.Location = New System.Drawing.Point(579, 12)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(172, 36)
+        Me.TextBox1.Size = New System.Drawing.Size(209, 36)
         Me.TextBox1.TabIndex = 7
-        Me.TextBox1.Text = "Rations: 2"
+        Me.TextBox1.Text = "Rations: 2 (-1)"
         Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
@@ -360,19 +362,45 @@ Partial Class Form1
         Me.TextBox14.ReadOnly = True
         Me.TextBox14.Size = New System.Drawing.Size(125, 26)
         Me.TextBox14.TabIndex = 37
-        Me.TextBox14.Text = "Assigned Task"
+        Me.TextBox14.Text = "Task"
         '
         'ComboBox1
         '
         Me.ComboBox1.BackColor = System.Drawing.Color.Black
-        Me.ComboBox1.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.ForeColor = System.Drawing.Color.White
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
-        Me.ComboBox1.Location = New System.Drawing.Point(158, 353)
+        Me.ComboBox1.Location = New System.Drawing.Point(472, 349)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(138, 26)
+        Me.ComboBox1.Size = New System.Drawing.Size(138, 27)
         Me.ComboBox1.TabIndex = 40
+        '
+        'ListBox1
+        '
+        Me.ListBox1.BackColor = System.Drawing.Color.Black
+        Me.ListBox1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListBox1.ForeColor = System.Drawing.Color.White
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.ItemHeight = 19
+        Me.ListBox1.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
+        Me.ListBox1.Location = New System.Drawing.Point(158, 353)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(138, 23)
+        Me.ListBox1.TabIndex = 38
+        '
+        'ListBox2
+        '
+        Me.ListBox2.BackColor = System.Drawing.Color.Black
+        Me.ListBox2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListBox2.ForeColor = System.Drawing.Color.White
+        Me.ListBox2.FormattingEnabled = True
+        Me.ListBox2.ItemHeight = 19
+        Me.ListBox2.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
+        Me.ListBox2.Location = New System.Drawing.Point(314, 353)
+        Me.ListBox2.Name = "ListBox2"
+        Me.ListBox2.Size = New System.Drawing.Size(138, 23)
+        Me.ListBox2.TabIndex = 39
         '
         'Form1
         '
@@ -381,6 +409,8 @@ Partial Class Form1
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.ListBox2)
+        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.TextBox14)
         Me.Controls.Add(Me.TextBox13)
         Me.Controls.Add(Me.TextBox12)
@@ -439,4 +469,6 @@ Partial Class Form1
     Friend WithEvents TextBox13 As TextBox
     Friend WithEvents TextBox14 As TextBox
     Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents ListBox2 As ListBox
 End Class
