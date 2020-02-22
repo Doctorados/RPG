@@ -42,6 +42,12 @@ Partial Class Form1
         Me.TextBox17 = New System.Windows.Forms.TextBox()
         Me.TextBox18 = New System.Windows.Forms.TextBox()
         Me.TextBox19 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.TextBox14 = New System.Windows.Forms.TextBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.SuspendLayout()
         '
         'name0
@@ -294,12 +300,92 @@ Partial Class Form1
         Me.TextBox19.TabIndex = 32
         Me.TextBox19.Text = "░░░░░░░░"
         '
+        'TextBox9
+        '
+        Me.TextBox9.BackColor = System.Drawing.Color.Black
+        Me.TextBox9.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox9.ForeColor = System.Drawing.Color.White
+        Me.TextBox9.Location = New System.Drawing.Point(12, 281)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.ReadOnly = True
+        Me.TextBox9.Size = New System.Drawing.Size(125, 20)
+        Me.TextBox9.TabIndex = 33
+        Me.TextBox9.Text = "Social"
+        '
+        'TextBox10
+        '
+        Me.TextBox10.BackColor = System.Drawing.Color.Black
+        Me.TextBox10.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox10.ForeColor = System.Drawing.Color.White
+        Me.TextBox10.Location = New System.Drawing.Point(12, 307)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.ReadOnly = True
+        Me.TextBox10.Size = New System.Drawing.Size(125, 20)
+        Me.TextBox10.TabIndex = 34
+        Me.TextBox10.Text = "Perception"
+        '
+        'TextBox12
+        '
+        Me.TextBox12.BackColor = System.Drawing.Color.Black
+        Me.TextBox12.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox12.ForeColor = System.Drawing.Color.White
+        Me.TextBox12.Location = New System.Drawing.Point(158, 281)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.ReadOnly = True
+        Me.TextBox12.Size = New System.Drawing.Size(138, 20)
+        Me.TextBox12.TabIndex = 35
+        Me.TextBox12.Text = "very bad"
+        Me.TextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox13
+        '
+        Me.TextBox13.BackColor = System.Drawing.Color.Black
+        Me.TextBox13.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox13.ForeColor = System.Drawing.Color.White
+        Me.TextBox13.Location = New System.Drawing.Point(158, 307)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.ReadOnly = True
+        Me.TextBox13.Size = New System.Drawing.Size(138, 20)
+        Me.TextBox13.TabIndex = 36
+        Me.TextBox13.Text = "fantastic"
+        Me.TextBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox14
+        '
+        Me.TextBox14.BackColor = System.Drawing.Color.Black
+        Me.TextBox14.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox14.ForeColor = System.Drawing.Color.White
+        Me.TextBox14.Location = New System.Drawing.Point(12, 353)
+        Me.TextBox14.Name = "TextBox14"
+        Me.TextBox14.ReadOnly = True
+        Me.TextBox14.Size = New System.Drawing.Size(125, 26)
+        Me.TextBox14.TabIndex = 37
+        Me.TextBox14.Text = "Assigned Task"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.BackColor = System.Drawing.Color.Black
+        Me.ComboBox1.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.ForeColor = System.Drawing.Color.White
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
+        Me.ComboBox1.Location = New System.Drawing.Point(158, 353)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(138, 26)
+        Me.ComboBox1.TabIndex = 40
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.TextBox14)
+        Me.Controls.Add(Me.TextBox13)
+        Me.Controls.Add(Me.TextBox12)
+        Me.Controls.Add(Me.TextBox10)
+        Me.Controls.Add(Me.TextBox9)
         Me.Controls.Add(Me.TextBox19)
         Me.Controls.Add(Me.TextBox18)
         Me.Controls.Add(Me.TextBox17)
@@ -347,4 +433,10 @@ Partial Class Form1
     Friend WithEvents TextBox17 As TextBox
     Friend WithEvents TextBox18 As TextBox
     Friend WithEvents TextBox19 As TextBox
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents TextBox12 As TextBox
+    Friend WithEvents TextBox13 As TextBox
+    Friend WithEvents TextBox14 As TextBox
+    Friend WithEvents ComboBox1 As ComboBox
 End Class
