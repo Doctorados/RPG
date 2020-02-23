@@ -25,31 +25,41 @@ Partial Class Form1
         Me.name0 = New System.Windows.Forms.TextBox()
         Me.name1 = New System.Windows.Forms.TextBox()
         Me.name2 = New System.Windows.Forms.TextBox()
-        Me.skill0 = New System.Windows.Forms.TextBox()
-        Me.dayCount = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.skillTitle0 = New System.Windows.Forms.TextBox()
+        Me.dayCounter = New System.Windows.Forms.TextBox()
+        Me.foodCounter = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.skillTitle1 = New System.Windows.Forms.TextBox()
+        Me.healthTitle = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
-        Me.TextBox18 = New System.Windows.Forms.TextBox()
-        Me.TextBox19 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
+        Me.skillTitle2 = New System.Windows.Forms.TextBox()
+        Me.strength0 = New System.Windows.Forms.TextBox()
+        Me.intelligence0 = New System.Windows.Forms.TextBox()
+        Me.agility0 = New System.Windows.Forms.TextBox()
+        Me.hungerBar1 = New System.Windows.Forms.TextBox()
+        Me.healthBar1 = New System.Windows.Forms.TextBox()
+        Me.hungerBar2 = New System.Windows.Forms.TextBox()
+        Me.healthBar2 = New System.Windows.Forms.TextBox()
+        Me.hungerBar0 = New System.Windows.Forms.TextBox()
+        Me.healthBar0 = New System.Windows.Forms.TextBox()
+        Me.skillTitle3 = New System.Windows.Forms.TextBox()
+        Me.skillTitle4 = New System.Windows.Forms.TextBox()
+        Me.social0 = New System.Windows.Forms.TextBox()
+        Me.perception0 = New System.Windows.Forms.TextBox()
+        Me.taskTitle = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
+        Me.strength1 = New System.Windows.Forms.TextBox()
+        Me.intelligence1 = New System.Windows.Forms.TextBox()
+        Me.agility1 = New System.Windows.Forms.TextBox()
+        Me.social1 = New System.Windows.Forms.TextBox()
+        Me.perception1 = New System.Windows.Forms.TextBox()
+        Me.strength2 = New System.Windows.Forms.TextBox()
+        Me.intelligence2 = New System.Windows.Forms.TextBox()
+        Me.agility2 = New System.Windows.Forms.TextBox()
+        Me.social2 = New System.Windows.Forms.TextBox()
+        Me.perception2 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'name0
@@ -62,7 +72,7 @@ Partial Class Form1
         Me.name0.ReadOnly = True
         Me.name0.Size = New System.Drawing.Size(138, 26)
         Me.name0.TabIndex = 1
-        Me.name0.Text = "Günther"
+        Me.name0.Text = "NO DATA"
         Me.name0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'name1
@@ -75,7 +85,7 @@ Partial Class Form1
         Me.name1.ReadOnly = True
         Me.name1.Size = New System.Drawing.Size(138, 26)
         Me.name1.TabIndex = 2
-        Me.name1.Text = "Karl"
+        Me.name1.Text = "NO DATA"
         Me.name1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'name2
@@ -88,46 +98,46 @@ Partial Class Form1
         Me.name2.ReadOnly = True
         Me.name2.Size = New System.Drawing.Size(138, 26)
         Me.name2.TabIndex = 3
-        Me.name2.Text = "Lisa"
+        Me.name2.Text = "NO DATA"
         Me.name2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'skill0
+        'skillTitle0
         '
-        Me.skill0.BackColor = System.Drawing.Color.Black
-        Me.skill0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.skill0.ForeColor = System.Drawing.Color.White
-        Me.skill0.Location = New System.Drawing.Point(12, 203)
-        Me.skill0.Name = "skill0"
-        Me.skill0.ReadOnly = True
-        Me.skill0.Size = New System.Drawing.Size(125, 20)
-        Me.skill0.TabIndex = 4
-        Me.skill0.Text = "Strength"
+        Me.skillTitle0.BackColor = System.Drawing.Color.Black
+        Me.skillTitle0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.skillTitle0.ForeColor = System.Drawing.Color.White
+        Me.skillTitle0.Location = New System.Drawing.Point(12, 203)
+        Me.skillTitle0.Name = "skillTitle0"
+        Me.skillTitle0.ReadOnly = True
+        Me.skillTitle0.Size = New System.Drawing.Size(125, 20)
+        Me.skillTitle0.TabIndex = 4
+        Me.skillTitle0.Text = "Strength"
         '
-        'dayCount
+        'dayCounter
         '
-        Me.dayCount.BackColor = System.Drawing.Color.Black
-        Me.dayCount.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dayCount.ForeColor = System.Drawing.Color.White
-        Me.dayCount.Location = New System.Drawing.Point(12, 12)
-        Me.dayCount.Name = "dayCount"
-        Me.dayCount.ReadOnly = True
-        Me.dayCount.Size = New System.Drawing.Size(138, 36)
-        Me.dayCount.TabIndex = 6
-        Me.dayCount.Text = "DAY 3"
-        Me.dayCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.dayCounter.BackColor = System.Drawing.Color.Black
+        Me.dayCounter.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dayCounter.ForeColor = System.Drawing.Color.White
+        Me.dayCounter.Location = New System.Drawing.Point(12, 12)
+        Me.dayCounter.Name = "dayCounter"
+        Me.dayCounter.ReadOnly = True
+        Me.dayCounter.Size = New System.Drawing.Size(138, 36)
+        Me.dayCounter.TabIndex = 6
+        Me.dayCounter.Text = "DAY 3"
+        Me.dayCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox1
+        'foodCounter
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.Black
-        Me.TextBox1.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.Color.White
-        Me.TextBox1.Location = New System.Drawing.Point(579, 12)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(209, 36)
-        Me.TextBox1.TabIndex = 7
-        Me.TextBox1.Text = "Rations: 2 (-1)"
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.foodCounter.BackColor = System.Drawing.Color.Black
+        Me.foodCounter.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.foodCounter.ForeColor = System.Drawing.Color.White
+        Me.foodCounter.Location = New System.Drawing.Point(579, 12)
+        Me.foodCounter.Name = "foodCounter"
+        Me.foodCounter.ReadOnly = True
+        Me.foodCounter.Size = New System.Drawing.Size(209, 36)
+        Me.foodCounter.TabIndex = 7
+        Me.foodCounter.Text = "Rations: 2 (-1)"
+        Me.foodCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
         '
@@ -143,29 +153,29 @@ Partial Class Form1
         Me.Button1.Text = "GO!"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'TextBox2
+        'skillTitle1
         '
-        Me.TextBox2.BackColor = System.Drawing.Color.Black
-        Me.TextBox2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.ForeColor = System.Drawing.Color.White
-        Me.TextBox2.Location = New System.Drawing.Point(12, 229)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(125, 20)
-        Me.TextBox2.TabIndex = 9
-        Me.TextBox2.Text = "Intelligence"
+        Me.skillTitle1.BackColor = System.Drawing.Color.Black
+        Me.skillTitle1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.skillTitle1.ForeColor = System.Drawing.Color.White
+        Me.skillTitle1.Location = New System.Drawing.Point(12, 229)
+        Me.skillTitle1.Name = "skillTitle1"
+        Me.skillTitle1.ReadOnly = True
+        Me.skillTitle1.Size = New System.Drawing.Size(125, 20)
+        Me.skillTitle1.TabIndex = 9
+        Me.skillTitle1.Text = "Intelligence"
         '
-        'TextBox3
+        'healthTitle
         '
-        Me.TextBox3.BackColor = System.Drawing.Color.Black
-        Me.TextBox3.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.ForeColor = System.Drawing.Color.White
-        Me.TextBox3.Location = New System.Drawing.Point(12, 131)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(125, 26)
-        Me.TextBox3.TabIndex = 11
-        Me.TextBox3.Text = "Health"
+        Me.healthTitle.BackColor = System.Drawing.Color.Black
+        Me.healthTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.healthTitle.ForeColor = System.Drawing.Color.White
+        Me.healthTitle.Location = New System.Drawing.Point(12, 131)
+        Me.healthTitle.Name = "healthTitle"
+        Me.healthTitle.ReadOnly = True
+        Me.healthTitle.Size = New System.Drawing.Size(125, 26)
+        Me.healthTitle.TabIndex = 11
+        Me.healthTitle.Text = "Health"
         '
         'TextBox4
         '
@@ -179,190 +189,190 @@ Partial Class Form1
         Me.TextBox4.TabIndex = 12
         Me.TextBox4.Text = "Hunger"
         '
-        'TextBox5
+        'skillTitle2
         '
-        Me.TextBox5.BackColor = System.Drawing.Color.Black
-        Me.TextBox5.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.ForeColor = System.Drawing.Color.White
-        Me.TextBox5.Location = New System.Drawing.Point(12, 255)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
-        Me.TextBox5.Size = New System.Drawing.Size(125, 20)
-        Me.TextBox5.TabIndex = 18
-        Me.TextBox5.Text = "Agility"
+        Me.skillTitle2.BackColor = System.Drawing.Color.Black
+        Me.skillTitle2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.skillTitle2.ForeColor = System.Drawing.Color.White
+        Me.skillTitle2.Location = New System.Drawing.Point(12, 255)
+        Me.skillTitle2.Name = "skillTitle2"
+        Me.skillTitle2.ReadOnly = True
+        Me.skillTitle2.Size = New System.Drawing.Size(125, 20)
+        Me.skillTitle2.TabIndex = 18
+        Me.skillTitle2.Text = "Agility"
         '
-        'TextBox6
+        'strength0
         '
-        Me.TextBox6.BackColor = System.Drawing.Color.Black
-        Me.TextBox6.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.ForeColor = System.Drawing.Color.White
-        Me.TextBox6.Location = New System.Drawing.Point(158, 203)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(138, 20)
-        Me.TextBox6.TabIndex = 19
-        Me.TextBox6.Text = "very strong"
-        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.strength0.BackColor = System.Drawing.Color.Black
+        Me.strength0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.strength0.ForeColor = System.Drawing.Color.White
+        Me.strength0.Location = New System.Drawing.Point(158, 203)
+        Me.strength0.Name = "strength0"
+        Me.strength0.ReadOnly = True
+        Me.strength0.Size = New System.Drawing.Size(138, 20)
+        Me.strength0.TabIndex = 19
+        Me.strength0.Text = "NO DATA"
+        Me.strength0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox7
+        'intelligence0
         '
-        Me.TextBox7.BackColor = System.Drawing.Color.Black
-        Me.TextBox7.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.ForeColor = System.Drawing.Color.White
-        Me.TextBox7.Location = New System.Drawing.Point(158, 229)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(138, 20)
-        Me.TextBox7.TabIndex = 20
-        Me.TextBox7.Text = "idiot"
-        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.intelligence0.BackColor = System.Drawing.Color.Black
+        Me.intelligence0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.intelligence0.ForeColor = System.Drawing.Color.White
+        Me.intelligence0.Location = New System.Drawing.Point(158, 229)
+        Me.intelligence0.Name = "intelligence0"
+        Me.intelligence0.ReadOnly = True
+        Me.intelligence0.Size = New System.Drawing.Size(138, 20)
+        Me.intelligence0.TabIndex = 20
+        Me.intelligence0.Text = "NO DATA"
+        Me.intelligence0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox8
+        'agility0
         '
-        Me.TextBox8.BackColor = System.Drawing.Color.Black
-        Me.TextBox8.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox8.ForeColor = System.Drawing.Color.White
-        Me.TextBox8.Location = New System.Drawing.Point(158, 255)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.ReadOnly = True
-        Me.TextBox8.Size = New System.Drawing.Size(138, 20)
-        Me.TextBox8.TabIndex = 21
-        Me.TextBox8.Text = "somewhat agile"
-        Me.TextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.agility0.BackColor = System.Drawing.Color.Black
+        Me.agility0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.agility0.ForeColor = System.Drawing.Color.White
+        Me.agility0.Location = New System.Drawing.Point(158, 255)
+        Me.agility0.Name = "agility0"
+        Me.agility0.ReadOnly = True
+        Me.agility0.Size = New System.Drawing.Size(138, 20)
+        Me.agility0.TabIndex = 21
+        Me.agility0.Text = "NO DATA"
+        Me.agility0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox11
+        'hungerBar1
         '
-        Me.TextBox11.BackColor = System.Drawing.Color.Black
-        Me.TextBox11.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox11.ForeColor = System.Drawing.Color.White
-        Me.TextBox11.Location = New System.Drawing.Point(314, 162)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.ReadOnly = True
-        Me.TextBox11.Size = New System.Drawing.Size(138, 26)
-        Me.TextBox11.TabIndex = 24
-        Me.TextBox11.Text = "░░░░        +1"
+        Me.hungerBar1.BackColor = System.Drawing.Color.Black
+        Me.hungerBar1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.hungerBar1.ForeColor = System.Drawing.Color.White
+        Me.hungerBar1.Location = New System.Drawing.Point(314, 162)
+        Me.hungerBar1.Name = "hungerBar1"
+        Me.hungerBar1.ReadOnly = True
+        Me.hungerBar1.Size = New System.Drawing.Size(138, 26)
+        Me.hungerBar1.TabIndex = 24
+        Me.hungerBar1.Text = "NO DATA"
         '
-        'TextBox15
+        'healthBar1
         '
-        Me.TextBox15.BackColor = System.Drawing.Color.Black
-        Me.TextBox15.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox15.ForeColor = System.Drawing.Color.White
-        Me.TextBox15.Location = New System.Drawing.Point(314, 130)
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.ReadOnly = True
-        Me.TextBox15.Size = New System.Drawing.Size(138, 26)
-        Me.TextBox15.TabIndex = 28
-        Me.TextBox15.Text = "░░░░░░░░"
+        Me.healthBar1.BackColor = System.Drawing.Color.Black
+        Me.healthBar1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.healthBar1.ForeColor = System.Drawing.Color.White
+        Me.healthBar1.Location = New System.Drawing.Point(314, 130)
+        Me.healthBar1.Name = "healthBar1"
+        Me.healthBar1.ReadOnly = True
+        Me.healthBar1.Size = New System.Drawing.Size(138, 26)
+        Me.healthBar1.TabIndex = 28
+        Me.healthBar1.Text = "NO DATA"
         '
-        'TextBox16
+        'hungerBar2
         '
-        Me.TextBox16.BackColor = System.Drawing.Color.Black
-        Me.TextBox16.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox16.ForeColor = System.Drawing.Color.White
-        Me.TextBox16.Location = New System.Drawing.Point(472, 163)
-        Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.ReadOnly = True
-        Me.TextBox16.Size = New System.Drawing.Size(138, 26)
-        Me.TextBox16.TabIndex = 29
-        Me.TextBox16.Text = "░░░░░░░░░░░░"
+        Me.hungerBar2.BackColor = System.Drawing.Color.Black
+        Me.hungerBar2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.hungerBar2.ForeColor = System.Drawing.Color.White
+        Me.hungerBar2.Location = New System.Drawing.Point(472, 163)
+        Me.hungerBar2.Name = "hungerBar2"
+        Me.hungerBar2.ReadOnly = True
+        Me.hungerBar2.Size = New System.Drawing.Size(138, 26)
+        Me.hungerBar2.TabIndex = 29
+        Me.hungerBar2.Text = "NO DATA"
         '
-        'TextBox17
+        'healthBar2
         '
-        Me.TextBox17.BackColor = System.Drawing.Color.Black
-        Me.TextBox17.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox17.ForeColor = System.Drawing.Color.White
-        Me.TextBox17.Location = New System.Drawing.Point(472, 131)
-        Me.TextBox17.Name = "TextBox17"
-        Me.TextBox17.ReadOnly = True
-        Me.TextBox17.Size = New System.Drawing.Size(138, 26)
-        Me.TextBox17.TabIndex = 30
-        Me.TextBox17.Text = "░░░░"
+        Me.healthBar2.BackColor = System.Drawing.Color.Black
+        Me.healthBar2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.healthBar2.ForeColor = System.Drawing.Color.White
+        Me.healthBar2.Location = New System.Drawing.Point(472, 131)
+        Me.healthBar2.Name = "healthBar2"
+        Me.healthBar2.ReadOnly = True
+        Me.healthBar2.Size = New System.Drawing.Size(138, 26)
+        Me.healthBar2.TabIndex = 30
+        Me.healthBar2.Text = "NO DATA"
         '
-        'TextBox18
+        'hungerBar0
         '
-        Me.TextBox18.BackColor = System.Drawing.Color.Black
-        Me.TextBox18.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox18.ForeColor = System.Drawing.Color.White
-        Me.TextBox18.Location = New System.Drawing.Point(158, 163)
-        Me.TextBox18.Name = "TextBox18"
-        Me.TextBox18.ReadOnly = True
-        Me.TextBox18.Size = New System.Drawing.Size(138, 26)
-        Me.TextBox18.TabIndex = 31
-        Me.TextBox18.Text = "░░░░"
+        Me.hungerBar0.BackColor = System.Drawing.Color.Black
+        Me.hungerBar0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.hungerBar0.ForeColor = System.Drawing.Color.White
+        Me.hungerBar0.Location = New System.Drawing.Point(158, 163)
+        Me.hungerBar0.Name = "hungerBar0"
+        Me.hungerBar0.ReadOnly = True
+        Me.hungerBar0.Size = New System.Drawing.Size(138, 26)
+        Me.hungerBar0.TabIndex = 31
+        Me.hungerBar0.Text = "NO DATA"
         '
-        'TextBox19
+        'healthBar0
         '
-        Me.TextBox19.BackColor = System.Drawing.Color.Black
-        Me.TextBox19.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox19.ForeColor = System.Drawing.Color.White
-        Me.TextBox19.Location = New System.Drawing.Point(158, 130)
-        Me.TextBox19.Name = "TextBox19"
-        Me.TextBox19.ReadOnly = True
-        Me.TextBox19.Size = New System.Drawing.Size(138, 26)
-        Me.TextBox19.TabIndex = 32
-        Me.TextBox19.Text = "░░░░░░░░"
+        Me.healthBar0.BackColor = System.Drawing.Color.Black
+        Me.healthBar0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.healthBar0.ForeColor = System.Drawing.Color.White
+        Me.healthBar0.Location = New System.Drawing.Point(158, 130)
+        Me.healthBar0.Name = "healthBar0"
+        Me.healthBar0.ReadOnly = True
+        Me.healthBar0.Size = New System.Drawing.Size(138, 26)
+        Me.healthBar0.TabIndex = 32
+        Me.healthBar0.Text = "NO DATA"
         '
-        'TextBox9
+        'skillTitle3
         '
-        Me.TextBox9.BackColor = System.Drawing.Color.Black
-        Me.TextBox9.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox9.ForeColor = System.Drawing.Color.White
-        Me.TextBox9.Location = New System.Drawing.Point(12, 281)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.ReadOnly = True
-        Me.TextBox9.Size = New System.Drawing.Size(125, 20)
-        Me.TextBox9.TabIndex = 33
-        Me.TextBox9.Text = "Social"
+        Me.skillTitle3.BackColor = System.Drawing.Color.Black
+        Me.skillTitle3.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.skillTitle3.ForeColor = System.Drawing.Color.White
+        Me.skillTitle3.Location = New System.Drawing.Point(12, 281)
+        Me.skillTitle3.Name = "skillTitle3"
+        Me.skillTitle3.ReadOnly = True
+        Me.skillTitle3.Size = New System.Drawing.Size(125, 20)
+        Me.skillTitle3.TabIndex = 33
+        Me.skillTitle3.Text = "Social"
         '
-        'TextBox10
+        'skillTitle4
         '
-        Me.TextBox10.BackColor = System.Drawing.Color.Black
-        Me.TextBox10.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox10.ForeColor = System.Drawing.Color.White
-        Me.TextBox10.Location = New System.Drawing.Point(12, 307)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.ReadOnly = True
-        Me.TextBox10.Size = New System.Drawing.Size(125, 20)
-        Me.TextBox10.TabIndex = 34
-        Me.TextBox10.Text = "Perception"
+        Me.skillTitle4.BackColor = System.Drawing.Color.Black
+        Me.skillTitle4.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.skillTitle4.ForeColor = System.Drawing.Color.White
+        Me.skillTitle4.Location = New System.Drawing.Point(12, 307)
+        Me.skillTitle4.Name = "skillTitle4"
+        Me.skillTitle4.ReadOnly = True
+        Me.skillTitle4.Size = New System.Drawing.Size(125, 20)
+        Me.skillTitle4.TabIndex = 34
+        Me.skillTitle4.Text = "Perception"
         '
-        'TextBox12
+        'social0
         '
-        Me.TextBox12.BackColor = System.Drawing.Color.Black
-        Me.TextBox12.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox12.ForeColor = System.Drawing.Color.White
-        Me.TextBox12.Location = New System.Drawing.Point(158, 281)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.ReadOnly = True
-        Me.TextBox12.Size = New System.Drawing.Size(138, 20)
-        Me.TextBox12.TabIndex = 35
-        Me.TextBox12.Text = "very bad"
-        Me.TextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.social0.BackColor = System.Drawing.Color.Black
+        Me.social0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.social0.ForeColor = System.Drawing.Color.White
+        Me.social0.Location = New System.Drawing.Point(158, 281)
+        Me.social0.Name = "social0"
+        Me.social0.ReadOnly = True
+        Me.social0.Size = New System.Drawing.Size(138, 20)
+        Me.social0.TabIndex = 35
+        Me.social0.Text = "NO DATA"
+        Me.social0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox13
+        'perception0
         '
-        Me.TextBox13.BackColor = System.Drawing.Color.Black
-        Me.TextBox13.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox13.ForeColor = System.Drawing.Color.White
-        Me.TextBox13.Location = New System.Drawing.Point(158, 307)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(138, 20)
-        Me.TextBox13.TabIndex = 36
-        Me.TextBox13.Text = "fantastic"
-        Me.TextBox13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.perception0.BackColor = System.Drawing.Color.Black
+        Me.perception0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.perception0.ForeColor = System.Drawing.Color.White
+        Me.perception0.Location = New System.Drawing.Point(158, 307)
+        Me.perception0.Name = "perception0"
+        Me.perception0.ReadOnly = True
+        Me.perception0.Size = New System.Drawing.Size(138, 20)
+        Me.perception0.TabIndex = 36
+        Me.perception0.Text = "NO DATA"
+        Me.perception0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TextBox14
+        'taskTitle
         '
-        Me.TextBox14.BackColor = System.Drawing.Color.Black
-        Me.TextBox14.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox14.ForeColor = System.Drawing.Color.White
-        Me.TextBox14.Location = New System.Drawing.Point(12, 353)
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.ReadOnly = True
-        Me.TextBox14.Size = New System.Drawing.Size(125, 26)
-        Me.TextBox14.TabIndex = 37
-        Me.TextBox14.Text = "Task"
+        Me.taskTitle.BackColor = System.Drawing.Color.Black
+        Me.taskTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.taskTitle.ForeColor = System.Drawing.Color.White
+        Me.taskTitle.Location = New System.Drawing.Point(12, 353)
+        Me.taskTitle.Name = "taskTitle"
+        Me.taskTitle.ReadOnly = True
+        Me.taskTitle.Size = New System.Drawing.Size(125, 26)
+        Me.taskTitle.TabIndex = 37
+        Me.taskTitle.Text = "Task"
         '
         'ComboBox1
         '
@@ -402,37 +412,177 @@ Partial Class Form1
         Me.ListBox2.Size = New System.Drawing.Size(138, 23)
         Me.ListBox2.TabIndex = 39
         '
+        'strength1
+        '
+        Me.strength1.BackColor = System.Drawing.Color.Black
+        Me.strength1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.strength1.ForeColor = System.Drawing.Color.White
+        Me.strength1.Location = New System.Drawing.Point(314, 203)
+        Me.strength1.Name = "strength1"
+        Me.strength1.ReadOnly = True
+        Me.strength1.Size = New System.Drawing.Size(138, 20)
+        Me.strength1.TabIndex = 41
+        Me.strength1.Text = "NO DATA"
+        Me.strength1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'intelligence1
+        '
+        Me.intelligence1.BackColor = System.Drawing.Color.Black
+        Me.intelligence1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.intelligence1.ForeColor = System.Drawing.Color.White
+        Me.intelligence1.Location = New System.Drawing.Point(314, 229)
+        Me.intelligence1.Name = "intelligence1"
+        Me.intelligence1.ReadOnly = True
+        Me.intelligence1.Size = New System.Drawing.Size(138, 20)
+        Me.intelligence1.TabIndex = 42
+        Me.intelligence1.Text = "NO DATA"
+        Me.intelligence1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'agility1
+        '
+        Me.agility1.BackColor = System.Drawing.Color.Black
+        Me.agility1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.agility1.ForeColor = System.Drawing.Color.White
+        Me.agility1.Location = New System.Drawing.Point(314, 255)
+        Me.agility1.Name = "agility1"
+        Me.agility1.ReadOnly = True
+        Me.agility1.Size = New System.Drawing.Size(138, 20)
+        Me.agility1.TabIndex = 43
+        Me.agility1.Text = "NO DATA"
+        Me.agility1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'social1
+        '
+        Me.social1.BackColor = System.Drawing.Color.Black
+        Me.social1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.social1.ForeColor = System.Drawing.Color.White
+        Me.social1.Location = New System.Drawing.Point(314, 281)
+        Me.social1.Name = "social1"
+        Me.social1.ReadOnly = True
+        Me.social1.Size = New System.Drawing.Size(138, 20)
+        Me.social1.TabIndex = 44
+        Me.social1.Text = "NO DATA"
+        Me.social1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'perception1
+        '
+        Me.perception1.BackColor = System.Drawing.Color.Black
+        Me.perception1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.perception1.ForeColor = System.Drawing.Color.White
+        Me.perception1.Location = New System.Drawing.Point(314, 307)
+        Me.perception1.Name = "perception1"
+        Me.perception1.ReadOnly = True
+        Me.perception1.Size = New System.Drawing.Size(138, 20)
+        Me.perception1.TabIndex = 45
+        Me.perception1.Text = "NO DATA"
+        Me.perception1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'strength2
+        '
+        Me.strength2.BackColor = System.Drawing.Color.Black
+        Me.strength2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.strength2.ForeColor = System.Drawing.Color.White
+        Me.strength2.Location = New System.Drawing.Point(472, 203)
+        Me.strength2.Name = "strength2"
+        Me.strength2.ReadOnly = True
+        Me.strength2.Size = New System.Drawing.Size(138, 20)
+        Me.strength2.TabIndex = 46
+        Me.strength2.Text = "NO DATA"
+        Me.strength2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'intelligence2
+        '
+        Me.intelligence2.BackColor = System.Drawing.Color.Black
+        Me.intelligence2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.intelligence2.ForeColor = System.Drawing.Color.White
+        Me.intelligence2.Location = New System.Drawing.Point(472, 229)
+        Me.intelligence2.Name = "intelligence2"
+        Me.intelligence2.ReadOnly = True
+        Me.intelligence2.Size = New System.Drawing.Size(138, 20)
+        Me.intelligence2.TabIndex = 47
+        Me.intelligence2.Text = "NO DATA"
+        Me.intelligence2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'agility2
+        '
+        Me.agility2.BackColor = System.Drawing.Color.Black
+        Me.agility2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.agility2.ForeColor = System.Drawing.Color.White
+        Me.agility2.Location = New System.Drawing.Point(472, 255)
+        Me.agility2.Name = "agility2"
+        Me.agility2.ReadOnly = True
+        Me.agility2.Size = New System.Drawing.Size(138, 20)
+        Me.agility2.TabIndex = 48
+        Me.agility2.Text = "NO DATA"
+        Me.agility2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'social2
+        '
+        Me.social2.BackColor = System.Drawing.Color.Black
+        Me.social2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.social2.ForeColor = System.Drawing.Color.White
+        Me.social2.Location = New System.Drawing.Point(472, 281)
+        Me.social2.Name = "social2"
+        Me.social2.ReadOnly = True
+        Me.social2.Size = New System.Drawing.Size(138, 20)
+        Me.social2.TabIndex = 49
+        Me.social2.Text = "NO DATA"
+        Me.social2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'perception2
+        '
+        Me.perception2.BackColor = System.Drawing.Color.Black
+        Me.perception2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.perception2.ForeColor = System.Drawing.Color.White
+        Me.perception2.Location = New System.Drawing.Point(472, 307)
+        Me.perception2.Name = "perception2"
+        Me.perception2.ReadOnly = True
+        Me.perception2.Size = New System.Drawing.Size(138, 20)
+        Me.perception2.TabIndex = 50
+        Me.perception2.Text = "NO DATA"
+        Me.perception2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.perception2)
+        Me.Controls.Add(Me.social2)
+        Me.Controls.Add(Me.agility2)
+        Me.Controls.Add(Me.intelligence2)
+        Me.Controls.Add(Me.strength2)
+        Me.Controls.Add(Me.perception1)
+        Me.Controls.Add(Me.social1)
+        Me.Controls.Add(Me.agility1)
+        Me.Controls.Add(Me.intelligence1)
+        Me.Controls.Add(Me.strength1)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.ListBox2)
         Me.Controls.Add(Me.ListBox1)
-        Me.Controls.Add(Me.TextBox14)
-        Me.Controls.Add(Me.TextBox13)
-        Me.Controls.Add(Me.TextBox12)
-        Me.Controls.Add(Me.TextBox10)
-        Me.Controls.Add(Me.TextBox9)
-        Me.Controls.Add(Me.TextBox19)
-        Me.Controls.Add(Me.TextBox18)
-        Me.Controls.Add(Me.TextBox17)
-        Me.Controls.Add(Me.TextBox16)
-        Me.Controls.Add(Me.TextBox15)
-        Me.Controls.Add(Me.TextBox11)
-        Me.Controls.Add(Me.TextBox8)
-        Me.Controls.Add(Me.TextBox7)
-        Me.Controls.Add(Me.TextBox6)
-        Me.Controls.Add(Me.TextBox5)
+        Me.Controls.Add(Me.taskTitle)
+        Me.Controls.Add(Me.perception0)
+        Me.Controls.Add(Me.social0)
+        Me.Controls.Add(Me.skillTitle4)
+        Me.Controls.Add(Me.skillTitle3)
+        Me.Controls.Add(Me.healthBar0)
+        Me.Controls.Add(Me.hungerBar0)
+        Me.Controls.Add(Me.healthBar2)
+        Me.Controls.Add(Me.hungerBar2)
+        Me.Controls.Add(Me.healthBar1)
+        Me.Controls.Add(Me.hungerBar1)
+        Me.Controls.Add(Me.agility0)
+        Me.Controls.Add(Me.intelligence0)
+        Me.Controls.Add(Me.strength0)
+        Me.Controls.Add(Me.skillTitle2)
         Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.healthTitle)
+        Me.Controls.Add(Me.skillTitle1)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.dayCount)
-        Me.Controls.Add(Me.skill0)
+        Me.Controls.Add(Me.foodCounter)
+        Me.Controls.Add(Me.dayCounter)
+        Me.Controls.Add(Me.skillTitle0)
         Me.Controls.Add(Me.name2)
         Me.Controls.Add(Me.name1)
         Me.Controls.Add(Me.name0)
@@ -446,29 +596,39 @@ Partial Class Form1
     Friend WithEvents name0 As TextBox
     Friend WithEvents name1 As TextBox
     Friend WithEvents name2 As TextBox
-    Friend WithEvents skill0 As TextBox
-    Friend WithEvents dayCount As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents skillTitle0 As TextBox
+    Friend WithEvents dayCounter As TextBox
+    Friend WithEvents foodCounter As TextBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents skillTitle1 As TextBox
+    Friend WithEvents healthTitle As TextBox
     Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents TextBox8 As TextBox
-    Friend WithEvents TextBox11 As TextBox
-    Friend WithEvents TextBox15 As TextBox
-    Friend WithEvents TextBox16 As TextBox
-    Friend WithEvents TextBox17 As TextBox
-    Friend WithEvents TextBox18 As TextBox
-    Friend WithEvents TextBox19 As TextBox
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents TextBox10 As TextBox
-    Friend WithEvents TextBox12 As TextBox
-    Friend WithEvents TextBox13 As TextBox
-    Friend WithEvents TextBox14 As TextBox
+    Friend WithEvents skillTitle2 As TextBox
+    Friend WithEvents strength0 As TextBox
+    Friend WithEvents intelligence0 As TextBox
+    Friend WithEvents agility0 As TextBox
+    Friend WithEvents hungerBar1 As TextBox
+    Friend WithEvents healthBar1 As TextBox
+    Friend WithEvents hungerBar2 As TextBox
+    Friend WithEvents healthBar2 As TextBox
+    Friend WithEvents hungerBar0 As TextBox
+    Friend WithEvents healthBar0 As TextBox
+    Friend WithEvents skillTitle3 As TextBox
+    Friend WithEvents skillTitle4 As TextBox
+    Friend WithEvents social0 As TextBox
+    Friend WithEvents perception0 As TextBox
+    Friend WithEvents taskTitle As TextBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents ListBox2 As ListBox
+    Friend WithEvents strength1 As TextBox
+    Friend WithEvents intelligence1 As TextBox
+    Friend WithEvents agility1 As TextBox
+    Friend WithEvents social1 As TextBox
+    Friend WithEvents perception1 As TextBox
+    Friend WithEvents strength2 As TextBox
+    Friend WithEvents intelligence2 As TextBox
+    Friend WithEvents agility2 As TextBox
+    Friend WithEvents social2 As TextBox
+    Friend WithEvents perception2 As TextBox
 End Class
