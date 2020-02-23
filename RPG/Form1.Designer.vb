@@ -284,7 +284,7 @@ Partial Class Form1
         Me.healthBar1.BackColor = System.Drawing.Color.Black
         Me.healthBar1.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthBar1.ForeColor = System.Drawing.Color.White
+        Me.healthBar1.ForeColor = System.Drawing.Color.Red
         Me.healthBar1.Location = New System.Drawing.Point(314, 130)
         Me.healthBar1.Name = "healthBar1"
         Me.healthBar1.ReadOnly = True
@@ -310,7 +310,7 @@ Partial Class Form1
         Me.healthBar2.BackColor = System.Drawing.Color.Black
         Me.healthBar2.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthBar2.ForeColor = System.Drawing.Color.White
+        Me.healthBar2.ForeColor = System.Drawing.Color.Red
         Me.healthBar2.Location = New System.Drawing.Point(472, 131)
         Me.healthBar2.Name = "healthBar2"
         Me.healthBar2.ReadOnly = True
@@ -336,7 +336,7 @@ Partial Class Form1
         Me.healthBar0.BackColor = System.Drawing.Color.Black
         Me.healthBar0.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthBar0.ForeColor = System.Drawing.Color.White
+        Me.healthBar0.ForeColor = System.Drawing.Color.Red
         Me.healthBar0.Location = New System.Drawing.Point(158, 130)
         Me.healthBar0.Name = "healthBar0"
         Me.healthBar0.ReadOnly = True
