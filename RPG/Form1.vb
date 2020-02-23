@@ -40,6 +40,8 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: Diese Codezeile lädt Daten in die Tabelle "MainDataSet1.Character". Sie können sie bei Bedarf verschieben oder entfernen.
+        Me.CharacterTableAdapter.Fill(Me.MainDataSet1.Character)
         Call fillCharFields()
     End Sub
 

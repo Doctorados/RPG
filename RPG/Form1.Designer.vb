@@ -22,6 +22,7 @@ Partial Class Form1
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.name0 = New System.Windows.Forms.TextBox()
         Me.name1 = New System.Windows.Forms.TextBox()
         Me.name2 = New System.Windows.Forms.TextBox()
@@ -60,11 +61,17 @@ Partial Class Form1
         Me.agility2 = New System.Windows.Forms.TextBox()
         Me.social2 = New System.Windows.Forms.TextBox()
         Me.perception2 = New System.Windows.Forms.TextBox()
+        Me.MainDataSet1 = New RPG.mainDataSet1()
+        Me.CharacterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CharacterTableAdapter = New RPG.mainDataSet1TableAdapters.CharacterTableAdapter()
+        CType(Me.MainDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CharacterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'name0
         '
         Me.name0.BackColor = System.Drawing.Color.Black
+        Me.name0.Cursor = System.Windows.Forms.Cursors.Default
         Me.name0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.name0.ForeColor = System.Drawing.Color.White
         Me.name0.Location = New System.Drawing.Point(158, 99)
@@ -78,6 +85,7 @@ Partial Class Form1
         'name1
         '
         Me.name1.BackColor = System.Drawing.Color.Black
+        Me.name1.Cursor = System.Windows.Forms.Cursors.Default
         Me.name1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.name1.ForeColor = System.Drawing.Color.White
         Me.name1.Location = New System.Drawing.Point(314, 99)
@@ -91,6 +99,7 @@ Partial Class Form1
         'name2
         '
         Me.name2.BackColor = System.Drawing.Color.Black
+        Me.name2.Cursor = System.Windows.Forms.Cursors.Default
         Me.name2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.name2.ForeColor = System.Drawing.Color.White
         Me.name2.Location = New System.Drawing.Point(472, 99)
@@ -104,6 +113,7 @@ Partial Class Form1
         'skillTitle0
         '
         Me.skillTitle0.BackColor = System.Drawing.Color.Black
+        Me.skillTitle0.Cursor = System.Windows.Forms.Cursors.Default
         Me.skillTitle0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.skillTitle0.ForeColor = System.Drawing.Color.White
         Me.skillTitle0.Location = New System.Drawing.Point(12, 203)
@@ -116,6 +126,7 @@ Partial Class Form1
         'dayCounter
         '
         Me.dayCounter.BackColor = System.Drawing.Color.Black
+        Me.dayCounter.Cursor = System.Windows.Forms.Cursors.Default
         Me.dayCounter.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dayCounter.ForeColor = System.Drawing.Color.White
         Me.dayCounter.Location = New System.Drawing.Point(12, 12)
@@ -129,6 +140,7 @@ Partial Class Form1
         'foodCounter
         '
         Me.foodCounter.BackColor = System.Drawing.Color.Black
+        Me.foodCounter.Cursor = System.Windows.Forms.Cursors.Default
         Me.foodCounter.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.foodCounter.ForeColor = System.Drawing.Color.White
         Me.foodCounter.Location = New System.Drawing.Point(579, 12)
@@ -156,6 +168,7 @@ Partial Class Form1
         'skillTitle1
         '
         Me.skillTitle1.BackColor = System.Drawing.Color.Black
+        Me.skillTitle1.Cursor = System.Windows.Forms.Cursors.Default
         Me.skillTitle1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.skillTitle1.ForeColor = System.Drawing.Color.White
         Me.skillTitle1.Location = New System.Drawing.Point(12, 229)
@@ -168,6 +181,7 @@ Partial Class Form1
         'healthTitle
         '
         Me.healthTitle.BackColor = System.Drawing.Color.Black
+        Me.healthTitle.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthTitle.ForeColor = System.Drawing.Color.White
         Me.healthTitle.Location = New System.Drawing.Point(12, 131)
@@ -180,6 +194,7 @@ Partial Class Form1
         'TextBox4
         '
         Me.TextBox4.BackColor = System.Drawing.Color.Black
+        Me.TextBox4.Cursor = System.Windows.Forms.Cursors.Default
         Me.TextBox4.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox4.ForeColor = System.Drawing.Color.White
         Me.TextBox4.Location = New System.Drawing.Point(12, 162)
@@ -192,6 +207,7 @@ Partial Class Form1
         'skillTitle2
         '
         Me.skillTitle2.BackColor = System.Drawing.Color.Black
+        Me.skillTitle2.Cursor = System.Windows.Forms.Cursors.Default
         Me.skillTitle2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.skillTitle2.ForeColor = System.Drawing.Color.White
         Me.skillTitle2.Location = New System.Drawing.Point(12, 255)
@@ -204,6 +220,7 @@ Partial Class Form1
         'strength0
         '
         Me.strength0.BackColor = System.Drawing.Color.Black
+        Me.strength0.Cursor = System.Windows.Forms.Cursors.Default
         Me.strength0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.strength0.ForeColor = System.Drawing.Color.White
         Me.strength0.Location = New System.Drawing.Point(158, 203)
@@ -217,6 +234,7 @@ Partial Class Form1
         'intelligence0
         '
         Me.intelligence0.BackColor = System.Drawing.Color.Black
+        Me.intelligence0.Cursor = System.Windows.Forms.Cursors.Default
         Me.intelligence0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.intelligence0.ForeColor = System.Drawing.Color.White
         Me.intelligence0.Location = New System.Drawing.Point(158, 229)
@@ -230,6 +248,7 @@ Partial Class Form1
         'agility0
         '
         Me.agility0.BackColor = System.Drawing.Color.Black
+        Me.agility0.Cursor = System.Windows.Forms.Cursors.Default
         Me.agility0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.agility0.ForeColor = System.Drawing.Color.White
         Me.agility0.Location = New System.Drawing.Point(158, 255)
@@ -243,6 +262,7 @@ Partial Class Form1
         'hungerBar1
         '
         Me.hungerBar1.BackColor = System.Drawing.Color.Black
+        Me.hungerBar1.Cursor = System.Windows.Forms.Cursors.Default
         Me.hungerBar1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hungerBar1.ForeColor = System.Drawing.Color.White
         Me.hungerBar1.Location = New System.Drawing.Point(314, 162)
@@ -255,6 +275,7 @@ Partial Class Form1
         'healthBar1
         '
         Me.healthBar1.BackColor = System.Drawing.Color.Black
+        Me.healthBar1.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthBar1.ForeColor = System.Drawing.Color.White
         Me.healthBar1.Location = New System.Drawing.Point(314, 130)
@@ -267,6 +288,7 @@ Partial Class Form1
         'hungerBar2
         '
         Me.hungerBar2.BackColor = System.Drawing.Color.Black
+        Me.hungerBar2.Cursor = System.Windows.Forms.Cursors.Default
         Me.hungerBar2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hungerBar2.ForeColor = System.Drawing.Color.White
         Me.hungerBar2.Location = New System.Drawing.Point(472, 163)
@@ -279,6 +301,7 @@ Partial Class Form1
         'healthBar2
         '
         Me.healthBar2.BackColor = System.Drawing.Color.Black
+        Me.healthBar2.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthBar2.ForeColor = System.Drawing.Color.White
         Me.healthBar2.Location = New System.Drawing.Point(472, 131)
@@ -291,6 +314,7 @@ Partial Class Form1
         'hungerBar0
         '
         Me.hungerBar0.BackColor = System.Drawing.Color.Black
+        Me.hungerBar0.Cursor = System.Windows.Forms.Cursors.Default
         Me.hungerBar0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hungerBar0.ForeColor = System.Drawing.Color.White
         Me.hungerBar0.Location = New System.Drawing.Point(158, 163)
@@ -303,6 +327,7 @@ Partial Class Form1
         'healthBar0
         '
         Me.healthBar0.BackColor = System.Drawing.Color.Black
+        Me.healthBar0.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthBar0.ForeColor = System.Drawing.Color.White
         Me.healthBar0.Location = New System.Drawing.Point(158, 130)
@@ -315,6 +340,7 @@ Partial Class Form1
         'skillTitle3
         '
         Me.skillTitle3.BackColor = System.Drawing.Color.Black
+        Me.skillTitle3.Cursor = System.Windows.Forms.Cursors.Default
         Me.skillTitle3.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.skillTitle3.ForeColor = System.Drawing.Color.White
         Me.skillTitle3.Location = New System.Drawing.Point(12, 281)
@@ -327,6 +353,7 @@ Partial Class Form1
         'skillTitle4
         '
         Me.skillTitle4.BackColor = System.Drawing.Color.Black
+        Me.skillTitle4.Cursor = System.Windows.Forms.Cursors.Default
         Me.skillTitle4.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.skillTitle4.ForeColor = System.Drawing.Color.White
         Me.skillTitle4.Location = New System.Drawing.Point(12, 307)
@@ -339,6 +366,7 @@ Partial Class Form1
         'social0
         '
         Me.social0.BackColor = System.Drawing.Color.Black
+        Me.social0.Cursor = System.Windows.Forms.Cursors.Default
         Me.social0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.social0.ForeColor = System.Drawing.Color.White
         Me.social0.Location = New System.Drawing.Point(158, 281)
@@ -352,6 +380,7 @@ Partial Class Form1
         'perception0
         '
         Me.perception0.BackColor = System.Drawing.Color.Black
+        Me.perception0.Cursor = System.Windows.Forms.Cursors.Default
         Me.perception0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.perception0.ForeColor = System.Drawing.Color.White
         Me.perception0.Location = New System.Drawing.Point(158, 307)
@@ -365,6 +394,7 @@ Partial Class Form1
         'taskTitle
         '
         Me.taskTitle.BackColor = System.Drawing.Color.Black
+        Me.taskTitle.Cursor = System.Windows.Forms.Cursors.Default
         Me.taskTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.taskTitle.ForeColor = System.Drawing.Color.White
         Me.taskTitle.Location = New System.Drawing.Point(12, 353)
@@ -415,6 +445,7 @@ Partial Class Form1
         'strength1
         '
         Me.strength1.BackColor = System.Drawing.Color.Black
+        Me.strength1.Cursor = System.Windows.Forms.Cursors.Default
         Me.strength1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.strength1.ForeColor = System.Drawing.Color.White
         Me.strength1.Location = New System.Drawing.Point(314, 203)
@@ -428,6 +459,7 @@ Partial Class Form1
         'intelligence1
         '
         Me.intelligence1.BackColor = System.Drawing.Color.Black
+        Me.intelligence1.Cursor = System.Windows.Forms.Cursors.Default
         Me.intelligence1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.intelligence1.ForeColor = System.Drawing.Color.White
         Me.intelligence1.Location = New System.Drawing.Point(314, 229)
@@ -441,6 +473,7 @@ Partial Class Form1
         'agility1
         '
         Me.agility1.BackColor = System.Drawing.Color.Black
+        Me.agility1.Cursor = System.Windows.Forms.Cursors.Default
         Me.agility1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.agility1.ForeColor = System.Drawing.Color.White
         Me.agility1.Location = New System.Drawing.Point(314, 255)
@@ -454,6 +487,7 @@ Partial Class Form1
         'social1
         '
         Me.social1.BackColor = System.Drawing.Color.Black
+        Me.social1.Cursor = System.Windows.Forms.Cursors.Default
         Me.social1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.social1.ForeColor = System.Drawing.Color.White
         Me.social1.Location = New System.Drawing.Point(314, 281)
@@ -467,6 +501,7 @@ Partial Class Form1
         'perception1
         '
         Me.perception1.BackColor = System.Drawing.Color.Black
+        Me.perception1.Cursor = System.Windows.Forms.Cursors.Default
         Me.perception1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.perception1.ForeColor = System.Drawing.Color.White
         Me.perception1.Location = New System.Drawing.Point(314, 307)
@@ -480,6 +515,7 @@ Partial Class Form1
         'strength2
         '
         Me.strength2.BackColor = System.Drawing.Color.Black
+        Me.strength2.Cursor = System.Windows.Forms.Cursors.Default
         Me.strength2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.strength2.ForeColor = System.Drawing.Color.White
         Me.strength2.Location = New System.Drawing.Point(472, 203)
@@ -493,6 +529,7 @@ Partial Class Form1
         'intelligence2
         '
         Me.intelligence2.BackColor = System.Drawing.Color.Black
+        Me.intelligence2.Cursor = System.Windows.Forms.Cursors.Default
         Me.intelligence2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.intelligence2.ForeColor = System.Drawing.Color.White
         Me.intelligence2.Location = New System.Drawing.Point(472, 229)
@@ -506,6 +543,7 @@ Partial Class Form1
         'agility2
         '
         Me.agility2.BackColor = System.Drawing.Color.Black
+        Me.agility2.Cursor = System.Windows.Forms.Cursors.Default
         Me.agility2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.agility2.ForeColor = System.Drawing.Color.White
         Me.agility2.Location = New System.Drawing.Point(472, 255)
@@ -519,6 +557,7 @@ Partial Class Form1
         'social2
         '
         Me.social2.BackColor = System.Drawing.Color.Black
+        Me.social2.Cursor = System.Windows.Forms.Cursors.Default
         Me.social2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.social2.ForeColor = System.Drawing.Color.White
         Me.social2.Location = New System.Drawing.Point(472, 281)
@@ -532,6 +571,7 @@ Partial Class Form1
         'perception2
         '
         Me.perception2.BackColor = System.Drawing.Color.Black
+        Me.perception2.Cursor = System.Windows.Forms.Cursors.Default
         Me.perception2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.perception2.ForeColor = System.Drawing.Color.White
         Me.perception2.Location = New System.Drawing.Point(472, 307)
@@ -541,6 +581,20 @@ Partial Class Form1
         Me.perception2.TabIndex = 50
         Me.perception2.Text = "NO DATA"
         Me.perception2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'MainDataSet1
+        '
+        Me.MainDataSet1.DataSetName = "mainDataSet1"
+        Me.MainDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'CharacterBindingSource
+        '
+        Me.CharacterBindingSource.DataMember = "Character"
+        Me.CharacterBindingSource.DataSource = Me.MainDataSet1
+        '
+        'CharacterTableAdapter
+        '
+        Me.CharacterTableAdapter.ClearBeforeFill = True
         '
         'Form1
         '
@@ -589,6 +643,8 @@ Partial Class Form1
         Me.ForeColor = System.Drawing.Color.White
         Me.Name = "Form1"
         Me.Text = "Form1"
+        CType(Me.MainDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CharacterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -631,4 +687,7 @@ Partial Class Form1
     Friend WithEvents agility2 As TextBox
     Friend WithEvents social2 As TextBox
     Friend WithEvents perception2 As TextBox
+    Friend WithEvents MainDataSet1 As mainDataSet1
+    Friend WithEvents CharacterBindingSource As BindingSource
+    Friend WithEvents CharacterTableAdapter As mainDataSet1TableAdapters.CharacterTableAdapter
 End Class
