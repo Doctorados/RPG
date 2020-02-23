@@ -2,15 +2,16 @@
     Dim rs As ADODB.Recordset
     Dim conn As ADODB.Connection
 
-    Private Sub fillCharFields()
-        rs = New ADODB.Recordset
+    Private Sub updateFields()
+
         Try
-            conn = New ADODB.Connection
-            conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
+            'conn = New ADODB.Connection
+            'conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
             rs.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
             )
+            'update Character Values
             If rs.RecordCount > 0 Then
                 rs.MoveFirst()
                 Dim i = 0
@@ -28,8 +29,17 @@
             Else
                 MsgBox("No Data")
             End If
-
             rs.Close()
+            'update Day and Rations
+            rs.Open("SELECT * FROM [Day]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+            rs.MoveLast()
+            dayCounter.Text = "Day " & CStr(rs.Fields("ID").Value)
+            foodCounter.Text = "Rations: " & CStr(rs.Fields("rations").Value)
+            rs.Close()
+
             conn.Close()
         Catch ex As Exception
             MsgBox("Exception: " & ex.Message)
@@ -40,9 +50,27 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: Diese Codezeile lädt Daten in die Tabelle "MainDataSet1.Character". Sie können sie bei Bedarf verschieben oder entfernen.
-        Me.CharacterTableAdapter.Fill(Me.MainDataSet1.Character)
-        Call fillCharFields()
+        Try
+            conn = New ADODB.Connection
+            conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
+            rs = New ADODB.Recordset
+            'get possible Tasks
+            rs.Open("SELECT * FROM [Task]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+            rs.MoveFirst()
+            Do While Not rs.EOF
+                For k = 0 To 2
+                    DirectCast(Me.Controls("task" & k), ComboBox).Items.Add(CStr(rs.Fields("taskName").Value))
+                Next
+                rs.MoveNext()
+            Loop
+            rs.Close()
+        Catch ex As Exception
+            MsgBox("Exception: " & ex.Message)
+        End Try
+        Call updateFields()
     End Sub
 
     Private Function getBar(ByRef value)
@@ -77,4 +105,8 @@
         "godlike"}
         skillWords = words(value)
     End Function
+
+    Private Sub calcDay()
+    End Sub
+
 End Class

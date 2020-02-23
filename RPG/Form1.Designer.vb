@@ -48,9 +48,6 @@ Partial Class Form1
         Me.social0 = New System.Windows.Forms.TextBox()
         Me.perception0 = New System.Windows.Forms.TextBox()
         Me.taskTitle = New System.Windows.Forms.TextBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.strength1 = New System.Windows.Forms.TextBox()
         Me.intelligence1 = New System.Windows.Forms.TextBox()
         Me.agility1 = New System.Windows.Forms.TextBox()
@@ -64,8 +61,16 @@ Partial Class Form1
         Me.MainDataSet1 = New RPG.mainDataSet1()
         Me.CharacterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CharacterTableAdapter = New RPG.mainDataSet1TableAdapters.CharacterTableAdapter()
+        Me.TaskBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MainDataSet = New RPG.mainDataSet()
+        Me.TaskTableAdapter = New RPG.mainDataSetTableAdapters.TaskTableAdapter()
+        Me.task0 = New System.Windows.Forms.ComboBox()
+        Me.task1 = New System.Windows.Forms.ComboBox()
+        Me.task2 = New System.Windows.Forms.ComboBox()
         CType(Me.MainDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CharacterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TaskBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MainDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'name0
@@ -127,28 +132,30 @@ Partial Class Form1
         '
         Me.dayCounter.BackColor = System.Drawing.Color.Black
         Me.dayCounter.Cursor = System.Windows.Forms.Cursors.Default
+        Me.dayCounter.Dock = System.Windows.Forms.DockStyle.Left
         Me.dayCounter.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dayCounter.ForeColor = System.Drawing.Color.White
-        Me.dayCounter.Location = New System.Drawing.Point(12, 12)
+        Me.dayCounter.Location = New System.Drawing.Point(0, 0)
         Me.dayCounter.Name = "dayCounter"
         Me.dayCounter.ReadOnly = True
         Me.dayCounter.Size = New System.Drawing.Size(138, 36)
         Me.dayCounter.TabIndex = 6
-        Me.dayCounter.Text = "DAY 3"
+        Me.dayCounter.Text = "DAY NO DATA"
         Me.dayCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'foodCounter
         '
         Me.foodCounter.BackColor = System.Drawing.Color.Black
         Me.foodCounter.Cursor = System.Windows.Forms.Cursors.Default
+        Me.foodCounter.Dock = System.Windows.Forms.DockStyle.Right
         Me.foodCounter.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.foodCounter.ForeColor = System.Drawing.Color.White
-        Me.foodCounter.Location = New System.Drawing.Point(579, 12)
+        Me.foodCounter.Location = New System.Drawing.Point(613, 0)
         Me.foodCounter.Name = "foodCounter"
         Me.foodCounter.ReadOnly = True
         Me.foodCounter.Size = New System.Drawing.Size(209, 36)
         Me.foodCounter.TabIndex = 7
-        Me.foodCounter.Text = "Rations: 2 (-1)"
+        Me.foodCounter.Text = "Rations: NO DATA"
         Me.foodCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Button1
@@ -404,44 +411,6 @@ Partial Class Form1
         Me.taskTitle.TabIndex = 37
         Me.taskTitle.Text = "Task"
         '
-        'ComboBox1
-        '
-        Me.ComboBox1.BackColor = System.Drawing.Color.Black
-        Me.ComboBox1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.ForeColor = System.Drawing.Color.White
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
-        Me.ComboBox1.Location = New System.Drawing.Point(472, 349)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(138, 27)
-        Me.ComboBox1.TabIndex = 40
-        '
-        'ListBox1
-        '
-        Me.ListBox1.BackColor = System.Drawing.Color.Black
-        Me.ListBox1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBox1.ForeColor = System.Drawing.Color.White
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 19
-        Me.ListBox1.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
-        Me.ListBox1.Location = New System.Drawing.Point(158, 353)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(138, 23)
-        Me.ListBox1.TabIndex = 38
-        '
-        'ListBox2
-        '
-        Me.ListBox2.BackColor = System.Drawing.Color.Black
-        Me.ListBox2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBox2.ForeColor = System.Drawing.Color.White
-        Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.ItemHeight = 19
-        Me.ListBox2.Items.AddRange(New Object() {"Rest", "Hunt", "Explore", "Trade"})
-        Me.ListBox2.Location = New System.Drawing.Point(314, 353)
-        Me.ListBox2.Name = "ListBox2"
-        Me.ListBox2.Size = New System.Drawing.Size(138, 23)
-        Me.ListBox2.TabIndex = 39
-        '
         'strength1
         '
         Me.strength1.BackColor = System.Drawing.Color.Black
@@ -596,12 +565,68 @@ Partial Class Form1
         '
         Me.CharacterTableAdapter.ClearBeforeFill = True
         '
+        'TaskBindingSource
+        '
+        Me.TaskBindingSource.DataMember = "Task"
+        Me.TaskBindingSource.DataSource = Me.MainDataSet
+        '
+        'MainDataSet
+        '
+        Me.MainDataSet.DataSetName = "mainDataSet"
+        Me.MainDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'TaskTableAdapter
+        '
+        Me.TaskTableAdapter.ClearBeforeFill = True
+        '
+        'task0
+        '
+        Me.task0.BackColor = System.Drawing.Color.Black
+        Me.task0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.task0.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.task0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.task0.ForeColor = System.Drawing.Color.White
+        Me.task0.FormattingEnabled = True
+        Me.task0.Location = New System.Drawing.Point(158, 353)
+        Me.task0.Name = "task0"
+        Me.task0.Size = New System.Drawing.Size(138, 27)
+        Me.task0.TabIndex = 54
+        '
+        'task1
+        '
+        Me.task1.BackColor = System.Drawing.Color.Black
+        Me.task1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.task1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.task1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.task1.ForeColor = System.Drawing.Color.White
+        Me.task1.FormattingEnabled = True
+        Me.task1.Location = New System.Drawing.Point(314, 352)
+        Me.task1.Name = "task1"
+        Me.task1.Size = New System.Drawing.Size(138, 27)
+        Me.task1.TabIndex = 55
+        '
+        'task2
+        '
+        Me.task2.BackColor = System.Drawing.Color.Black
+        Me.task2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.task2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.task2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.task2.ForeColor = System.Drawing.Color.White
+        Me.task2.FormattingEnabled = True
+        Me.task2.Location = New System.Drawing.Point(472, 352)
+        Me.task2.Name = "task2"
+        Me.task2.Size = New System.Drawing.Size(138, 27)
+        Me.task2.TabIndex = 56
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(822, 450)
+        Me.Controls.Add(Me.task2)
+        Me.Controls.Add(Me.task1)
+        Me.Controls.Add(Me.task0)
         Me.Controls.Add(Me.perception2)
         Me.Controls.Add(Me.social2)
         Me.Controls.Add(Me.agility2)
@@ -612,9 +637,6 @@ Partial Class Form1
         Me.Controls.Add(Me.agility1)
         Me.Controls.Add(Me.intelligence1)
         Me.Controls.Add(Me.strength1)
-        Me.Controls.Add(Me.ComboBox1)
-        Me.Controls.Add(Me.ListBox2)
-        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.taskTitle)
         Me.Controls.Add(Me.perception0)
         Me.Controls.Add(Me.social0)
@@ -645,6 +667,8 @@ Partial Class Form1
         Me.Text = "Form1"
         CType(Me.MainDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CharacterBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TaskBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MainDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -674,9 +698,6 @@ Partial Class Form1
     Friend WithEvents social0 As TextBox
     Friend WithEvents perception0 As TextBox
     Friend WithEvents taskTitle As TextBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents ListBox1 As ListBox
-    Friend WithEvents ListBox2 As ListBox
     Friend WithEvents strength1 As TextBox
     Friend WithEvents intelligence1 As TextBox
     Friend WithEvents agility1 As TextBox
@@ -690,4 +711,10 @@ Partial Class Form1
     Friend WithEvents MainDataSet1 As mainDataSet1
     Friend WithEvents CharacterBindingSource As BindingSource
     Friend WithEvents CharacterTableAdapter As mainDataSet1TableAdapters.CharacterTableAdapter
+    Friend WithEvents MainDataSet As mainDataSet
+    Friend WithEvents TaskBindingSource As BindingSource
+    Friend WithEvents TaskTableAdapter As mainDataSetTableAdapters.TaskTableAdapter
+    Friend WithEvents task0 As ComboBox
+    Friend WithEvents task1 As ComboBox
+    Friend WithEvents task2 As ComboBox
 End Class
