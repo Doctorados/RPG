@@ -26,14 +26,14 @@ Partial Class Form1
         Me.name0 = New System.Windows.Forms.TextBox()
         Me.name1 = New System.Windows.Forms.TextBox()
         Me.name2 = New System.Windows.Forms.TextBox()
-        Me.skillTitle0 = New System.Windows.Forms.TextBox()
+        Me.strengthTitle = New System.Windows.Forms.TextBox()
         Me.dayCounter = New System.Windows.Forms.TextBox()
         Me.foodCounter = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.skillTitle1 = New System.Windows.Forms.TextBox()
+        Me.intelligenceTitle = New System.Windows.Forms.TextBox()
         Me.healthTitle = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.skillTitle2 = New System.Windows.Forms.TextBox()
+        Me.hungerTitle = New System.Windows.Forms.TextBox()
+        Me.agilityTitle = New System.Windows.Forms.TextBox()
         Me.strength0 = New System.Windows.Forms.TextBox()
         Me.intelligence0 = New System.Windows.Forms.TextBox()
         Me.agility0 = New System.Windows.Forms.TextBox()
@@ -43,8 +43,8 @@ Partial Class Form1
         Me.healthBar2 = New System.Windows.Forms.TextBox()
         Me.hungerBar0 = New System.Windows.Forms.TextBox()
         Me.healthBar0 = New System.Windows.Forms.TextBox()
-        Me.skillTitle3 = New System.Windows.Forms.TextBox()
-        Me.skillTitle4 = New System.Windows.Forms.TextBox()
+        Me.socialTitle = New System.Windows.Forms.TextBox()
+        Me.perceptionTitle = New System.Windows.Forms.TextBox()
         Me.social0 = New System.Windows.Forms.TextBox()
         Me.perception0 = New System.Windows.Forms.TextBox()
         Me.taskTitle = New System.Windows.Forms.TextBox()
@@ -115,18 +115,18 @@ Partial Class Form1
         Me.name2.Text = "NO DATA"
         Me.name2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'skillTitle0
+        'strengthTitle
         '
-        Me.skillTitle0.BackColor = System.Drawing.Color.Black
-        Me.skillTitle0.Cursor = System.Windows.Forms.Cursors.Default
-        Me.skillTitle0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.skillTitle0.ForeColor = System.Drawing.Color.White
-        Me.skillTitle0.Location = New System.Drawing.Point(12, 203)
-        Me.skillTitle0.Name = "skillTitle0"
-        Me.skillTitle0.ReadOnly = True
-        Me.skillTitle0.Size = New System.Drawing.Size(125, 20)
-        Me.skillTitle0.TabIndex = 4
-        Me.skillTitle0.Text = "Strength"
+        Me.strengthTitle.BackColor = System.Drawing.Color.Black
+        Me.strengthTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.strengthTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.strengthTitle.ForeColor = System.Drawing.Color.White
+        Me.strengthTitle.Location = New System.Drawing.Point(12, 203)
+        Me.strengthTitle.Name = "strengthTitle"
+        Me.strengthTitle.ReadOnly = True
+        Me.strengthTitle.Size = New System.Drawing.Size(125, 20)
+        Me.strengthTitle.TabIndex = 4
+        Me.strengthTitle.Text = "Strength"
         '
         'dayCounter
         '
@@ -172,18 +172,18 @@ Partial Class Form1
         Me.Button1.Text = "GO!"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'skillTitle1
+        'intelligenceTitle
         '
-        Me.skillTitle1.BackColor = System.Drawing.Color.Black
-        Me.skillTitle1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.skillTitle1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.skillTitle1.ForeColor = System.Drawing.Color.White
-        Me.skillTitle1.Location = New System.Drawing.Point(12, 229)
-        Me.skillTitle1.Name = "skillTitle1"
-        Me.skillTitle1.ReadOnly = True
-        Me.skillTitle1.Size = New System.Drawing.Size(125, 20)
-        Me.skillTitle1.TabIndex = 9
-        Me.skillTitle1.Text = "Intelligence"
+        Me.intelligenceTitle.BackColor = System.Drawing.Color.Black
+        Me.intelligenceTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.intelligenceTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.intelligenceTitle.ForeColor = System.Drawing.Color.White
+        Me.intelligenceTitle.Location = New System.Drawing.Point(12, 229)
+        Me.intelligenceTitle.Name = "intelligenceTitle"
+        Me.intelligenceTitle.ReadOnly = True
+        Me.intelligenceTitle.Size = New System.Drawing.Size(125, 20)
+        Me.intelligenceTitle.TabIndex = 9
+        Me.intelligenceTitle.Text = "Intelligence"
         '
         'healthTitle
         '
@@ -198,31 +198,31 @@ Partial Class Form1
         Me.healthTitle.TabIndex = 11
         Me.healthTitle.Text = "Health"
         '
-        'TextBox4
+        'hungerTitle
         '
-        Me.TextBox4.BackColor = System.Drawing.Color.Black
-        Me.TextBox4.Cursor = System.Windows.Forms.Cursors.Default
-        Me.TextBox4.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.ForeColor = System.Drawing.Color.White
-        Me.TextBox4.Location = New System.Drawing.Point(12, 162)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.ReadOnly = True
-        Me.TextBox4.Size = New System.Drawing.Size(125, 26)
-        Me.TextBox4.TabIndex = 12
-        Me.TextBox4.Text = "Hunger"
+        Me.hungerTitle.BackColor = System.Drawing.Color.Black
+        Me.hungerTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.hungerTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.hungerTitle.ForeColor = System.Drawing.Color.White
+        Me.hungerTitle.Location = New System.Drawing.Point(12, 162)
+        Me.hungerTitle.Name = "hungerTitle"
+        Me.hungerTitle.ReadOnly = True
+        Me.hungerTitle.Size = New System.Drawing.Size(125, 26)
+        Me.hungerTitle.TabIndex = 12
+        Me.hungerTitle.Text = "Hunger"
         '
-        'skillTitle2
+        'agilityTitle
         '
-        Me.skillTitle2.BackColor = System.Drawing.Color.Black
-        Me.skillTitle2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.skillTitle2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.skillTitle2.ForeColor = System.Drawing.Color.White
-        Me.skillTitle2.Location = New System.Drawing.Point(12, 255)
-        Me.skillTitle2.Name = "skillTitle2"
-        Me.skillTitle2.ReadOnly = True
-        Me.skillTitle2.Size = New System.Drawing.Size(125, 20)
-        Me.skillTitle2.TabIndex = 18
-        Me.skillTitle2.Text = "Agility"
+        Me.agilityTitle.BackColor = System.Drawing.Color.Black
+        Me.agilityTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.agilityTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.agilityTitle.ForeColor = System.Drawing.Color.White
+        Me.agilityTitle.Location = New System.Drawing.Point(12, 255)
+        Me.agilityTitle.Name = "agilityTitle"
+        Me.agilityTitle.ReadOnly = True
+        Me.agilityTitle.Size = New System.Drawing.Size(125, 20)
+        Me.agilityTitle.TabIndex = 18
+        Me.agilityTitle.Text = "Agility"
         '
         'strength0
         '
@@ -344,31 +344,31 @@ Partial Class Form1
         Me.healthBar0.TabIndex = 32
         Me.healthBar0.Text = "NO DATA"
         '
-        'skillTitle3
+        'socialTitle
         '
-        Me.skillTitle3.BackColor = System.Drawing.Color.Black
-        Me.skillTitle3.Cursor = System.Windows.Forms.Cursors.Default
-        Me.skillTitle3.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.skillTitle3.ForeColor = System.Drawing.Color.White
-        Me.skillTitle3.Location = New System.Drawing.Point(12, 281)
-        Me.skillTitle3.Name = "skillTitle3"
-        Me.skillTitle3.ReadOnly = True
-        Me.skillTitle3.Size = New System.Drawing.Size(125, 20)
-        Me.skillTitle3.TabIndex = 33
-        Me.skillTitle3.Text = "Social"
+        Me.socialTitle.BackColor = System.Drawing.Color.Black
+        Me.socialTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.socialTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.socialTitle.ForeColor = System.Drawing.Color.White
+        Me.socialTitle.Location = New System.Drawing.Point(12, 281)
+        Me.socialTitle.Name = "socialTitle"
+        Me.socialTitle.ReadOnly = True
+        Me.socialTitle.Size = New System.Drawing.Size(125, 20)
+        Me.socialTitle.TabIndex = 33
+        Me.socialTitle.Text = "Social"
         '
-        'skillTitle4
+        'perceptionTitle
         '
-        Me.skillTitle4.BackColor = System.Drawing.Color.Black
-        Me.skillTitle4.Cursor = System.Windows.Forms.Cursors.Default
-        Me.skillTitle4.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.skillTitle4.ForeColor = System.Drawing.Color.White
-        Me.skillTitle4.Location = New System.Drawing.Point(12, 307)
-        Me.skillTitle4.Name = "skillTitle4"
-        Me.skillTitle4.ReadOnly = True
-        Me.skillTitle4.Size = New System.Drawing.Size(125, 20)
-        Me.skillTitle4.TabIndex = 34
-        Me.skillTitle4.Text = "Perception"
+        Me.perceptionTitle.BackColor = System.Drawing.Color.Black
+        Me.perceptionTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.perceptionTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.perceptionTitle.ForeColor = System.Drawing.Color.White
+        Me.perceptionTitle.Location = New System.Drawing.Point(12, 307)
+        Me.perceptionTitle.Name = "perceptionTitle"
+        Me.perceptionTitle.ReadOnly = True
+        Me.perceptionTitle.Size = New System.Drawing.Size(125, 20)
+        Me.perceptionTitle.TabIndex = 34
+        Me.perceptionTitle.Text = "Perception"
         '
         'social0
         '
@@ -640,8 +640,8 @@ Partial Class Form1
         Me.Controls.Add(Me.taskTitle)
         Me.Controls.Add(Me.perception0)
         Me.Controls.Add(Me.social0)
-        Me.Controls.Add(Me.skillTitle4)
-        Me.Controls.Add(Me.skillTitle3)
+        Me.Controls.Add(Me.perceptionTitle)
+        Me.Controls.Add(Me.socialTitle)
         Me.Controls.Add(Me.healthBar0)
         Me.Controls.Add(Me.hungerBar0)
         Me.Controls.Add(Me.healthBar2)
@@ -651,14 +651,14 @@ Partial Class Form1
         Me.Controls.Add(Me.agility0)
         Me.Controls.Add(Me.intelligence0)
         Me.Controls.Add(Me.strength0)
-        Me.Controls.Add(Me.skillTitle2)
-        Me.Controls.Add(Me.TextBox4)
+        Me.Controls.Add(Me.agilityTitle)
+        Me.Controls.Add(Me.hungerTitle)
         Me.Controls.Add(Me.healthTitle)
-        Me.Controls.Add(Me.skillTitle1)
+        Me.Controls.Add(Me.intelligenceTitle)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.foodCounter)
         Me.Controls.Add(Me.dayCounter)
-        Me.Controls.Add(Me.skillTitle0)
+        Me.Controls.Add(Me.strengthTitle)
         Me.Controls.Add(Me.name2)
         Me.Controls.Add(Me.name1)
         Me.Controls.Add(Me.name0)
@@ -676,14 +676,14 @@ Partial Class Form1
     Friend WithEvents name0 As TextBox
     Friend WithEvents name1 As TextBox
     Friend WithEvents name2 As TextBox
-    Friend WithEvents skillTitle0 As TextBox
+    Friend WithEvents strengthTitle As TextBox
     Friend WithEvents dayCounter As TextBox
     Friend WithEvents foodCounter As TextBox
     Friend WithEvents Button1 As Button
-    Friend WithEvents skillTitle1 As TextBox
+    Friend WithEvents intelligenceTitle As TextBox
     Friend WithEvents healthTitle As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents skillTitle2 As TextBox
+    Friend WithEvents hungerTitle As TextBox
+    Friend WithEvents agilityTitle As TextBox
     Friend WithEvents strength0 As TextBox
     Friend WithEvents intelligence0 As TextBox
     Friend WithEvents agility0 As TextBox
@@ -693,8 +693,8 @@ Partial Class Form1
     Friend WithEvents healthBar2 As TextBox
     Friend WithEvents hungerBar0 As TextBox
     Friend WithEvents healthBar0 As TextBox
-    Friend WithEvents skillTitle3 As TextBox
-    Friend WithEvents skillTitle4 As TextBox
+    Friend WithEvents socialTitle As TextBox
+    Friend WithEvents perceptionTitle As TextBox
     Friend WithEvents social0 As TextBox
     Friend WithEvents perception0 As TextBox
     Friend WithEvents taskTitle As TextBox

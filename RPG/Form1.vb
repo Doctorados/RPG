@@ -9,8 +9,7 @@
     End Sub
     Private Sub updateFields() 'update the main menu fields
         Dim rs As New ADODB.Recordset
-        Try
-            rs.Open("SELECT * FROM [Character]", conn,
+        rs.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
             )
@@ -45,12 +44,10 @@
             dayCounter.Text = "Day " & CStr(dayCountVal)
             foodCounter.Text = "Rations: " & CStr(rationCountVal)
             rs.Close()
-            hungerBar0.ForeColor = Color.White
-            hungerBar1.ForeColor = Color.White
-            hungerBar2.ForeColor = Color.White
-        Catch ex As Exception
-            MsgBox("Exception: " & ex.Message)
-        End Try
+            For i = 0 To 2
+            DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex = -1
+            DirectCast(Me.Controls("hungerBar" & i), TextBox).ForeColor = Color.White
+        Next
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Call calcDay()
@@ -121,6 +118,7 @@
 
     Private Sub calcDay()
         Dim rs As New ADODB.Recordset
+        Call calcTasks()
         Call updateHunger()
         Call updateHealth()
         rs.Open("SELECT * FROM [Day]", conn,
@@ -163,21 +161,25 @@
     End Sub
     Private Sub updateHealth()
         Dim rs As New ADODB.Recordset
+        Dim i As Int16
         rs.Open("SELECT hunger, health FROM [Character]", conn,
                    ADODB.CursorTypeEnum.adOpenStatic,
                    ADODB.LockTypeEnum.adLockPessimistic
            )
         rs.MoveFirst()
+        i = 0
         Do While Not rs.EOF
             If rs.Fields("hunger").Value = 0 Then
                 rs.Fields("health").Value -= 30
             End If
             If rs.Fields("health").Value < 0 Then
                 rs.Fields("health").Value = 0
+                Call killChar(i)
             End If
             If rs.Fields("health").Value > 100 Then
                 rs.Fields("health").Value = 100
             End If
+            i += 1
             rs.MoveNext()
         Loop
         rs.Close()
@@ -230,4 +232,17 @@
         MsgBox(num)
         sumArray = num
     End Function
+
+    Sub killChar(ByVal index)
+        index = CStr(index)
+        For Each elem In Controls
+            If elem.Name(elem.Name.length - 1) = index Then
+                elem.enabled = False
+            End If
+        Next
+    End Sub
+
+    Sub calcTasks()
+
+    End Sub
 End Class
