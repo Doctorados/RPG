@@ -229,7 +229,6 @@
                 num += 1
             End If
         Next
-        MsgBox(num)
         sumArray = num
     End Function
 
@@ -243,6 +242,44 @@
     End Sub
 
     Sub calcTasks()
+        Dim rs_assignment As New ADODB.Recordset
+        Dim rs_tasks As New ADODB.Recordset
+        Dim rs_char As New ADODB.Recordset
+        Dim rs_day As New ADODB.Recordset
+        Dim taskInd As Int16
 
+        rs_assignment.Open("SELECT * FROM [Assignment]", conn,
+                    ADODB.CursorTypeEnum.adOpenDynamic,
+                    ADODB.LockTypeEnum.adLockOptimistic
+            )
+        rs_tasks.Open("SELECT ID FROM [Task]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+        rs_char.Open("SELECT ID FROM [Character]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+        rs_day.Open("SELECT ID FROM [Day]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+        rs_day.MoveLast()
+        rs_char.MoveFirst()
+
+
+        For i = 0 To 2
+            taskInd = DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex
+            rs_assignment.AddNew()
+            rs_assignment.Fields("dayID").Value = rs_day.Fields("ID").Value
+            rs_assignment.Fields("characterID").Value = rs_char.Fields("ID").Value
+            rs_assignment.Fields("taskID").Value = taskInd + 1 'this only works when Combobox vlues are obtained from db
+            rs_assignment.Update()
+            rs_char.MoveNext()
+        Next
+        rs_assignment.Close()
+        rs_tasks.Close()
+        rs_char.Close()
     End Sub
+
 End Class
