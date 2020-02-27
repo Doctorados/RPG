@@ -252,10 +252,6 @@
                     ADODB.CursorTypeEnum.adOpenDynamic,
                     ADODB.LockTypeEnum.adLockOptimistic
             )
-        rs_tasks.Open("SELECT ID FROM [Task]", conn,
-                    ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic
-            )
         rs_char.Open("SELECT ID FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
@@ -278,7 +274,7 @@
             rs_char.MoveNext()
         Next
         rs_assignment.Close()
-        rs_tasks.Close()
+        rs_day.Close()
         rs_char.Close()
     End Sub
 
