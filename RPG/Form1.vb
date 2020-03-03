@@ -3,9 +3,11 @@
     Dim foodDist(3) As Boolean 'array determines who gets rations
     Dim dayCountVal As Int16
     Dim rationCountVal As Int16
+    'Dim baseTaskChances(6) As Double
     Private Sub Class_Initialize()
         dayCountVal = 1
         foodDist = {False, False, False}
+        'baseTaskChances = {0.05, 0.15, 0.3, 0.3, 0.15, 0.05}
     End Sub
     Private Sub updateFields() 'update the main menu fields
         Dim rs As New ADODB.Recordset
@@ -242,6 +244,80 @@
     End Sub
 
     Sub calcTasks()
+        Dim rs_tasks As New ADODB.Recordset
+        Dim rs_char As New ADODB.Recordset
+        Dim rs_strings As New ADODB.Recordset
+        Dim taskInd As Long
+        Dim relSkill As String
+        Dim skillLevel As Int16
+        Dim result As Int16
+
+        rs_char.Open("SELECT * FROM [Character]", conn,
+                    ADODB.CursorTypeEnum.adOpenDynamic,
+                    ADODB.LockTypeEnum.adLockOptimistic
+            )
+        rs_tasks.Open("SELECT * FROM [Task]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+        For i = 0 To 2
+            taskInd = DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex 'get index of assigned task
+            Console.WriteLine(taskInd)
+            moveAbsolute(rs_tasks, taskInd) 'THIS IS VERY FRAGILE! SWITCH TO IDs and finding via value
+            relSkill = rs_tasks.Fields("relevantSkill").Value
+            Console.WriteLine(relSkill)
+            skillLevel = rs_char.Fields(relSkill).Value
+            Console.WriteLine(skillLevel)
+            result = getOutcome(skillLevel)
+            Console.WriteLine("Result: " & result)
+            rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd & " AND outcome = " & result, conn,
+                            ADODB.CursorTypeEnum.adOpenStatic
+            ) 'open recordset with relevant stings
+            MsgBox(rs_strings.Fields("string").Value)
+            rs_strings.Close()
+        Next
+        rs_tasks.Close()
+        rs_char.Close()
+    End Sub
+
+    Function getOutcome(ByRef skill)
+        Randomize()
+        'gets outcome determined by binomial dist higher skill = higher p
+        Dim p As Single
+        Dim out As Int16
+        out = 0
+        p = ((0.045 * skill) + 0.05)
+        For i = 0 To 5
+            If p > Rnd() Then
+                out += 1
+            End If
+        Next
+        getOutcome = out
+    End Function
+
+    Sub moveAbsolute(ByRef rs, ByVal pos)
+        rs.MoveFirst()
+        If pos > 0 Then
+            For i = 0 To pos
+                If Not rs.EOF Then
+                    rs.MoveNext()
+                End If
+            Next
+        End If
+    End Sub
+    Function randomRecord(ByRef rs, ByVal fieldName) 'this doesnt work, i dont know why
+        Dim numOfRecords As Long
+        Dim recordPos As Int16
+        Randomize()
+        numOfRecords = rs.RecordCount
+        recordPos = Int(numOfRecords * Rnd()) 'calculate a random pos in rs
+        If recordPos = numOfRecords And recordPos > 0 Then 'treat out of range edge case
+            recordPos -= 1
+        End If
+        rs.AbsolutePosition = recordPos
+        randomRecord = rs.Fields(fieldName).Value
+    End Function
+    Sub assign() 'tbh I don't know anymore why the assignement table exists
         Dim rs_assignment As New ADODB.Recordset
         Dim rs_tasks As New ADODB.Recordset
         Dim rs_char As New ADODB.Recordset
@@ -269,7 +345,7 @@
             rs_assignment.AddNew()
             rs_assignment.Fields("dayID").Value = rs_day.Fields("ID").Value
             rs_assignment.Fields("characterID").Value = rs_char.Fields("ID").Value
-            rs_assignment.Fields("taskID").Value = taskInd + 1 'this only works when Combobox vlues are obtained from db
+            rs_assignment.Fields("taskID").Value = taskInd + 1 'this only works when Combobox values are obtained from db
             rs_assignment.Update()
             rs_char.MoveNext()
         Next
