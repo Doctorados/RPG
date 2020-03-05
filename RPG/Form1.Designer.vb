@@ -29,7 +29,7 @@ Partial Class Form1
         Me.strengthTitle = New System.Windows.Forms.TextBox()
         Me.dayCounter = New System.Windows.Forms.TextBox()
         Me.foodCounter = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.GO = New System.Windows.Forms.Button()
         Me.intelligenceTitle = New System.Windows.Forms.TextBox()
         Me.healthTitle = New System.Windows.Forms.TextBox()
         Me.hungerTitle = New System.Windows.Forms.TextBox()
@@ -158,19 +158,19 @@ Partial Class Form1
         Me.foodCounter.Text = "Rations: NO DATA"
         Me.foodCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'Button1
+        'GO
         '
-        Me.Button1.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.Button1.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(650, 389)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(138, 36)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "GO!"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.GO.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.GO.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.GO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.GO.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GO.ForeColor = System.Drawing.Color.White
+        Me.GO.Location = New System.Drawing.Point(650, 389)
+        Me.GO.Name = "GO"
+        Me.GO.Size = New System.Drawing.Size(138, 36)
+        Me.GO.TabIndex = 8
+        Me.GO.Text = "GO!"
+        Me.GO.UseVisualStyleBackColor = False
         '
         'intelligenceTitle
         '
@@ -655,7 +655,7 @@ Partial Class Form1
         Me.Controls.Add(Me.hungerTitle)
         Me.Controls.Add(Me.healthTitle)
         Me.Controls.Add(Me.intelligenceTitle)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.GO)
         Me.Controls.Add(Me.foodCounter)
         Me.Controls.Add(Me.dayCounter)
         Me.Controls.Add(Me.strengthTitle)
@@ -679,7 +679,7 @@ Partial Class Form1
     Friend WithEvents strengthTitle As TextBox
     Friend WithEvents dayCounter As TextBox
     Friend WithEvents foodCounter As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents GO As Button
     Friend WithEvents intelligenceTitle As TextBox
     Friend WithEvents healthTitle As TextBox
     Friend WithEvents hungerTitle As TextBox

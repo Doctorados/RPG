@@ -13,44 +13,44 @@
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
             )
-            'update Character Values
-            If rs.RecordCount > 0 Then
-                rs.MoveFirst()
-                Dim i = 0
-                Dim skillNames = New String() {"strength", "intelligence", "agility", "social", "perception"}
-                Do While Not rs.EOF
-                    Me.Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value))
-                    Me.Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD"))
-                    Me.Controls("hungerBar" & i).Text = (getBar(rs.Fields("hunger").Value, "STARVING"))
-                    For Each elem As String In skillNames
-                        Me.Controls(elem & i).Text = (skillWords(rs.Fields(elem).Value))
-                    Next
-                    rs.MoveNext()
-                    i += 1
-                Loop
-            Else
-                MsgBox("No Data")
-            End If
-            rs.Close()
-            'update Day and Rations
+        'update Character Values
+        If rs.RecordCount > 0 Then
+            rs.MoveFirst()
+            Dim i = 0
+            Dim skillNames = New String() {"strength", "intelligence", "agility", "social", "perception"}
+            Do While Not rs.EOF
+                Me.Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value))
+                Me.Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD"))
+                If rs.Fields("health").Value = 0 Then
+                    killChar(i)
+                End If
+                Me.Controls("hungerBar" & i).Text = (getBar(rs.Fields("hunger").Value, "STARVING"))
+                For Each elem As String In skillNames
+                    Me.Controls(elem & i).Text = (skillWords(rs.Fields(elem).Value))
+                Next
+                rs.MoveNext()
+                i += 1
+            Loop
+        Else
+            MsgBox("No Data")
+        End If
+        rs.Close()
+        'update Day and Rations
 
-            rs.Open("SELECT * FROM [Day]", conn,
+        rs.Open("SELECT * FROM [Day]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
             )
-            rs.MoveLast()
-            dayCountVal = rs.Fields("counter").Value
-            rationCountVal = rs.Fields("rations").Value
-            dayCounter.Text = "Day " & CStr(dayCountVal)
-            foodCounter.Text = "Rations: " & CStr(rationCountVal)
-            rs.Close()
-            For i = 0 To 2
+        rs.MoveLast()
+        dayCountVal = rs.Fields("counter").Value
+        rationCountVal = rs.Fields("rations").Value
+        dayCounter.Text = "Day " & CStr(dayCountVal)
+        foodCounter.Text = "Rations: " & CStr(rationCountVal)
+        rs.Close()
+        For i = 0 To 2
             DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex = -1
             DirectCast(Me.Controls("hungerBar" & i), TextBox).ForeColor = Color.White
         Next
-    End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Call calcDay()
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -108,6 +108,7 @@
         "slightly impressive",
         "impressive",
         "excellent",
+        "fantasttic",
         "incredible",
         "exceptional",
         "epic",
@@ -174,7 +175,7 @@
             End If
             If rs.Fields("health").Value < 0 Then
                 rs.Fields("health").Value = 0
-                Call killChar(i)
+                'Call killChar(i)
             End If
             If rs.Fields("health").Value > 100 Then
                 rs.Fields("health").Value = 100
@@ -195,7 +196,8 @@
     End Sub
 
     Private Sub hungerBar_click_helper(ByVal i, ByRef sender)
-        If sumArray(foodDist) <= rationCountVal And Not foodDist(i) Then
+        Console.WriteLine("Rations: " & rationCountVal)
+        If sumArray(foodDist) < rationCountVal And Not foodDist(i) Then
             foodDist(i) = Not foodDist(i)
             If foodDist(i) Then
                 sender.ForeColor = Color.Lime
@@ -224,11 +226,13 @@
 
     Function sumArray(ByVal arr)
         Dim num As Int16
+        num = 0
         For Each elem In arr
             If elem Then
                 num += 1
             End If
         Next
+        Console.WriteLine("Sum of Array: " & num)
         sumArray = num
     End Function
 
@@ -249,6 +253,7 @@
         Dim relSkill As String
         Dim skillLevel As Int16
         Dim result As Int16
+        Dim msgString As String
 
         rs_char.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenDynamic,
@@ -260,23 +265,58 @@
             )
         For i = 0 To 2
             taskInd = DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex 'get index of assigned task
-            Console.WriteLine(taskInd)
-            moveAbsolute(rs_tasks, taskInd)
-            relSkill = rs_tasks.Fields("relevantSkill").Value
-            Console.WriteLine("Relevantskill: " & relSkill)
-            skillLevel = rs_char.Fields(relSkill).Value
-            Console.WriteLine("Skilllevel: " & skillLevel)
-            result = getOutcome(skillLevel)
-            Console.WriteLine("Result: " & result)
-            Console.WriteLine("SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result)
-            rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result, conn,
-                            ADODB.CursorTypeEnum.adOpenStatic
-            ) 'open recordset with relevant stings
-            MsgBox(rs_strings.Fields("string").Value)
-            rs_strings.Close()
+            If taskInd <> -1 Then
+                Console.WriteLine(taskInd)
+                moveAbsolute(rs_tasks, taskInd)
+                relSkill = rs_tasks.Fields("relevantSkill").Value
+                Console.WriteLine("Relevantskill: " & relSkill)
+                skillLevel = rs_char.Fields(relSkill).Value
+                Console.WriteLine("Skilllevel: " & skillLevel)
+                result = getOutcome(skillLevel)
+                Console.WriteLine("Result: " & result)
+                Console.WriteLine("SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result)
+                rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result, conn,
+                                ADODB.CursorTypeEnum.adOpenStatic
+                ) 'open recordset with relevant stings
+                msgString = rs_char.Fields("fullName").Value & " was " & rs_tasks.Fields("taskName").Value & "ing " & rs_strings.Fields("string").Value
+                parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
+                MsgBox(msgString)
+                rs_strings.Close()
+            End If
+            rs_char.MoveNext()
         Next
+        rs_tasks.Update()
+        'rs_char.Update()
         rs_tasks.Close()
         rs_char.Close()
+    End Sub
+
+    Sub parseOutcome(ByRef outString, ByRef rs_char)
+        Dim arr(2) As String
+        Dim rs As New ADODB.Recordset
+        Dim num As Int16
+        Dim str As String
+        'splitter
+        arr = outString.Split(":")
+        str = arr(0)
+        num = CInt(arr(1))
+        'change values
+        Select Case str
+            Case "food"
+                rs.Open("SELECT rations FROM [Day]", conn,
+                   ADODB.CursorTypeEnum.adOpenStatic,
+                   ADODB.LockTypeEnum.adLockPessimistic
+           )
+                rs.MoveLast()
+                rs.Fields("rations").Value += num
+                rs.Update()
+                rs.Close()
+            Case "health"
+                rs_char.Fields("health").Value += num
+                If rs_char.Fields("health").Value < 0 Then
+                    rs_char.Fields("health").Value = 0
+                End If
+        End Select
     End Sub
 
     Function getOutcome(ByRef skill)
@@ -286,8 +326,8 @@
         Dim out As Int16
         out = 0
         p = ((0.045 * skill) + 0.05)
-        For i = 0 To 5
-            If p > Rnd() Then
+        For i = 0 To 4
+            If p < Rnd() Then
                 out += 1
             End If
         Next
@@ -296,11 +336,12 @@
 
     Sub moveAbsolute(ByRef rs, ByVal pos) 'this function only exists because Recordset.moveabsolute is very unreliable
         rs.MoveFirst()
-        If pos > 0 Then
-            For i = 0 To pos
-                If Not rs.EOF Then
-                    rs.MoveNext()
-                End If
+
+        If pos > rs.RecordCount - 1 Then
+            rs.MoveLast()
+        Else
+            For i = 1 To pos
+                rs.MoveNext()
             Next
         End If
     End Sub
@@ -353,4 +394,7 @@
         rs_char.Close()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles GO.Click
+        Call calcDay()
+    End Sub
 End Class
