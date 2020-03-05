@@ -3,11 +3,9 @@
     Dim foodDist(3) As Boolean 'array determines who gets rations
     Dim dayCountVal As Int16
     Dim rationCountVal As Int16
-    'Dim baseTaskChances(6) As Double
     Private Sub Class_Initialize()
         dayCountVal = 1
         foodDist = {False, False, False}
-        'baseTaskChances = {0.05, 0.15, 0.3, 0.3, 0.15, 0.05}
     End Sub
     Private Sub updateFields() 'update the main menu fields
         Dim rs As New ADODB.Recordset
@@ -263,14 +261,15 @@
         For i = 0 To 2
             taskInd = DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex 'get index of assigned task
             Console.WriteLine(taskInd)
-            moveAbsolute(rs_tasks, taskInd) 'THIS IS VERY FRAGILE! SWITCH TO IDs and finding via value
+            moveAbsolute(rs_tasks, taskInd)
             relSkill = rs_tasks.Fields("relevantSkill").Value
-            Console.WriteLine(relSkill)
+            Console.WriteLine("Relevantskill: " & relSkill)
             skillLevel = rs_char.Fields(relSkill).Value
-            Console.WriteLine(skillLevel)
+            Console.WriteLine("Skilllevel: " & skillLevel)
             result = getOutcome(skillLevel)
             Console.WriteLine("Result: " & result)
-            rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd & " AND outcome = " & result, conn,
+            Console.WriteLine("SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result)
+            rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result, conn,
                             ADODB.CursorTypeEnum.adOpenStatic
             ) 'open recordset with relevant stings
             MsgBox(rs_strings.Fields("string").Value)
@@ -295,7 +294,7 @@
         getOutcome = out
     End Function
 
-    Sub moveAbsolute(ByRef rs, ByVal pos)
+    Sub moveAbsolute(ByRef rs, ByVal pos) 'this function only exists because Recordset.moveabsolute is very unreliable
         rs.MoveFirst()
         If pos > 0 Then
             For i = 0 To pos
