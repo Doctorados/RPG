@@ -48,7 +48,8 @@
         foodCounter.Text = "Rations: " & CStr(rationCountVal)
         rs.Close()
         For i = 0 To 2
-            DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex = -1
+            DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex = 1
+
             DirectCast(Me.Controls("hungerBar" & i), TextBox).ForeColor = Color.White
         Next
     End Sub
@@ -254,7 +255,8 @@
         Dim skillLevel As Int16
         Dim result As Int16
         Dim msgString As String
-
+        Dim resultList(3) As String
+        resultList = {"", "", ""}
         rs_char.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenDynamic,
                     ADODB.LockTypeEnum.adLockOptimistic
@@ -280,17 +282,27 @@
                 ) 'open recordset with relevant stings
                 msgString = rs_char.Fields("fullName").Value & " was " & rs_tasks.Fields("taskName").Value & "ing " & rs_strings.Fields("string").Value
                 parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
-                MsgBox(msgString)
                 rs_strings.Close()
+                resultList(i) = msgString
             End If
             rs_char.MoveNext()
         Next
+        MsgBox(arrToStr(resultList, vbLf))
         rs_tasks.Update()
         'rs_char.Update()
         rs_tasks.Close()
         rs_char.Close()
     End Sub
 
+    Function arrToStr(ByRef arr, ByVal sep)
+        Dim str As String
+        str = ""
+        For Each elem In arr
+            str = str & elem & sep
+
+        Next
+        arrToStr = str
+    End Function
     Sub parseOutcome(ByRef outString, ByRef rs_char)
         Dim arr(2) As String
         Dim rs As New ADODB.Recordset
@@ -319,6 +331,9 @@
         End Select
     End Sub
 
+    Function levelUp()
+
+    End Function
     Function getOutcome(ByRef skill)
         Randomize()
         'gets outcome determined by binomial dist higher skill = higher p
