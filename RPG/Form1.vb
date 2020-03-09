@@ -94,27 +94,27 @@
     Private Function skillWords(ByRef value)
         Dim words(20) As String
         words = {
-        "incapable",
-        "horrible",
-        "awful",
-        "very bad",
-        "bad",
-        "poor",
-        "lacking",
-        "basic",
-        "mediocre",
-        "average",
-        "good",
-        "very good",
-        "slightly impressive",
-        "impressive",
-        "excellent",
-        "fantasttic",
-        "incredible",
-        "exceptional",
-        "epic",
-        "legendary",
-        "godlike"}
+        "unfähig",
+        "grauenhaft",
+        "furchtbar",
+        "sehr schlecht",
+        "schlecht",
+        "gering",
+        "mangelhaft",
+        "unterdurchschnittlich",
+        "mittelmäßig",
+        "durchschnittlich",
+        "gut",
+        "sehr gut",
+        "außergewöhnlich",
+        "beeindruckend",
+        "exzellent",
+        "fantastisch",
+        "unglaublich",
+        "übermenschlich",
+        "episch",
+        "legendär",
+        "gottgleich"}
         skillWords = words(value)
     End Function
 
