@@ -198,13 +198,13 @@
 
     Private Sub hungerBar_click_helper(ByVal i, ByRef sender)
         Console.WriteLine("Rations: " & rationCountVal)
-        If sumArray(foodDist) < rationCountVal And Not foodDist(i) Then
+        Console.WriteLine("Getsfood? " & foodDist(i))
+        If foodDist(i) Then
             foodDist(i) = Not foodDist(i)
-            If foodDist(i) Then
-                sender.ForeColor = Color.Lime
-            Else
-                sender.ForeColor = Color.White
-            End If
+            sender.ForeColor = Color.White
+        ElseIf sumArray(foodDist) < rationCountVal And Not foodDist(i) Then
+            foodDist(i) = Not foodDist(i)
+            sender.ForeColor = Color.Lime
         End If
     End Sub
     Function calcRations()
@@ -267,7 +267,7 @@
             )
         For i = 0 To 2
             taskInd = DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex 'get index of assigned task
-            If taskInd <> -1 Then
+            If taskInd <> -1 And rs_char.Fields("health").Value > 0 Then
                 Console.WriteLine(taskInd)
                 moveAbsolute(rs_tasks, taskInd)
                 relSkill = rs_tasks.Fields("relevantSkill").Value
@@ -281,7 +281,7 @@
                                 ADODB.CursorTypeEnum.adOpenStatic
                 ) 'open recordset with relevant stings
                 randomRecord(rs_strings)
-                msgString = rs_char.Fields("fullName").Value & " was " & rs_tasks.Fields("taskName").Value & "ing " & rs_strings.Fields("string").Value
+                msgString = rs_char.Fields("fullName").Value & " " & rs_strings.Fields("string").Value
                 parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
                 rs_strings.Close()
                 resultList(i) = msgString
@@ -328,6 +328,9 @@
                 rs_char.Fields("health").Value += num
                 If rs_char.Fields("health").Value < 0 Then
                     rs_char.Fields("health").Value = 0
+                End If
+                If rs_char.Fields("health").Value > 100 Then
+                    rs_char.Fields("health").Value = 100
                 End If
         End Select
     End Sub
