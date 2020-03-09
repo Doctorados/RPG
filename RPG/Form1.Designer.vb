@@ -43,20 +43,20 @@ Partial Class Form1
         Me.healthBar2 = New System.Windows.Forms.TextBox()
         Me.hungerBar0 = New System.Windows.Forms.TextBox()
         Me.healthBar0 = New System.Windows.Forms.TextBox()
-        Me.socialTitle = New System.Windows.Forms.TextBox()
+        Me.mentalTitle = New System.Windows.Forms.TextBox()
         Me.perceptionTitle = New System.Windows.Forms.TextBox()
-        Me.social0 = New System.Windows.Forms.TextBox()
+        Me.mental0 = New System.Windows.Forms.TextBox()
         Me.perception0 = New System.Windows.Forms.TextBox()
         Me.taskTitle = New System.Windows.Forms.TextBox()
         Me.strength1 = New System.Windows.Forms.TextBox()
         Me.intelligence1 = New System.Windows.Forms.TextBox()
         Me.agility1 = New System.Windows.Forms.TextBox()
-        Me.social1 = New System.Windows.Forms.TextBox()
+        Me.mental1 = New System.Windows.Forms.TextBox()
         Me.perception1 = New System.Windows.Forms.TextBox()
         Me.strength2 = New System.Windows.Forms.TextBox()
         Me.intelligence2 = New System.Windows.Forms.TextBox()
         Me.agility2 = New System.Windows.Forms.TextBox()
-        Me.social2 = New System.Windows.Forms.TextBox()
+        Me.mental2 = New System.Windows.Forms.TextBox()
         Me.perception2 = New System.Windows.Forms.TextBox()
         Me.MainDataSet1 = New RPG.mainDataSet1()
         Me.CharacterBindingSource = New System.Windows.Forms.BindingSource(Me.components)
@@ -126,7 +126,7 @@ Partial Class Form1
         Me.strengthTitle.ReadOnly = True
         Me.strengthTitle.Size = New System.Drawing.Size(125, 20)
         Me.strengthTitle.TabIndex = 4
-        Me.strengthTitle.Text = "Strength"
+        Me.strengthTitle.Text = "Stärke"
         '
         'dayCounter
         '
@@ -155,7 +155,7 @@ Partial Class Form1
         Me.foodCounter.ReadOnly = True
         Me.foodCounter.Size = New System.Drawing.Size(209, 36)
         Me.foodCounter.TabIndex = 7
-        Me.foodCounter.Text = "Rations: NO DATA"
+        Me.foodCounter.Text = "Rationen: NO DATA"
         Me.foodCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'GO
@@ -183,7 +183,7 @@ Partial Class Form1
         Me.intelligenceTitle.ReadOnly = True
         Me.intelligenceTitle.Size = New System.Drawing.Size(125, 20)
         Me.intelligenceTitle.TabIndex = 9
-        Me.intelligenceTitle.Text = "Intelligence"
+        Me.intelligenceTitle.Text = "Intelligenz"
         '
         'healthTitle
         '
@@ -196,7 +196,7 @@ Partial Class Form1
         Me.healthTitle.ReadOnly = True
         Me.healthTitle.Size = New System.Drawing.Size(125, 26)
         Me.healthTitle.TabIndex = 11
-        Me.healthTitle.Text = "Health"
+        Me.healthTitle.Text = "Gesundheit"
         '
         'hungerTitle
         '
@@ -222,7 +222,7 @@ Partial Class Form1
         Me.agilityTitle.ReadOnly = True
         Me.agilityTitle.Size = New System.Drawing.Size(125, 20)
         Me.agilityTitle.TabIndex = 18
-        Me.agilityTitle.Text = "Agility"
+        Me.agilityTitle.Text = "Geschicklichkeit"
         '
         'strength0
         '
@@ -344,18 +344,18 @@ Partial Class Form1
         Me.healthBar0.TabIndex = 32
         Me.healthBar0.Text = "NO DATA"
         '
-        'socialTitle
+        'mentalTitle
         '
-        Me.socialTitle.BackColor = System.Drawing.Color.Black
-        Me.socialTitle.Cursor = System.Windows.Forms.Cursors.Default
-        Me.socialTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.socialTitle.ForeColor = System.Drawing.Color.White
-        Me.socialTitle.Location = New System.Drawing.Point(12, 281)
-        Me.socialTitle.Name = "socialTitle"
-        Me.socialTitle.ReadOnly = True
-        Me.socialTitle.Size = New System.Drawing.Size(125, 20)
-        Me.socialTitle.TabIndex = 33
-        Me.socialTitle.Text = "Social"
+        Me.mentalTitle.BackColor = System.Drawing.Color.Black
+        Me.mentalTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.mentalTitle.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mentalTitle.ForeColor = System.Drawing.Color.White
+        Me.mentalTitle.Location = New System.Drawing.Point(12, 281)
+        Me.mentalTitle.Name = "mentalTitle"
+        Me.mentalTitle.ReadOnly = True
+        Me.mentalTitle.Size = New System.Drawing.Size(125, 20)
+        Me.mentalTitle.TabIndex = 33
+        Me.mentalTitle.Text = "Mental"
         '
         'perceptionTitle
         '
@@ -368,21 +368,21 @@ Partial Class Form1
         Me.perceptionTitle.ReadOnly = True
         Me.perceptionTitle.Size = New System.Drawing.Size(125, 20)
         Me.perceptionTitle.TabIndex = 34
-        Me.perceptionTitle.Text = "Perception"
+        Me.perceptionTitle.Text = "Wahrnehmung"
         '
-        'social0
+        'mental0
         '
-        Me.social0.BackColor = System.Drawing.Color.Black
-        Me.social0.Cursor = System.Windows.Forms.Cursors.Default
-        Me.social0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.social0.ForeColor = System.Drawing.Color.White
-        Me.social0.Location = New System.Drawing.Point(158, 281)
-        Me.social0.Name = "social0"
-        Me.social0.ReadOnly = True
-        Me.social0.Size = New System.Drawing.Size(138, 20)
-        Me.social0.TabIndex = 35
-        Me.social0.Text = "NO DATA"
-        Me.social0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.mental0.BackColor = System.Drawing.Color.Black
+        Me.mental0.Cursor = System.Windows.Forms.Cursors.Default
+        Me.mental0.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mental0.ForeColor = System.Drawing.Color.White
+        Me.mental0.Location = New System.Drawing.Point(158, 281)
+        Me.mental0.Name = "mental0"
+        Me.mental0.ReadOnly = True
+        Me.mental0.Size = New System.Drawing.Size(138, 20)
+        Me.mental0.TabIndex = 35
+        Me.mental0.Text = "NO DATA"
+        Me.mental0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'perception0
         '
@@ -409,7 +409,7 @@ Partial Class Form1
         Me.taskTitle.ReadOnly = True
         Me.taskTitle.Size = New System.Drawing.Size(125, 26)
         Me.taskTitle.TabIndex = 37
-        Me.taskTitle.Text = "Task"
+        Me.taskTitle.Text = "Aufgabe"
         '
         'strength1
         '
@@ -453,19 +453,19 @@ Partial Class Form1
         Me.agility1.Text = "NO DATA"
         Me.agility1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'social1
+        'mental1
         '
-        Me.social1.BackColor = System.Drawing.Color.Black
-        Me.social1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.social1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.social1.ForeColor = System.Drawing.Color.White
-        Me.social1.Location = New System.Drawing.Point(314, 281)
-        Me.social1.Name = "social1"
-        Me.social1.ReadOnly = True
-        Me.social1.Size = New System.Drawing.Size(138, 20)
-        Me.social1.TabIndex = 44
-        Me.social1.Text = "NO DATA"
-        Me.social1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.mental1.BackColor = System.Drawing.Color.Black
+        Me.mental1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.mental1.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mental1.ForeColor = System.Drawing.Color.White
+        Me.mental1.Location = New System.Drawing.Point(314, 281)
+        Me.mental1.Name = "mental1"
+        Me.mental1.ReadOnly = True
+        Me.mental1.Size = New System.Drawing.Size(138, 20)
+        Me.mental1.TabIndex = 44
+        Me.mental1.Text = "NO DATA"
+        Me.mental1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'perception1
         '
@@ -523,19 +523,19 @@ Partial Class Form1
         Me.agility2.Text = "NO DATA"
         Me.agility2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'social2
+        'mental2
         '
-        Me.social2.BackColor = System.Drawing.Color.Black
-        Me.social2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.social2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.social2.ForeColor = System.Drawing.Color.White
-        Me.social2.Location = New System.Drawing.Point(472, 281)
-        Me.social2.Name = "social2"
-        Me.social2.ReadOnly = True
-        Me.social2.Size = New System.Drawing.Size(138, 20)
-        Me.social2.TabIndex = 49
-        Me.social2.Text = "NO DATA"
-        Me.social2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.mental2.BackColor = System.Drawing.Color.Black
+        Me.mental2.Cursor = System.Windows.Forms.Cursors.Default
+        Me.mental2.Font = New System.Drawing.Font("Consolas", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mental2.ForeColor = System.Drawing.Color.White
+        Me.mental2.Location = New System.Drawing.Point(472, 281)
+        Me.mental2.Name = "mental2"
+        Me.mental2.ReadOnly = True
+        Me.mental2.Size = New System.Drawing.Size(138, 20)
+        Me.mental2.TabIndex = 49
+        Me.mental2.Text = "NO DATA"
+        Me.mental2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'perception2
         '
@@ -628,20 +628,20 @@ Partial Class Form1
         Me.Controls.Add(Me.task1)
         Me.Controls.Add(Me.task0)
         Me.Controls.Add(Me.perception2)
-        Me.Controls.Add(Me.social2)
+        Me.Controls.Add(Me.mental2)
         Me.Controls.Add(Me.agility2)
         Me.Controls.Add(Me.intelligence2)
         Me.Controls.Add(Me.strength2)
         Me.Controls.Add(Me.perception1)
-        Me.Controls.Add(Me.social1)
+        Me.Controls.Add(Me.mental1)
         Me.Controls.Add(Me.agility1)
         Me.Controls.Add(Me.intelligence1)
         Me.Controls.Add(Me.strength1)
         Me.Controls.Add(Me.taskTitle)
         Me.Controls.Add(Me.perception0)
-        Me.Controls.Add(Me.social0)
+        Me.Controls.Add(Me.mental0)
         Me.Controls.Add(Me.perceptionTitle)
-        Me.Controls.Add(Me.socialTitle)
+        Me.Controls.Add(Me.mentalTitle)
         Me.Controls.Add(Me.healthBar0)
         Me.Controls.Add(Me.hungerBar0)
         Me.Controls.Add(Me.healthBar2)
@@ -693,20 +693,20 @@ Partial Class Form1
     Friend WithEvents healthBar2 As TextBox
     Friend WithEvents hungerBar0 As TextBox
     Friend WithEvents healthBar0 As TextBox
-    Friend WithEvents socialTitle As TextBox
+    Friend WithEvents mentalTitle As TextBox
     Friend WithEvents perceptionTitle As TextBox
-    Friend WithEvents social0 As TextBox
+    Friend WithEvents mental0 As TextBox
     Friend WithEvents perception0 As TextBox
     Friend WithEvents taskTitle As TextBox
     Friend WithEvents strength1 As TextBox
     Friend WithEvents intelligence1 As TextBox
     Friend WithEvents agility1 As TextBox
-    Friend WithEvents social1 As TextBox
+    Friend WithEvents mental1 As TextBox
     Friend WithEvents perception1 As TextBox
     Friend WithEvents strength2 As TextBox
     Friend WithEvents intelligence2 As TextBox
     Friend WithEvents agility2 As TextBox
-    Friend WithEvents social2 As TextBox
+    Friend WithEvents mental2 As TextBox
     Friend WithEvents perception2 As TextBox
     Friend WithEvents MainDataSet1 As mainDataSet1
     Friend WithEvents CharacterBindingSource As BindingSource

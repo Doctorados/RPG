@@ -17,7 +17,7 @@
         If rs.RecordCount > 0 Then
             rs.MoveFirst()
             Dim i = 0
-            Dim skillNames = New String() {"strength", "intelligence", "agility", "social", "perception"}
+            Dim skillNames = New String() {"strength", "intelligence", "agility", "mental", "perception"}
             Do While Not rs.EOF
                 Me.Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value))
                 Me.Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD"))
@@ -44,8 +44,8 @@
         rs.MoveLast()
         dayCountVal = rs.Fields("counter").Value
         rationCountVal = rs.Fields("rations").Value
-        dayCounter.Text = "Day " & CStr(dayCountVal)
-        foodCounter.Text = "Rations: " & CStr(rationCountVal)
+        dayCounter.Text = "Tag " & CStr(dayCountVal)
+        foodCounter.Text = "Rationen: " & CStr(rationCountVal)
         rs.Close()
         For i = 0 To 2
             DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex = 1
@@ -280,6 +280,7 @@
                 rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result, conn,
                                 ADODB.CursorTypeEnum.adOpenStatic
                 ) 'open recordset with relevant stings
+                randomRecord(rs_strings)
                 msgString = rs_char.Fields("fullName").Value & " was " & rs_tasks.Fields("taskName").Value & "ing " & rs_strings.Fields("string").Value
                 parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
                 rs_strings.Close()
@@ -360,7 +361,7 @@
             Next
         End If
     End Sub
-    Function randomRecord(ByRef rs, ByVal fieldName) 'this doesnt work, i dont know why
+    Sub randomRecord(ByRef rs) 'this doesnt work, i dont know why
         Dim numOfRecords As Long
         Dim recordPos As Int16
         Randomize()
@@ -369,9 +370,8 @@
         If recordPos = numOfRecords And recordPos > 0 Then 'treat out of range edge case
             recordPos -= 1
         End If
-        rs.AbsolutePosition = recordPos
-        randomRecord = rs.Fields(fieldName).Value
-    End Function
+        moveAbsolute(rs, recordPos)
+    End Sub
     Sub assign() 'tbh I don't know anymore why the assignement table exists
         Dim rs_assignment As New ADODB.Recordset
         Dim rs_tasks As New ADODB.Recordset
