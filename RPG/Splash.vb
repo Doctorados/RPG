@@ -1,14 +1,32 @@
 ﻿Public Class Splash
+    Dim conn As New ADODB.Connection
     Private Sub Splash_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
+
         Difficulty.Hide()
         Start.Hide()
         Back.Hide()
         Difficulty.SelectedIndex = 0
+        Call checkLoadBtn()
     End Sub
-    Private Sub loadGame_Click(sender As Object, e As EventArgs) Handles loadGame.Click
+
+    Sub checkLoadBtn()
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Day]", conn, ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic)
+        If rs.RecordCount = 0 Then 'disable load if no game in db
+            loadGame.Enabled = False
+        End If
+        rs.Close()
+    End Sub
+
+    Sub startGame()
         Dim mainWindow As New main
         main.Show()
-        Me.Hide()
+        Me.Close()
+    End Sub
+    Private Sub loadGame_Click(sender As Object, e As EventArgs) Handles loadGame.Click
+        Call startGame()
     End Sub
 
     Private Sub newGame_Click(sender As Object, e As EventArgs) Handles newGame.Click
@@ -26,12 +44,10 @@
         Back.Hide()
         loadGame.Show()
         newGame.Show()
+        Call checkLoadBtn()
     End Sub
 
     Private Sub createNewGame()
-        Dim conn As New ADODB.Connection
-        conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
-
         conn.Execute("DELETE FROM [Day]")
         conn.Execute("DELETE FROM [Character]")
 
@@ -61,6 +77,9 @@
             Next
             rs_char.Update()
         Next
+        rs_char.Close()
+        rs_day.Close()
+        Call startGame()
     End Sub
 
     Function newSkills(ByVal diff)
@@ -97,8 +116,13 @@
     End Function
 
     Private Sub Start_Click(sender As Object, e As EventArgs) Handles Start.Click
-        'Dim skills(5) As Int16
-        Call createNewGame()
+        Dim confirm As DialogResult
+        confirm = MessageBox.Show("Durch starten eines neuen Spiels wird jeder vohandene Spielstand gelöscht. Neues Spiel?",
+                                     "",
+                                     MessageBoxButtons.YesNo)
+        If (confirm = DialogResult.Yes) Then
+            Call createNewGame()
+        End If
         'skills = newSkills(Difficulty.SelectedIndex)
     End Sub
 End Class
