@@ -1,4 +1,4 @@
-﻿Public Class Form1
+﻿Public Class main
     Dim conn As ADODB.Connection
     Dim foodDist(3) As Boolean 'array determines who gets rations
     Dim dayCountVal As Int16
@@ -6,6 +6,9 @@
     Private Sub Class_Initialize()
         dayCountVal = 1
         foodDist = {False, False, False}
+        conn = New ADODB.Connection
+        conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
+
     End Sub
     Private Sub updateFields() 'update the main menu fields
         Dim rs As New ADODB.Recordset
@@ -55,8 +58,6 @@
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        conn = New ADODB.Connection
-        conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
 
         Dim rs As New ADODB.Recordset
         Try
