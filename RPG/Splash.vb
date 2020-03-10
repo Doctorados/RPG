@@ -23,7 +23,7 @@
     Sub startGame()
         Dim mainWindow As New main
         main.Show()
-        Me.Close()
+        Me.Hide()
     End Sub
     Private Sub loadGame_Click(sender As Object, e As EventArgs) Handles loadGame.Click
         Call startGame()
