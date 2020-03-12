@@ -31,18 +31,13 @@ Partial Class main
         Me.foodCounter = New System.Windows.Forms.TextBox()
         Me.GO = New System.Windows.Forms.Button()
         Me.intelligenceTitle = New System.Windows.Forms.TextBox()
-        Me.healthTitle = New System.Windows.Forms.TextBox()
-        Me.hungerTitle = New System.Windows.Forms.TextBox()
         Me.agilityTitle = New System.Windows.Forms.TextBox()
         Me.strength0 = New System.Windows.Forms.TextBox()
         Me.intelligence0 = New System.Windows.Forms.TextBox()
         Me.agility0 = New System.Windows.Forms.TextBox()
         Me.hungerBar1 = New System.Windows.Forms.TextBox()
-        Me.healthBar1 = New System.Windows.Forms.TextBox()
         Me.hungerBar2 = New System.Windows.Forms.TextBox()
-        Me.healthBar2 = New System.Windows.Forms.TextBox()
         Me.hungerBar0 = New System.Windows.Forms.TextBox()
-        Me.healthBar0 = New System.Windows.Forms.TextBox()
         Me.mentalTitle = New System.Windows.Forms.TextBox()
         Me.perceptionTitle = New System.Windows.Forms.TextBox()
         Me.mental0 = New System.Windows.Forms.TextBox()
@@ -67,6 +62,8 @@ Partial Class main
         Me.task0 = New System.Windows.Forms.ComboBox()
         Me.task1 = New System.Windows.Forms.ComboBox()
         Me.task2 = New System.Windows.Forms.ComboBox()
+        Me.healthTitle = New System.Windows.Forms.TextBox()
+        Me.hungerTitle = New System.Windows.Forms.TextBox()
         CType(Me.MainDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CharacterBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TaskBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -185,32 +182,6 @@ Partial Class main
         Me.intelligenceTitle.TabIndex = 9
         Me.intelligenceTitle.Text = "Intelligenz"
         '
-        'healthTitle
-        '
-        Me.healthTitle.BackColor = System.Drawing.Color.Black
-        Me.healthTitle.Cursor = System.Windows.Forms.Cursors.Default
-        Me.healthTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthTitle.ForeColor = System.Drawing.Color.White
-        Me.healthTitle.Location = New System.Drawing.Point(12, 131)
-        Me.healthTitle.Name = "healthTitle"
-        Me.healthTitle.ReadOnly = True
-        Me.healthTitle.Size = New System.Drawing.Size(125, 26)
-        Me.healthTitle.TabIndex = 11
-        Me.healthTitle.Text = "Gesundheit"
-        '
-        'hungerTitle
-        '
-        Me.hungerTitle.BackColor = System.Drawing.Color.Black
-        Me.hungerTitle.Cursor = System.Windows.Forms.Cursors.Default
-        Me.hungerTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.hungerTitle.ForeColor = System.Drawing.Color.White
-        Me.hungerTitle.Location = New System.Drawing.Point(12, 162)
-        Me.hungerTitle.Name = "hungerTitle"
-        Me.hungerTitle.ReadOnly = True
-        Me.hungerTitle.Size = New System.Drawing.Size(125, 26)
-        Me.hungerTitle.TabIndex = 12
-        Me.hungerTitle.Text = "Hunger"
-        '
         'agilityTitle
         '
         Me.agilityTitle.BackColor = System.Drawing.Color.Black
@@ -279,19 +250,6 @@ Partial Class main
         Me.hungerBar1.TabIndex = 24
         Me.hungerBar1.Text = "NO DATA"
         '
-        'healthBar1
-        '
-        Me.healthBar1.BackColor = System.Drawing.Color.Black
-        Me.healthBar1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.healthBar1.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthBar1.ForeColor = System.Drawing.Color.Red
-        Me.healthBar1.Location = New System.Drawing.Point(314, 130)
-        Me.healthBar1.Name = "healthBar1"
-        Me.healthBar1.ReadOnly = True
-        Me.healthBar1.Size = New System.Drawing.Size(138, 26)
-        Me.healthBar1.TabIndex = 28
-        Me.healthBar1.Text = "NO DATA"
-        '
         'hungerBar2
         '
         Me.hungerBar2.BackColor = System.Drawing.Color.Black
@@ -305,19 +263,6 @@ Partial Class main
         Me.hungerBar2.TabIndex = 29
         Me.hungerBar2.Text = "NO DATA"
         '
-        'healthBar2
-        '
-        Me.healthBar2.BackColor = System.Drawing.Color.Black
-        Me.healthBar2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.healthBar2.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthBar2.ForeColor = System.Drawing.Color.Red
-        Me.healthBar2.Location = New System.Drawing.Point(472, 131)
-        Me.healthBar2.Name = "healthBar2"
-        Me.healthBar2.ReadOnly = True
-        Me.healthBar2.Size = New System.Drawing.Size(138, 26)
-        Me.healthBar2.TabIndex = 30
-        Me.healthBar2.Text = "NO DATA"
-        '
         'hungerBar0
         '
         Me.hungerBar0.BackColor = System.Drawing.Color.Black
@@ -330,19 +275,6 @@ Partial Class main
         Me.hungerBar0.Size = New System.Drawing.Size(138, 26)
         Me.hungerBar0.TabIndex = 31
         Me.hungerBar0.Text = "NO DATA"
-        '
-        'healthBar0
-        '
-        Me.healthBar0.BackColor = System.Drawing.Color.Black
-        Me.healthBar0.Cursor = System.Windows.Forms.Cursors.Default
-        Me.healthBar0.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.healthBar0.ForeColor = System.Drawing.Color.Red
-        Me.healthBar0.Location = New System.Drawing.Point(158, 130)
-        Me.healthBar0.Name = "healthBar0"
-        Me.healthBar0.ReadOnly = True
-        Me.healthBar0.Size = New System.Drawing.Size(138, 26)
-        Me.healthBar0.TabIndex = 32
-        Me.healthBar0.Text = "NO DATA"
         '
         'mentalTitle
         '
@@ -618,6 +550,32 @@ Partial Class main
         Me.task2.Size = New System.Drawing.Size(138, 27)
         Me.task2.TabIndex = 56
         '
+        'healthTitle
+        '
+        Me.healthTitle.BackColor = System.Drawing.Color.Black
+        Me.healthTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.healthTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.healthTitle.ForeColor = System.Drawing.Color.White
+        Me.healthTitle.Location = New System.Drawing.Point(12, 131)
+        Me.healthTitle.Name = "healthTitle"
+        Me.healthTitle.ReadOnly = True
+        Me.healthTitle.Size = New System.Drawing.Size(125, 26)
+        Me.healthTitle.TabIndex = 11
+        Me.healthTitle.Text = "Gesundheit"
+        '
+        'hungerTitle
+        '
+        Me.hungerTitle.BackColor = System.Drawing.Color.Black
+        Me.hungerTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.hungerTitle.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.hungerTitle.ForeColor = System.Drawing.Color.White
+        Me.hungerTitle.Location = New System.Drawing.Point(12, 162)
+        Me.hungerTitle.Name = "hungerTitle"
+        Me.hungerTitle.ReadOnly = True
+        Me.hungerTitle.Size = New System.Drawing.Size(125, 26)
+        Me.hungerTitle.TabIndex = 12
+        Me.hungerTitle.Text = "Hunger"
+        '
         'main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -642,11 +600,8 @@ Partial Class main
         Me.Controls.Add(Me.mental0)
         Me.Controls.Add(Me.perceptionTitle)
         Me.Controls.Add(Me.mentalTitle)
-        Me.Controls.Add(Me.healthBar0)
         Me.Controls.Add(Me.hungerBar0)
-        Me.Controls.Add(Me.healthBar2)
         Me.Controls.Add(Me.hungerBar2)
-        Me.Controls.Add(Me.healthBar1)
         Me.Controls.Add(Me.hungerBar1)
         Me.Controls.Add(Me.agility0)
         Me.Controls.Add(Me.intelligence0)
@@ -681,18 +636,13 @@ Partial Class main
     Friend WithEvents foodCounter As TextBox
     Friend WithEvents GO As Button
     Friend WithEvents intelligenceTitle As TextBox
-    Friend WithEvents healthTitle As TextBox
-    Friend WithEvents hungerTitle As TextBox
     Friend WithEvents agilityTitle As TextBox
     Friend WithEvents strength0 As TextBox
     Friend WithEvents intelligence0 As TextBox
     Friend WithEvents agility0 As TextBox
     Friend WithEvents hungerBar1 As TextBox
-    Friend WithEvents healthBar1 As TextBox
     Friend WithEvents hungerBar2 As TextBox
-    Friend WithEvents healthBar2 As TextBox
     Friend WithEvents hungerBar0 As TextBox
-    Friend WithEvents healthBar0 As TextBox
     Friend WithEvents mentalTitle As TextBox
     Friend WithEvents perceptionTitle As TextBox
     Friend WithEvents mental0 As TextBox
@@ -717,4 +667,6 @@ Partial Class main
     Friend WithEvents task0 As ComboBox
     Friend WithEvents task1 As ComboBox
     Friend WithEvents task2 As ComboBox
+    Friend WithEvents healthTitle As TextBox
+    Friend WithEvents hungerTitle As TextBox
 End Class
