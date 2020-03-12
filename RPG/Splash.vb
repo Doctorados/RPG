@@ -48,7 +48,7 @@
     End Sub
 
     Private Sub createNewGame()
-        conn.Execute("DELETE FROM [Day]")
+        conn.Execute("DELETE FROM [Day]") 'clear db
         conn.Execute("DELETE FROM [Character]")
 
         Dim rs_day As New ADODB.Recordset
@@ -87,33 +87,49 @@
         difficulties = {75, 50, 25, 0}
 
         Dim tmpSkill As Int16 'newly calulated Skill
-        Dim total As Int16
+        Dim total As Int16 'max skillpoints
+        Dim i As Int16 'counter for array index
         Dim skillArray(5) As Int16
-        Dim i As Int16
         skillArray = {0, 0, 0, 0, 0}
         total = difficulties(diff)
-        i = 0
 
         While total > 0
-            If i > (skillArray.Length - 1) Then
-                i = 0
-            End If
-            If total > 20 Then
-                tmpSkill = CInt(Math.Ceiling(Rnd() * (20))) 'random num 0 -> 20 (inclusive)
-            Else
-                tmpSkill = CInt(Math.Ceiling(Rnd() * total))
-            End If
-            If Not skillArray(i) > (20 - tmpSkill) Then
-                skillArray(i) += tmpSkill
-                total -= tmpSkill
-            End If
-            i += 1
-            Console.WriteLine(String.Join(", ", skillArray))
-            Console.WriteLine("Total: " & total)
+            i = 0
+            For Each elem In skillArray
+                If total > 20 Then
+                    Console.WriteLine("calculating skil 0-20")
+                    tmpSkill = CInt(Math.Ceiling(Rnd() * (20))) 'random num 0 -> 20 (inclusive)
+                Else
+                    Console.WriteLine("calulating skil 0-total")
+                    tmpSkill = CInt(Math.Ceiling(Rnd() * total))
+                End If
+                If Not elem > (20 - tmpSkill) Then 'treat edge case where skill might become >20
+                    Console.WriteLine("Elem: " & elem)
+                    Console.WriteLine("Temp: " & tmpSkill)
+                    skillArray(i) += tmpSkill
+                    total -= tmpSkill
+                    Console.WriteLine(String.Join(", ", skillArray))
+                End If
+                i += 1
+            Next
         End While
-
+        Shuffle(skillArray) 'shuffling is mandatory because otherwise last numbers in Array are alwas smaller
         newSkills = skillArray
     End Function
+
+    Private Sub Shuffle(items As Int16())
+        Dim rnd As New Random()
+        Dim j As Int32
+        Dim temp As Int16
+
+        For n As Int32 = items.Length - 1 To 0 Step -1
+            j = rnd.Next(0, n + 1)
+            ' Swap them.
+            temp = items(n)
+            items(n) = items(j)
+            items(j) = temp
+        Next n
+    End Sub
 
     Private Sub Start_Click(sender As Object, e As EventArgs) Handles Start.Click
         Dim confirm As DialogResult

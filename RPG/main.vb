@@ -46,11 +46,25 @@
         rs.Close()
         For i = 0 To 2
             DirectCast(Me.Controls("task" & i), ComboBox).SelectedIndex = 1
-
             DirectCast(Me.Controls("hungerBar" & i), TextBox).ForeColor = Color.White
         Next
+        rs.Open("SELECT SUM(health) FROM [Character]", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+        If rs.Fields(0).Value = 0 Then
+            rs.Close()
+            Call endGame()
+        Else
+            rs.Close()
+        End If
     End Sub
 
+    Sub endGame()
+        MsgBox("Alle sind tot. Du hast " & dayCountVal & " Tage geschafft")
+        Splash.Show()
+        Me.Close()
+    End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dayCountVal = 1
         foodDist = {False, False, False}
