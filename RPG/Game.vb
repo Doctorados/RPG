@@ -35,7 +35,6 @@
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
             )
-            rs.MoveFirst()
             Do While Not rs.EOF
                 For k = 0 To 2
                     DirectCast(TabControl.TabPages(3).Controls("task" & k), ComboBox).Items.Add(CStr(rs.Fields("taskName").Value))
@@ -53,14 +52,15 @@
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic
+                    ADODB.LockTypeEnum.adLockReadOnly
             )
+        rs.MoveFirst()
         'update Character Values
         If rs.RecordCount > 0 Then
-            rs.MoveFirst()
+            'rs.MoveFirst()
             Dim i = 0 'counter val to cycle through character specific textboxes
             Dim k As Int16 'counter val to cycle through skills in db
-            Dim skillNames = New String() {"Stärke", "Intelligenz", "Geschick", "Mental", "Wahrnehmung"}
+            Dim skillNames = New String() {"Intelligenz", "Geschick", "Stärke", "Wahrnehmung", "Mental"}
             Do While Not rs.EOF
                 TabControl.TabPages(3).Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value))
                 TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD"))
@@ -89,7 +89,7 @@
 
         rs.Open("SELECT * FROM [Day]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic
+                    ADODB.LockTypeEnum.adLockReadOnly
             )
         rs.MoveLast()
         dayCountVal = rs.Fields("counter").Value
@@ -107,7 +107,7 @@
         Next
         rs.Open("SELECT SUM(health) FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic
+                    ADODB.LockTypeEnum.adLockReadOnly
             )
         If rs.Fields(0).Value = 0 Then
             rs.Close()
@@ -126,7 +126,7 @@
         End While
         padText = str
     End Function
-    Private Function getBar(ByRef value, ByRef zeroWord)
+    Private Function getBar(ByVal value, ByVal zeroWord)
         Dim num As Int16
         Dim str As String
         str = "░"
@@ -264,7 +264,7 @@
         Next
         rs.Open("SELECT rations FROM [Day]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic
+                    ADODB.LockTypeEnum.adLockReadOnly
             )
         rs.MoveLast()
         calcRations = (rs.Fields("rations").Value - num)
@@ -309,7 +309,7 @@
             )
         rs_tasks.Open("SELECT * FROM [Task]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic
+                    ADODB.LockTypeEnum.adLockReadOnly
             )
         For i = 0 To 2
             taskInd = DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex 'get index of assigned task
@@ -340,7 +340,7 @@
             rs_char.MoveNext()
         Next
         MsgBox(arrToStr(resultList, vbLf))
-        rs_tasks.Update()
+        'rs_tasks.Update()
         'rs_char.Update()
         rs_tasks.Close()
         rs_char.Close()
@@ -355,7 +355,7 @@
         Next
         arrToStr = str
     End Function
-    Sub parseOutcome(ByRef outString As String, ByRef rs_char As ADODB.Recordset)
+    Sub parseOutcome(ByVal outString As String, ByRef rs_char As ADODB.Recordset)
         Dim arr(2) As String
         Dim rs As New ADODB.Recordset
         Dim num As Int16
@@ -391,7 +391,7 @@
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT * FROM [Event] WHERE [taskID]=" & taskID, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
-                  ADODB.LockTypeEnum.adLockPessimistic
+                  ADODB.LockTypeEnum.adLockReadOnly
           )
         randomRecord(rs)
         eventID = rs.Fields(0).Value
@@ -414,7 +414,7 @@
         Dim relSkill As String
         rs_event.Open("SELECT * FROM [Event] WHERE [ID]=" & eventID, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
-                  ADODB.LockTypeEnum.adLockPessimistic
+                  ADODB.LockTypeEnum.adLockReadOnly
           )
         rs_char.Open("SELECT * FROM [Character] WHERE [ID]=" & eventCharID, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
@@ -427,7 +427,7 @@
         Console.WriteLine("Outcome: " & outcome)
         rs_string.Open("SELECT * FROM [EventResultString] WHERE [eventID]=" & eventID & "AND [outcome]=" & outcome, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
-                  ADODB.LockTypeEnum.adLockPessimistic
+                  ADODB.LockTypeEnum.adLockReadOnly
           )
         randomRecord(rs_string)
         eventOutcomeBox.Text = rs_char.Fields("fullName").Value & " " & rs_string.Fields("string").Value
@@ -485,7 +485,7 @@
     Sub checkLoadBtn()
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT * FROM [Day]", conn, ADODB.CursorTypeEnum.adOpenStatic,
-                    ADODB.LockTypeEnum.adLockPessimistic)
+                    ADODB.LockTypeEnum.adLockReadOnly)
         If rs.RecordCount = 0 Then 'disable load if no game in db
             loadGameBtn.Enabled = False
         End If
