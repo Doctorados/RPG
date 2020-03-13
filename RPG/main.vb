@@ -348,9 +348,6 @@
         End Select
     End Sub
 
-    Function levelUp()
-
-    End Function
     Function getOutcome(ByRef skill)
         Randomize()
         'gets outcome determined by binomial dist higher skill = higher p
