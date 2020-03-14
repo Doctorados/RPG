@@ -3,8 +3,9 @@
     Dim foodDist(3) As Boolean 'array determines who gets rations
     Dim dayCountVal As Int16 'counter for game days since starting the game
     Dim rationCountVal As Int16 'counter for rations
-    Dim eventID As Int16
+    Dim eventID As Short = 0 'ID of event, 0 = no event
     Dim eventCharID As Int16
+    Dim eventActionTaken As Boolean = False
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Console.WriteLine("Game_Load: Start of Sub")
         'generic
@@ -78,8 +79,8 @@
                 TabControl.TabPages(3).Controls("hungerBar" & i).Text = (getBar(rs.Fields("hunger").Value, "STARVING"))
             End If
             Console.WriteLine("update_Fields: Updating Skills for Character " & i)
-                k = 4
-                DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Clear() 'clear skill info box
+            k = 4
+            DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Clear() 'clear skill info box
             For Each elem In skillNames 'fill skill info boxes
                 DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add(padText(elem, 10) & ": " & (rs.Fields(k).Value))
                 DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add("---------------") '
@@ -171,6 +172,7 @@
     Private Sub calcDay()
         Console.WriteLine("calcDay: Start of Sub")
         Dim rs As New ADODB.Recordset
+        eventID = 0
         Call calcTasks()
         Call updateHunger()
         Call updateHealth()
@@ -321,6 +323,7 @@
 
 
         For i = 0 To 2
+            eventActionTaken = False
             taskID = DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex + 1 'get ID of assigned task
             Console.WriteLine("calcTasks: task" & i & " selected Index: " & taskID)
 
@@ -350,6 +353,12 @@
                     Console.WriteLine("calcTasks: the outcome is 'event'")
                     eventCharID = rs_char.Fields(0).Value
                     Call openEvent(rs_tasks.Fields(0).Value, rs_char)
+                    Do 'wait for the user react to event
+                        If eventActionTaken = True Then
+                            Exit Do
+                        End If
+                        Application.DoEvents()
+                    Loop
                 Else
                     Console.WriteLine("calcTasks: the outcome is NOT 'event'")
                     parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
@@ -363,7 +372,7 @@
             rs_char.MoveNext()
         Next
 
-        MsgBox(arrToStr(resultList, vbLf))
+        displayOutcome(arrToStr(resultList, vbLf))
         rs_char.Close()
         Console.WriteLine("calcTasks: End of Sub")
     End Sub
@@ -377,6 +386,11 @@
         Next
         arrToStr = str
     End Function
+
+    Sub displayOutcome(ByVal message As String)
+        outcomeBox.Text = message
+        TabControl.SelectedIndex = 5
+    End Sub
     Sub parseOutcome(ByVal outString As String, ByRef rs_char As ADODB.Recordset)
         Console.WriteLine("parseOutcome: Start of Sub")
         Dim rs As New ADODB.Recordset
@@ -410,8 +424,8 @@
                 End If
             Case "intelligence", "agility", "strength", "perception", "mental"
                 rs_char.Fields(str).Value += num
-                If rs_char.Fields(str).Value < 0 Then
-                    rs_char.Fields(str).Value = 0
+                If rs_char.Fields(str).Value > 20 Then
+                    rs_char.Fields(str).Value = 20
                 End If
         End Select
         rs_char.Update()
@@ -694,8 +708,11 @@
     End Sub
 
     Private Sub eventGoBack_Click(sender As Object, e As EventArgs) Handles eventGoBack.Click
-        TabControl.SelectedIndex = 3
         Call updateFields()
+        eventActionTaken = True
     End Sub
 
+    Private Sub outcomeGoBack_Click(sender As Object, e As EventArgs) Handles outcomeGoBack.Click
+        TabControl.SelectedIndex = 3
+    End Sub
 End Class

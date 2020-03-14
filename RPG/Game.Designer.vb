@@ -63,6 +63,9 @@ Partial Class Game
         Me.eventAction1 = New System.Windows.Forms.Button()
         Me.eventAction0 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.outcomePage = New System.Windows.Forms.TabPage()
+        Me.outcomeGoBack = New System.Windows.Forms.Button()
+        Me.outcomeBox = New System.Windows.Forms.RichTextBox()
         Me.TabControl.SuspendLayout()
         Me.splash.SuspendLayout()
         Me.newgame.SuspendLayout()
@@ -72,6 +75,7 @@ Partial Class Game
         CType(Me.charPic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.eventPage.SuspendLayout()
+        Me.outcomePage.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl
@@ -81,6 +85,7 @@ Partial Class Game
         Me.TabControl.Controls.Add(Me.manual)
         Me.TabControl.Controls.Add(Me.main)
         Me.TabControl.Controls.Add(Me.eventPage)
+        Me.TabControl.Controls.Add(Me.outcomePage)
         Me.TabControl.Location = New System.Drawing.Point(12, 12)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
@@ -513,7 +518,7 @@ Partial Class Game
         Me.eventGoBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.eventGoBack.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.eventGoBack.ForeColor = System.Drawing.Color.Black
-        Me.eventGoBack.Location = New System.Drawing.Point(540, 340)
+        Me.eventGoBack.Location = New System.Drawing.Point(540, 361)
         Me.eventGoBack.Name = "eventGoBack"
         Me.eventGoBack.Size = New System.Drawing.Size(199, 36)
         Me.eventGoBack.TabIndex = 73
@@ -580,6 +585,44 @@ Partial Class Game
         Me.Label3.Size = New System.Drawing.Size(0, 13)
         Me.Label3.TabIndex = 1
         '
+        'outcomePage
+        '
+        Me.outcomePage.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.outcomePage.Controls.Add(Me.outcomeGoBack)
+        Me.outcomePage.Controls.Add(Me.outcomeBox)
+        Me.outcomePage.Location = New System.Drawing.Point(4, 22)
+        Me.outcomePage.Name = "outcomePage"
+        Me.outcomePage.Padding = New System.Windows.Forms.Padding(3)
+        Me.outcomePage.Size = New System.Drawing.Size(768, 400)
+        Me.outcomePage.TabIndex = 5
+        Me.outcomePage.Text = "TabPage1"
+        '
+        'outcomeGoBack
+        '
+        Me.outcomeGoBack.BackColor = System.Drawing.Color.White
+        Me.outcomeGoBack.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.outcomeGoBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.outcomeGoBack.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.outcomeGoBack.ForeColor = System.Drawing.Color.Black
+        Me.outcomeGoBack.Location = New System.Drawing.Point(541, 358)
+        Me.outcomeGoBack.Name = "outcomeGoBack"
+        Me.outcomeGoBack.Size = New System.Drawing.Size(199, 36)
+        Me.outcomeGoBack.TabIndex = 74
+        Me.outcomeGoBack.Text = "OK"
+        Me.outcomeGoBack.UseVisualStyleBackColor = False
+        '
+        'outcomeBox
+        '
+        Me.outcomeBox.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.outcomeBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.outcomeBox.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.outcomeBox.ForeColor = System.Drawing.Color.White
+        Me.outcomeBox.Location = New System.Drawing.Point(28, 6)
+        Me.outcomeBox.Name = "outcomeBox"
+        Me.outcomeBox.Size = New System.Drawing.Size(712, 315)
+        Me.outcomeBox.TabIndex = 72
+        Me.outcomeBox.Text = "OUTCOMES"
+        '
         'Game
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -600,6 +643,7 @@ Partial Class Game
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).EndInit()
         Me.eventPage.ResumeLayout(False)
         Me.eventPage.PerformLayout()
+        Me.outcomePage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -644,4 +688,7 @@ Partial Class Game
     Friend WithEvents Label3 As Label
     Friend WithEvents eventOutcomeBox As RichTextBox
     Friend WithEvents eventGoBack As Button
+    Friend WithEvents outcomePage As TabPage
+    Friend WithEvents outcomeGoBack As Button
+    Friend WithEvents outcomeBox As RichTextBox
 End Class
