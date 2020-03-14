@@ -723,8 +723,8 @@
     'Inventory Drag and Drop
     Dim dragdrop_source As Object 'control from which item is being dragged
     Private Sub inventoryBox_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles inventoryBox.MouseDown
-        sender.DoDragDrop(sender.SelectedItem, DragDropEffects.Copy)
         dragdrop_source = sender
+        sender.DoDragDrop(sender.SelectedItem, DragDropEffects.Copy)
     End Sub
     Private Sub item_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles item0.MouseDown, item1.MouseDown, item2.MouseDown
         dragdrop_source = sender
@@ -733,17 +733,26 @@
         End If
     End Sub
     Private Sub inventoryBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles inventoryBox.DragDrop
-        sender.Items.Add(e.Data.GetData(DataFormats.Text).ToString)
-        dragdrop_source.Text = "" 'clear Textbox
+        If dragdrop_source.Name <> sender.Name Then 'prevent self drop
+            sender.Items.Add(e.Data.GetData(DataFormats.Text).ToString)
+            dragdrop_source.Text = "" 'clear Textbox
+        End If
     End Sub
     Private Sub item_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragDrop, item1.DragDrop, item2.DragDrop
-        If sender.Text <> "" Then 'if already item in textbox put back into inventory
-            inventoryBox.Items.Add(sender.Text)
-        End If
-        sender.Text = e.Data.GetData(DataFormats.Text).ToString
-        If inventoryBox.SelectedIndex >= 0 Then
-            inventoryBox.Items.RemoveAt(inventoryBox.SelectedIndex) 'remove item from Inventory
-            inventoryBox.SelectedIndex = -1
+        If dragdrop_source.Name <> sender.Name Then 'prevent self drop
+            If sender.Text <> "" Then 'if already item in textbox put back into inventory
+                If TypeOf (dragdrop_source) Is ListBox Then
+                    dragdrop_source.Items.Add(sender.Text)
+                End If
+            End If
+            If TypeOf (dragdrop_source) Is TextBox Then 'treat exchange between textboxes
+                dragdrop_source.Text = sender.Text
+            End If
+            sender.Text = e.Data.GetData(DataFormats.Text).ToString
+            If inventoryBox.SelectedIndex >= 0 Then
+                inventoryBox.Items.RemoveAt(inventoryBox.SelectedIndex) 'remove item from Inventory
+                inventoryBox.SelectedIndex = -1
+            End If
         End If
     End Sub
     Private Sub item_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragEnter, item1.DragEnter, item2.DragEnter, inventoryBox.DragEnter
