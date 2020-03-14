@@ -6,6 +6,9 @@
     Dim eventID As Short = 0 'ID of event, 0 = no event
     Dim eventCharID As Int16
     Dim eventActionTaken As Boolean = False
+    Dim inventoryIDs As New List(Of Short) 'Ids of items in inventory
+    Dim charItemIDs As New Dictionary(Of Short, Short) 'IDs of chracters carying items 1. is chracterID 2. is ItemID
+
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Console.WriteLine("Game_Load: Start of Sub")
         'generic
@@ -62,17 +65,25 @@
         Console.WriteLine("updateFields: Start of Sub")
         Dim skillNames = New String() {"Intelligenz", "Geschick", "Stärke", "Wahrnehmung", "Mental"} 'human readable names for skills
         Dim rs As New ADODB.Recordset
-        rs.Open("SELECT * FROM [Character]", conn,
+        Dim rs_items As New ADODB.Recordset
+        'update Character Values
+        Dim k As Int16 'counter val to cycle through skills in rs
+        charItemIDs.Clear()
+        For i = 0 To 2
+            Console.WriteLine("update_Fields: Updating for Character " & i)
+            rs.Open("SELECT * FROM [Character] WHERE ID=" & i, conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockReadOnly
             )
-        rs.MoveFirst()
-        'update Character Values
-        Dim k As Int16 'counter val to cycle through skills in rs
-        For i = 0 To 2
-            Console.WriteLine("update_Fields: Updating for Character " & i)
+            rs_items.Open("SELECT * FROM [Items] WHERE ID=" & rs.Fields("itemID").Value, conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockReadOnly
+            )
             TabControl.TabPages(3).Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value)) 'fill name boxes with names
             TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD")) 'fill healthbar
+            TabControl.TabPages(3).Controls("item" & i).Text = (rs_items.Fields("itemName").Value) 'fill item field
+            charItemIDs.Add(i, rs.Fields("itemID").Value)
+
             If rs.Fields("health").Value = 0 Then
                 killChar(i) 'self explanatory
             Else
@@ -86,9 +97,10 @@
                 DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add("---------------") '
                 k += 1
             Next
-            rs.MoveNext()
+            rs_items.Close()
+            rs.Close()
         Next
-        rs.Close()
+
 
         'update Day and Rations
         rs.Open("SELECT * FROM [Day]", conn,
@@ -119,6 +131,22 @@
         Else
             rs.Close()
         End If
+
+        'get Inventory from DB
+        rs.Open("SELECT [Inventory].ID, [Inventory].itemID, [Items].itemName FROM [Inventory] LEFT JOIN [Items] ON [Inventory].itemID =[Items].ID", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockReadOnly
+            )
+        inventoryBox.Items.Clear()
+        inventoryIDs.Clear()
+        While Not rs.EOF
+            inventoryBox.Items.Add(rs.Fields("itemName").Value)
+            inventoryIDs.Add(rs.Fields("itemID").Value)
+            rs.MoveNext()
+        End While
+        rs.Close()
+        Console.WriteLine("update_Fields: inventoryIDs: " & String.Join(", ", inventoryIDs))
+
         Console.WriteLine("update_Fields: End of Sub")
     End Sub
     Sub endGame()
@@ -574,6 +602,7 @@
             Dim x As Short = 4
             Dim skills As Int16() = newSkills(Difficulty.SelectedIndex)
             rs_char.AddNew()
+            rs_char.Fields(0).Value = i
             rs_char.Fields(1).Value = "NONAME " & i
             rs_char.Fields(2).Value = 100
             rs_char.Fields(3).Value = 100
@@ -733,30 +762,103 @@
         End If
     End Sub
     Private Sub inventoryBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles inventoryBox.DragDrop
+        Dim sourceID As Short = Integer.Parse(dragdrop_source.Name(dragdrop_source.Name.Length - 1))
         If dragdrop_source.Name <> sender.Name Then 'prevent self drop
+            'add Item to Inventory
             sender.Items.Add(e.Data.GetData(DataFormats.Text).ToString)
+            inventoryIDs.Add(charItemIDs(sourceID))
+            addToInv(charItemIDs(sourceID))
+
+            'remove Item from Sender
             dragdrop_source.Text = "" 'clear Textbox
+            removeItemFromChar(sourceID)
+            charItemIDs(sourceID) = 0
         End If
     End Sub
     Private Sub item_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragDrop, item1.DragDrop, item2.DragDrop
+        Console.WriteLine("sender.name: " & sender.name)
+        Console.WriteLine("sender.name last char: " & sender.Name(sender.Name.Length - 1))
+        Dim targetID As Short = Integer.Parse(sender.Name(sender.Name.Length - 1)) 'ID of character recieving object
+        Console.WriteLine("targetID: " & targetID)
+
         If dragdrop_source.Name <> sender.Name Then 'prevent self drop
             If sender.Text <> "" Then 'if already item in textbox put back into inventory
                 If TypeOf (dragdrop_source) Is ListBox Then
+                    'add to Inventory
                     dragdrop_source.Items.Add(sender.Text)
+                    addToInv(charItemIDs(targetID))
+                    'add to Character
+                    addItemToChar(targetID, inventoryIDs(inventoryBox.SelectedIndex))
                 End If
             End If
+
             If TypeOf (dragdrop_source) Is TextBox Then 'treat exchange between textboxes
+                Dim sourceID As Short = Integer.Parse(dragdrop_source.Name(dragdrop_source.Name.Length - 1)) 'ID of character giving object
                 dragdrop_source.Text = sender.Text
+                'add item to source character
+                addItemToChar(sourceID, charItemIDs(targetID))
+                'add item to target character
+                addItemToChar(targetID, charItemIDs(sourceID))
             End If
-            sender.Text = e.Data.GetData(DataFormats.Text).ToString
-            If inventoryBox.SelectedIndex >= 0 Then
+
+            If TypeOf (dragdrop_source) Is ListBox Then
+                'add to character
+                addItemToChar(targetID, inventoryIDs(inventoryBox.SelectedIndex))
+                'remove from Inventory
+                removeFromInv(inventoryBox.SelectedIndex)
                 inventoryBox.Items.RemoveAt(inventoryBox.SelectedIndex) 'remove item from Inventory
                 inventoryBox.SelectedIndex = -1
             End If
+
+            sender.Text = e.Data.GetData(DataFormats.Text).ToString
         End If
     End Sub
     Private Sub item_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragEnter, item1.DragEnter, item2.DragEnter, inventoryBox.DragEnter
         e.Effect = e.AllowedEffect And DragDropEffects.Copy
     End Sub
 
+    Sub removeFromInv(index) 'remove item form inventory in db
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Inventory] WHERE itemID=" & inventoryIDs.Item(index), conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        rs.Delete()
+        rs.Update()
+        inventoryIDs.RemoveAt(index)
+    End Sub
+    Sub removeItemFromChar(ByVal characterID) 'remove item from a character
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Character] WHERE ID=" & characterID, conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        rs.Fields("itemID").Value = 0
+        rs.Update()
+        rs.Close()
+    End Sub
+    Sub addToInv(ByVal itemID) 'add item to inventory
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Inventory] ", conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        rs.AddNew()
+        rs.Fields("itemID").Value = itemID
+        rs.Update()
+        rs.Close()
+        inventoryIDs.Add(itemID)
+    End Sub
+    Sub addItemToChar(ByVal characterID, ByVal itemID) 'remove item from a character
+        Console.WriteLine("addItemToChar: characterID= " & characterID & " itemID=" & itemID)
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Character] WHERE ID=" & characterID, conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        rs.Fields("itemID").Value = itemID
+        rs.Update()
+        rs.Close()
+        charItemIDs(characterID) = itemID
+    End Sub
 End Class
