@@ -321,10 +321,10 @@
 
 
         For i = 0 To 2
-            taskID = DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex + 1 'get index of assigned task
+            taskID = DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex + 1 'get ID of assigned task
             Console.WriteLine("calcTasks: task" & i & " selected Index: " & taskID)
 
-            If taskID <> -1 And rs_char.Fields("health").Value > 0 Then 'true if selection not null and character alive
+            If taskID > 0 And rs_char.Fields("health").Value > 0 Then 'true if selection not null and character alive
                 Console.WriteLine("calcTasks: SQL-String: & SELECT * FROM [Task] WHERE [ID]=" & taskID)
                 rs_tasks.Open("SELECT * FROM [Task] WHERE [ID]=" & taskID, conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
