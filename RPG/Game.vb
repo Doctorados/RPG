@@ -1,11 +1,12 @@
 ﻿Public Class Game
     Dim conn As New ADODB.Connection
     Dim foodDist(3) As Boolean 'array determines who gets rations
-    Dim dayCountVal As Int16
-    Dim rationCountVal As Int16
+    Dim dayCountVal As Int16 'counter for game days since starting the game
+    Dim rationCountVal As Int16 'counter for rations
     Dim eventID As Int16
     Dim eventCharID As Int16
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Console.WriteLine("Game_Load: Start of Sub")
         'generic
         conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
         'hide the tab control bar
@@ -29,26 +30,36 @@
         dayCountVal = 1
         foodDist = {False, False, False}
         Dim rs As New ADODB.Recordset
+        Dim taskString As String
         Try
             'get possible Tasks
             rs.Open("SELECT * FROM [Task]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic
             )
-            Do While Not rs.EOF
-                For k = 0 To 2
-                    DirectCast(TabControl.TabPages(3).Controls("task" & k), ComboBox).Items.Add(CStr(rs.Fields("taskName").Value))
-                Next
-                rs.MoveNext()
-            Loop
+            Console.WriteLine("Game_Load: DB Connection successful")
+
+            For k = 0 To 2 'cycle thorugh task selection comboboxes
+                rs.MoveFirst()
+                Do While Not rs.EOF 'get all tasks out of db
+                    taskString = CStr(rs.Fields("taskName").Value)
+                    DirectCast(TabControl.TabPages(3).Controls("task" & k), ComboBox).Items.Add(taskString)
+                    Console.WriteLine("Game_Load: Added Task '" & taskString & "' to 'task" & k & "'")
+                    rs.MoveNext()
+                Loop
+            Next
             rs.Close()
         Catch ex As Exception
             MsgBox("Exception: " & ex.Message)
+            TabControl.SelectedIndex = 0 'go back to start screen if no db connection
         End Try
         foodDist = {False, False, False}
+        Console.WriteLine("Game_Load: End of Sub")
     End Sub
 
     Private Sub updateFields() 'update the main menu fields
+        Console.WriteLine("updateFields: Start of Sub")
+        Dim skillNames = New String() {"Intelligenz", "Geschick", "Stärke", "Wahrnehmung", "Mental"} 'human readable names for skills
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
@@ -56,65 +67,58 @@
             )
         rs.MoveFirst()
         'update Character Values
-        If rs.RecordCount > 0 Then
-            'rs.MoveFirst()
-            Dim i = 0 'counter val to cycle through character specific textboxes
-            Dim k As Int16 'counter val to cycle through skills in db
-            Dim skillNames = New String() {"Intelligenz", "Geschick", "Stärke", "Wahrnehmung", "Mental"}
-            Do While Not rs.EOF
-                TabControl.TabPages(3).Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value))
-                TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD"))
-                If rs.Fields("health").Value = 0 Then
-                    killChar(i)
-                End If
+        Dim k As Int16 'counter val to cycle through skills in rs
+        For i = 0 To 2
+            Console.WriteLine("update_Fields: Updating for Character " & i)
+            TabControl.TabPages(3).Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value)) 'fill name boxes with names
+            TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD")) 'fill healthbar
+            If rs.Fields("health").Value = 0 Then
+                killChar(i) 'self explanatory
+            Else
                 TabControl.TabPages(3).Controls("hungerBar" & i).Text = (getBar(rs.Fields("hunger").Value, "STARVING"))
-                For x = 0 To 2
-                    k = 4
-                    DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Clear()
-                    For Each elem In skillNames
-                        DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add(padText(elem, 10) & ": " & (rs.Fields(k).Value))
-                        DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add("---------------")
-                        'DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add(skillWords(rs.Fields(k).Value))
-                        k += 1
-                    Next
-                Next
-                rs.MoveNext()
-                i += 1
-            Loop
-        Else
-            MsgBox("No Data")
-        End If
+            End If
+            Console.WriteLine("update_Fields: Updating Skills for Character " & i)
+                k = 4
+                DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Clear() 'clear skill info box
+            For Each elem In skillNames 'fill skill info boxes
+                DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add(padText(elem, 10) & ": " & (rs.Fields(k).Value))
+                DirectCast(TabControl.TabPages(3).Controls("charSkills" & i), ListBox).Items.Add("---------------") '
+                k += 1
+            Next
+            rs.MoveNext()
+        Next
         rs.Close()
-        'update Day and Rations
 
+        'update Day and Rations
         rs.Open("SELECT * FROM [Day]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockReadOnly
             )
-        rs.MoveLast()
+        rs.MoveLast() 'go to most recent entry
         dayCountVal = rs.Fields("counter").Value
         rationCountVal = rs.Fields("rations").Value
-        'TabControl.TabPages(3).Controls.
-        dayCounter.Text = "Tag " & CStr(dayCountVal)
-        'TabControl.TabPages(3).Controls.
-        foodCounter.Text = CStr(rationCountVal) & " Rationen"
+        dayCounter.Text = "Tag " & CStr(dayCountVal) 'set fields
+        foodCounter.Text = CStr(rationCountVal) & " Rationen" 'set fields
         rs.Close()
+
         For i = 0 To 2
             If DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex < 0 Then 'prevent combobox from being empty
                 DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex = 1
             End If
-            DirectCast(TabControl.TabPages(3).Controls("hungerBar" & i), TextBox).ForeColor = Color.White
+            DirectCast(TabControl.TabPages(3).Controls("hungerBar" & i), TextBox).ForeColor = Color.White 'reset hungerbar
         Next
+
         rs.Open("SELECT SUM(health) FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockReadOnly
             )
-        If rs.Fields(0).Value = 0 Then
+        If rs.Fields(0).Value = 0 Then 'check if all Characters are dead
             rs.Close()
             Call endGame()
         Else
             rs.Close()
         End If
+        Console.WriteLine("update_Fields: End of Sub")
     End Sub
     Sub endGame()
         MsgBox("Alle sind tot. Du hast " & dayCountVal & " Tage geschafft")
@@ -165,25 +169,28 @@
         skillWords = words(value)
     End Function
     Private Sub calcDay()
+        Console.WriteLine("calcDay: Start of Sub")
         Dim rs As New ADODB.Recordset
         Call calcTasks()
         Call updateHunger()
         Call updateHealth()
+
         rs.Open("SELECT * FROM [Day]", conn,
                    ADODB.CursorTypeEnum.adOpenKeyset,
                    ADODB.LockTypeEnum.adLockOptimistic
            )
-
-        rs.AddNew()
+        rs.AddNew() 'add new Day with updated Values
         rs.Fields("rations").Value = calcRations()
         rs.Fields("counter").Value = (dayCountVal + 1)
         rs.Update()
         rs.Close()
-        foodDist = {False, False, False}
+        foodDist = {False, False, False} 'reset foodDist
         Call updateFields()
+        Console.WriteLine("calcDay: End of Sub")
     End Sub
 
     Private Sub updateHunger()
+        Console.WriteLine("updateHunger: Start of Sub")
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT hunger FROM [Character]", conn,
                    ADODB.CursorTypeEnum.adOpenStatic,
@@ -192,7 +199,7 @@
         'update hunger
         rs.MoveFirst()
         For Each elem In foodDist
-            If elem Then
+            If elem Then 'increase Hunger if getting ration
                 rs.Fields("hunger").Value += 25
             Else
                 rs.Fields("hunger").Value -= 25
@@ -206,31 +213,30 @@
             rs.MoveNext()
         Next
         rs.Close()
+        Console.WriteLine("updateHunger: End of Sub")
     End Sub
     Private Sub updateHealth()
+        Console.WriteLine("updateHealth: Start of Sub")
         Dim rs As New ADODB.Recordset
-        Dim i As Int16
         rs.Open("SELECT hunger, health FROM [Character]", conn,
                    ADODB.CursorTypeEnum.adOpenStatic,
                    ADODB.LockTypeEnum.adLockPessimistic
            )
         rs.MoveFirst()
-        i = 0
         Do While Not rs.EOF
-            If rs.Fields("hunger").Value = 0 Then
+            If rs.Fields("hunger").Value = 0 Then 'decrease health if starving
                 rs.Fields("health").Value -= 30
             End If
-            If rs.Fields("health").Value < 0 Then
+            If rs.Fields("health").Value < 0 Then 'treat sub zero value
                 rs.Fields("health").Value = 0
-                'Call killChar(i)
             End If
-            If rs.Fields("health").Value > 100 Then
+            If rs.Fields("health").Value > 100 Then 'treat >100 value
                 rs.Fields("health").Value = 100
             End If
-            i += 1
             rs.MoveNext()
         Loop
         rs.Close()
+        Console.WriteLine("updateHealth: End of Sub")
     End Sub
     Private Sub hungerBar0_click(sender As Object, e As EventArgs) Handles hungerBar0.Click
         Call hungerBar_click_helper(0, sender)
@@ -243,8 +249,9 @@
     End Sub
 
     Private Sub hungerBar_click_helper(ByVal i, ByRef sender)
-        Console.WriteLine("Rations: " & rationCountVal)
-        Console.WriteLine("Getsfood? " & foodDist(i))
+        Console.WriteLine("hungerBar_click_helper: Start of Sub")
+        Console.WriteLine("hungerBar_click_helper: Rations: " & rationCountVal)
+        Console.WriteLine("hungerBar_click_helper: Getsfood? " & foodDist(i))
         If foodDist(i) Then
             foodDist(i) = Not foodDist(i)
             sender.ForeColor = Color.White
@@ -252,11 +259,13 @@
             foodDist(i) = Not foodDist(i)
             sender.ForeColor = Color.Lime
         End If
+        Console.WriteLine("hungerBar_click_helper: End of Sub")
     End Sub
     Function calcRations()
+        Console.WriteLine("calcRations: Start of Sub")
         Dim rs As New ADODB.Recordset
         Dim num As Int16
-        num = 0
+        num = 0 'count how many rations are consumed
         For Each elem In foodDist
             If elem Then
                 num += 1
@@ -267,8 +276,10 @@
                     ADODB.LockTypeEnum.adLockReadOnly
             )
         rs.MoveLast()
+        Console.WriteLine("calcRations: Rations consumed :" & num)
         calcRations = (rs.Fields("rations").Value - num)
         rs.Close()
+        Console.WriteLine("calcRations: End of Sub")
     End Function
 
     Function sumArray(ByVal arr)
@@ -283,7 +294,7 @@
         sumArray = num
     End Function
 
-    Sub killChar(ByVal index)
+    Sub killChar(ByVal index) 'disables Character fields if dead
         index = CStr(index)
         For Each elem In TabControl.TabPages(3).Controls
             If elem.Name(elem.Name.length - 1) = index Then
@@ -293,60 +304,71 @@
     End Sub
 
     Sub calcTasks()
+        Console.WriteLine("calcTasks: Start of Sub")
         Dim rs_tasks As New ADODB.Recordset
         Dim rs_char As New ADODB.Recordset
         Dim rs_strings As New ADODB.Recordset
-        Dim taskInd As Long
-        Dim relSkill As String
+        Dim taskID As Int16 'index of selected task
+        Dim relSkill As String 'relevant skill
         Dim skillLevel As Int16
         Dim result As Int16
-        Dim msgString As String
-        Dim resultList(3) As String
-        resultList = {"", "", ""}
+        Dim msgString As String 'displayed string for result of task
+        Dim resultList As String() = {"", "", ""} 'list for output
         rs_char.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenDynamic,
                     ADODB.LockTypeEnum.adLockOptimistic
             )
-        rs_tasks.Open("SELECT * FROM [Task]", conn,
+
+
+        For i = 0 To 2
+            taskID = DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex + 1 'get index of assigned task
+            Console.WriteLine("calcTasks: task" & i & " selected Index: " & taskID)
+
+            If taskID <> -1 And rs_char.Fields("health").Value > 0 Then 'true if selection not null and character alive
+                Console.WriteLine("calcTasks: SQL-String: & SELECT * FROM [Task] WHERE [ID]=" & taskID)
+                rs_tasks.Open("SELECT * FROM [Task] WHERE [ID]=" & taskID, conn,
                     ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockReadOnly
             )
-        For i = 0 To 2
-            taskInd = DirectCast(TabControl.TabPages(3).Controls("task" & i), ComboBox).SelectedIndex 'get index of assigned task
-            If taskInd <> -1 And rs_char.Fields("health").Value > 0 Then
-                Console.WriteLine(taskInd)
-                moveAbsolute(rs_tasks, taskInd)
                 relSkill = rs_tasks.Fields("relevantSkill").Value
-                Console.WriteLine("Relevantskill: " & relSkill)
                 skillLevel = rs_char.Fields(relSkill).Value
-                Console.WriteLine("Skilllevel: " & skillLevel)
-                result = getOutcome(skillLevel)
-                Console.WriteLine("Result: " & result)
-                Console.WriteLine("SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result)
-                rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskInd + 1 & " AND outcome = " & result, conn,
+                Console.WriteLine("calcTasks: relevant skill: " & relSkill)
+                Console.WriteLine("calcTasks skilllevel: " & skillLevel)
+
+                result = getOutcome(skillLevel) 'calculate outcome
+                Console.WriteLine("calcTasks: result: " & result)
+
+                Console.WriteLine("calcTasks: SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskID & " AND outcome = " & result)
+                rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskID & " AND outcome = " & result, conn,
                                 ADODB.CursorTypeEnum.adOpenStatic
                 ) 'open recordset with relevant stings
-                randomRecord(rs_strings)
+
+                randomRecord(rs_strings) 'randomize which string is displayed
                 msgString = rs_char.Fields("fullName").Value & " " & rs_strings.Fields("string").Value
-                eventCharID = rs_char.Fields(0).Value
+
                 If rs_tasks.Fields("outcome" & result).Value = "event" Then
+                    Console.WriteLine("calcTasks: the outcome is 'event'")
+                    eventCharID = rs_char.Fields(0).Value
                     Call openEvent(rs_tasks.Fields(0).Value, rs_char)
                 Else
+                    Console.WriteLine("calcTasks: the outcome is NOT 'event'")
                     parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
                     resultList(i) = msgString
                 End If
+
                 rs_strings.Close()
+                rs_tasks.Close()
             End If
+
             rs_char.MoveNext()
         Next
+
         MsgBox(arrToStr(resultList, vbLf))
-        'rs_tasks.Update()
-        'rs_char.Update()
-        rs_tasks.Close()
         rs_char.Close()
+        Console.WriteLine("calcTasks: End of Sub")
     End Sub
 
-    Function arrToStr(ByRef arr, ByVal sep)
+    Function arrToStr(ByRef arr, ByVal sep) 'convert array to string
         Dim str As String
         str = ""
         For Each elem In arr
@@ -356,15 +378,17 @@
         arrToStr = str
     End Function
     Sub parseOutcome(ByVal outString As String, ByRef rs_char As ADODB.Recordset)
-        Dim arr(2) As String
+        Console.WriteLine("parseOutcome: Start of Sub")
         Dim rs As New ADODB.Recordset
         Dim num As Int16
         Dim str As String
         'splitter
         Console.WriteLine("Outcome: " & outString)
-        arr = outString.Split(":")
+        Dim arr As String() = outString.Split(":") 'split outcome to array
         str = arr(0)
         num = CInt(arr(1))
+        Console.WriteLine("parseOutcome: string: " & str)
+        Console.WriteLine("parseOutcome: num: " & num)
         'change values
         Select Case str
             Case "food"
@@ -384,17 +408,27 @@
                 If rs_char.Fields("health").Value > 100 Then
                     rs_char.Fields("health").Value = 100
                 End If
+            Case "intelligence", "agility", "strength", "perception", "mental"
+                rs_char.Fields(str).Value += num
+                If rs_char.Fields(str).Value < 0 Then
+                    rs_char.Fields(str).Value = 0
+                End If
         End Select
+        rs_char.Update()
+        Console.WriteLine("parseOutcome: End of Sub")
     End Sub
 
     Sub openEvent(ByVal taskID As Integer, ByRef rs_char As ADODB.Recordset)
+        Console.WriteLine("openEvent: Start of Sub")
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT * FROM [Event] WHERE [taskID]=" & taskID, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
                   ADODB.LockTypeEnum.adLockReadOnly
           )
         randomRecord(rs)
+
         eventID = rs.Fields(0).Value
+        'fill textboxes in event screen
         eventTextBox.Text = rs_char.Fields("fullName").Value & " " & rs.Fields("eventString").Value
         eventAction0.Text = rs.Fields("option0").Value
         eventAction1.Text = rs.Fields("option1").Value
@@ -403,15 +437,19 @@
         eventAction0.Show()
         eventAction1.Show()
         eventOutcomeBox.Text = ""
+
         rs.Close()
+        Console.WriteLine("openEvent: End of Sub")
     End Sub
     Sub eventCalcOutcome(ByVal action As Integer)
-        Console.WriteLine("ActionID: " & action)
+        Console.WriteLine("eventCalcOutcome: Start of Sub")
+        Console.WriteLine("eventCalcOutcome: ActionID: " & action)
+        Console.WriteLine("eventCalcOutcome: eventID: " & eventID)
         Dim rs_event As New ADODB.Recordset
         Dim rs_char As New ADODB.Recordset
         Dim rs_string As New ADODB.Recordset
         Dim outcome As New Int16
-        Dim relSkill As String
+        Dim relSkill As String 'relevant Skill
         rs_event.Open("SELECT * FROM [Event] WHERE [ID]=" & eventID, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
                   ADODB.LockTypeEnum.adLockReadOnly
@@ -422,16 +460,21 @@
           )
 
         relSkill = rs_event.Fields("relevantSkill" & action).Value
+        Console.WriteLine("eventCalcOutcome: relevant Skill: " & relSkill)
+
         outcome = (getOutcome(rs_char.Fields(relSkill).Value) \ 4) 'outcome 0-3 = 0, 4-5=1
         outcome = outcome + (action * 2)
-        Console.WriteLine("Outcome: " & outcome)
+        Console.WriteLine("eventCalcOutcome: Outcome: " & outcome)
+
         rs_string.Open("SELECT * FROM [EventResultString] WHERE [eventID]=" & eventID & "AND [outcome]=" & outcome, conn,
                   ADODB.CursorTypeEnum.adOpenStatic,
                   ADODB.LockTypeEnum.adLockReadOnly
           )
         randomRecord(rs_string)
+
         eventOutcomeBox.Text = rs_char.Fields("fullName").Value & " " & rs_string.Fields("string").Value
         parseOutcome(rs_event.Fields("outcome" & outcome).Value, rs_char)
+
         With rs_event
             .CancelUpdate()
             .Close()
@@ -442,9 +485,11 @@
             .Close()
         End With
         eventGoBack.Show()
+        Console.WriteLine("eventCalcOutcome: End of Sub")
     End Sub
 
     Function getOutcome(ByVal skill)
+        Console.WriteLine("getOutcome: Start of Sub")
         Randomize()
         'gets outcome determined by binomial dist higher skill = higher p
         Dim p As Single
@@ -456,13 +501,13 @@
                 out += 1
             End If
         Next
-        Console.WriteLine("getOutcome Outcome: " & out)
+        Console.WriteLine("getOutcome: Outcome: " & out)
         getOutcome = out
+        Console.WriteLine("getOutcome: End of Sub")
     End Function
 
     Sub moveAbsolute(ByRef rs, ByVal pos) 'this function only exists because Recordset.moveabsolute is very unreliable
         rs.MoveFirst()
-
         If pos > rs.RecordCount - 1 Then
             rs.MoveLast()
         Else
@@ -471,7 +516,7 @@
             Next
         End If
     End Sub
-    Sub randomRecord(ByRef rs) 'this doesnt work, i dont know why
+    Sub randomRecord(ByRef rs) 'moves rs cursor to a random position (excluding BOF and EOF)
         Dim numOfRecords As Long
         Dim recordPos As Int16
         Randomize()
@@ -493,7 +538,10 @@
     End Sub
 
     Private Sub createNewGame()
-        conn.Execute("DELETE FROM [Day]") 'clear db
+        Console.WriteLine("createNewGame: Start of Sub")
+
+        'clear db
+        conn.Execute("DELETE FROM [Day]")
         conn.Execute("DELETE FROM [Character]")
 
         Dim rs_day As New ADODB.Recordset
@@ -507,11 +555,10 @@
         rs_day.Fields("rations").Value = 5
         rs_day.Fields("counter").Value = 1
         rs_day.Update()
+
         For i = 0 To 2
-            Dim skills(5) As Int16
-            Dim x As Int16
-            x = 4
-            skills = newSkills(Difficulty.SelectedIndex)
+            Dim x As Short = 4
+            Dim skills As Int16() = newSkills(Difficulty.SelectedIndex)
             rs_char.AddNew()
             rs_char.Fields(1).Value = "NONAME " & i
             rs_char.Fields(2).Value = 100
@@ -524,36 +571,35 @@
         Next
         rs_char.Close()
         rs_day.Close()
-        For Each elem In TabControl.TabPages(3).Controls
+        For Each elem In TabControl.TabPages(3).Controls 'enable all character fields. They might be disabled if chracter died in previous game
             elem.Enabled = True
         Next
         TabControl.SelectedIndex = 3
         Call updateFields()
+        Console.WriteLine("createNewGame: End of Sub")
     End Sub
     Function newSkills(ByVal diff)
-        Dim difficulties(4) As Int16 ' total amount of skill points per character
-        difficulties = {75, 50, 25, 0}
+        Console.WriteLine("newSkills: Start of Sub")
+        Dim difficulties As Short() = {75, 50, 25, 0} ' total amount of skill points per character
 
         Dim tmpSkill As Int16 'newly calulated Skill
-        Dim total As Int16 'max skillpoints
+        Dim total As Short = difficulties(diff) 'max skillpoints
         Dim i As Int16 'counter for array index
-        Dim skillArray(5) As Int16
-        skillArray = {0, 0, 0, 0, 0}
-        total = difficulties(diff)
+        Dim skillArray() As Short = {0, 0, 0, 0, 0}
 
-        While total > 0
+        While total > 0 'while limit for skillPoints is not reached
             i = 0
             For Each elem In skillArray
                 If total > 20 Then
-                    Console.WriteLine("calculating skil 0-20")
+                    Console.WriteLine("newSkills: calculating skil 0-20")
                     tmpSkill = CInt(Math.Ceiling(Rnd() * (20))) 'random num 0 -> 20 (inclusive)
                 Else
-                    Console.WriteLine("calulating skil 0-total")
+                    Console.WriteLine("newSkills: calulating skil 0-total")
                     tmpSkill = CInt(Math.Ceiling(Rnd() * total))
                 End If
                 If Not elem > (20 - tmpSkill) Then 'treat edge case where skill might become >20
-                    Console.WriteLine("Elem: " & elem)
-                    Console.WriteLine("Temp: " & tmpSkill)
+                    Console.WriteLine("newSkills: Elem: " & elem)
+                    Console.WriteLine("newSkills: Temp: " & tmpSkill)
                     skillArray(i) += tmpSkill
                     total -= tmpSkill
                     Console.WriteLine(String.Join(", ", skillArray))
@@ -563,6 +609,7 @@
         End While
         Shuffle(skillArray) 'shuffling is mandatory because otherwise last numbers in Array are alwas smaller
         newSkills = skillArray
+        Console.WriteLine("newSkills: End of Sub")
     End Function
 
     Private Sub Shuffle(items As Int16())
