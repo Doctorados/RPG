@@ -32,7 +32,6 @@ Partial Class Game
         Me.Start = New System.Windows.Forms.Button()
         Me.Difficulty = New System.Windows.Forms.ComboBox()
         Me.manual = New System.Windows.Forms.TabPage()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.main = New System.Windows.Forms.TabPage()
         Me.manualBtn = New System.Windows.Forms.Button()
         Me.charSkills2 = New System.Windows.Forms.ListBox()
@@ -66,6 +65,7 @@ Partial Class Game
         Me.outcomePage = New System.Windows.Forms.TabPage()
         Me.outcomeGoBack = New System.Windows.Forms.Button()
         Me.outcomeBox = New System.Windows.Forms.RichTextBox()
+        Me.manualTextBox = New System.Windows.Forms.RichTextBox()
         Me.TabControl.SuspendLayout()
         Me.splash.SuspendLayout()
         Me.newgame.SuspendLayout()
@@ -163,23 +163,14 @@ Partial Class Game
         '
         'manual
         '
-        Me.manual.Controls.Add(Me.Label1)
+        Me.manual.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.manual.Controls.Add(Me.manualTextBox)
         Me.manual.Location = New System.Drawing.Point(4, 22)
         Me.manual.Name = "manual"
         Me.manual.Padding = New System.Windows.Forms.Padding(3)
         Me.manual.Size = New System.Drawing.Size(768, 400)
         Me.manual.TabIndex = 1
         Me.manual.Text = "Anleitung"
-        Me.manual.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(264, 105)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(160, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Hier entsteht bald eine Anleitung"
         '
         'main
         '
@@ -623,6 +614,18 @@ Partial Class Game
         Me.outcomeBox.TabIndex = 72
         Me.outcomeBox.Text = "OUTCOMES"
         '
+        'manualTextBox
+        '
+        Me.manualTextBox.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.manualTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.manualTextBox.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.manualTextBox.ForeColor = System.Drawing.Color.White
+        Me.manualTextBox.Location = New System.Drawing.Point(6, 6)
+        Me.manualTextBox.Name = "manualTextBox"
+        Me.manualTextBox.Size = New System.Drawing.Size(712, 315)
+        Me.manualTextBox.TabIndex = 73
+        Me.manualTextBox.Text = "OUTCOMES"
+        '
         'Game
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -635,7 +638,6 @@ Partial Class Game
         Me.splash.ResumeLayout(False)
         Me.newgame.ResumeLayout(False)
         Me.manual.ResumeLayout(False)
-        Me.manual.PerformLayout()
         Me.main.ResumeLayout(False)
         Me.main.PerformLayout()
         CType(Me.charPic2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -658,7 +660,6 @@ Partial Class Game
     Friend WithEvents Back As Button
     Friend WithEvents Start As Button
     Friend WithEvents Difficulty As ComboBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents charPic0 As PictureBox
     Friend WithEvents charSkills0 As ListBox
     Friend WithEvents healthBar0 As TextBox
@@ -691,4 +692,5 @@ Partial Class Game
     Friend WithEvents outcomePage As TabPage
     Friend WithEvents outcomeGoBack As Button
     Friend WithEvents outcomeBox As RichTextBox
+    Friend WithEvents manualTextBox As RichTextBox
 End Class
