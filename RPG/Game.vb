@@ -369,14 +369,6 @@
                 result = getOutcome(skillLevel) 'calculate outcome
                 Console.WriteLine("calcTasks: result: " & result)
 
-                Console.WriteLine("calcTasks: SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskID & " AND outcome = " & result)
-                rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskID & " AND outcome = " & result, conn,
-                                ADODB.CursorTypeEnum.adOpenStatic
-                ) 'open recordset with relevant stings
-
-                randomRecord(rs_strings) 'randomize which string is displayed
-                msgString = rs_char.Fields("fullName").Value & " " & rs_strings.Fields("string").Value
-
                 If rs_tasks.Fields("outcome" & result).Value = "event" Then
                     Console.WriteLine("calcTasks: the outcome is 'event'")
                     eventCharID = rs_char.Fields(0).Value
@@ -389,18 +381,27 @@
                     Loop
                 Else
                     Console.WriteLine("calcTasks: the outcome is NOT 'event'")
+                    Console.WriteLine("calcTasks: SQL-String:" & "SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskID & " AND outcome = " & result)
+                    rs_strings.Open("SELECT * FROM [TaskResultStrings] WHERE taskID = " & taskID & " AND outcome = " & result, conn,
+                                ADODB.CursorTypeEnum.adOpenStatic
+                ) 'open recordset with relevant stings
+
+                    randomRecord(rs_strings) 'randomize which string is displayed
+                    msgString = rs_char.Fields("fullName").Value & " " & rs_strings.Fields("string").Value
+
                     parseOutcome(rs_tasks.Fields("outcome" & result).Value, rs_char)
                     resultList(i) = msgString
+                    rs_strings.Close()
                 End If
 
-                rs_strings.Close()
                 rs_tasks.Close()
             End If
 
             rs_char.MoveNext()
         Next
-
-        displayOutcome(arrToStr(resultList, vbLf))
+        If resultList.Length > 0 Then
+            displayOutcome(arrToStr(resultList, vbLf))
+        End If
         rs_char.Close()
         Console.WriteLine("calcTasks: End of Sub")
     End Sub
@@ -455,6 +456,13 @@
                 If rs_char.Fields(str).Value > 20 Then
                     rs_char.Fields(str).Value = 20
                 End If
+            Case "item"
+                rs.Open("SELECT * FROM [Items] WHERE ID=" & num, conn,
+                   ADODB.CursorTypeEnum.adOpenStatic,
+                   ADODB.LockTypeEnum.adLockPessimistic
+           )
+                addToInv(rs.Fields("ID").Value)
+                rs.Close()
         End Select
         rs_char.Update()
         Console.WriteLine("parseOutcome: End of Sub")
@@ -508,20 +516,20 @@
         outcome = outcome + (action * 2)
         Console.WriteLine("eventCalcOutcome: Outcome: " & outcome)
 
-        rs_string.Open("SELECT * FROM [EventResultString] WHERE [eventID]=" & eventID & "AND [outcome]=" & outcome, conn,
-                  ADODB.CursorTypeEnum.adOpenStatic,
-                  ADODB.LockTypeEnum.adLockReadOnly
-          )
-        randomRecord(rs_string)
+        'rs_string.Open("SELECT * FROM [EventResultString] WHERE [eventID]=" & eventID & "AND [outcome]=" & outcome, conn,
+        'ADODB.CursorTypeEnum.adOpenStatic,
+        'ADODB.LockTypeEnum.adLockReadOnly
+        ')
+        'randomRecord(rs_string)
 
-        eventOutcomeBox.Text = rs_char.Fields("fullName").Value & " " & rs_string.Fields("string").Value
+        eventOutcomeBox.Text = rs_char.Fields("fullName").Value & " " & rs_event.Fields("str" & outcome).Value
         parseOutcome(rs_event.Fields("outcome" & outcome).Value, rs_char)
 
         With rs_event
             .CancelUpdate()
             .Close()
         End With
-        rs_string.Close()
+        'rs_string.Close()
         With rs_char
             .Update()
             .Close()
