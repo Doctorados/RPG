@@ -99,7 +99,7 @@
         dayCountVal = rs.Fields("counter").Value
         rationCountVal = rs.Fields("rations").Value
         dayCounter.Text = "Tag " & CStr(dayCountVal) 'set fields
-        foodCounter.Text = CStr(rationCountVal) & " Rationen" 'set fields
+        foodCounter.Text = CStr(rationCountVal) & "Rationen" 'set fields
         rs.Close()
 
         For i = 0 To 2
@@ -715,4 +715,39 @@
     Private Sub outcomeGoBack_Click(sender As Object, e As EventArgs) Handles outcomeGoBack.Click
         TabControl.SelectedIndex = 3
     End Sub
+
+    Private Sub inventoryBtn_Click(sender As Object, e As EventArgs)
+        TabControl.SelectedIndex = 6
+    End Sub
+
+    'Inventory Drag and Drop
+    Dim dragdrop_source As Object 'control from which item is being dragged
+    Private Sub inventoryBox_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles inventoryBox.MouseDown
+        sender.DoDragDrop(sender.SelectedItem, DragDropEffects.Copy)
+        dragdrop_source = sender
+    End Sub
+    Private Sub item_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles item0.MouseDown, item1.MouseDown, item2.MouseDown
+        dragdrop_source = sender
+        If sender.Text <> "" Then 'prevent drag and drop of nothing
+            sender.DoDragDrop(sender.Text, DragDropEffects.Copy)
+        End If
+    End Sub
+    Private Sub inventoryBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles inventoryBox.DragDrop
+        sender.Items.Add(e.Data.GetData(DataFormats.Text).ToString)
+        dragdrop_source.Text = "" 'clear Textbox
+    End Sub
+    Private Sub item_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragDrop, item1.DragDrop, item2.DragDrop
+        If sender.Text <> "" Then 'if already item in textbox put back into inventory
+            inventoryBox.Items.Add(sender.Text)
+        End If
+        sender.Text = e.Data.GetData(DataFormats.Text).ToString
+        If inventoryBox.SelectedIndex >= 0 Then
+            inventoryBox.Items.RemoveAt(inventoryBox.SelectedIndex) 'remove item from Inventory
+            inventoryBox.SelectedIndex = -1
+        End If
+    End Sub
+    Private Sub item_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragEnter, item1.DragEnter, item2.DragEnter, inventoryBox.DragEnter
+        e.Effect = e.AllowedEffect And DragDropEffects.Copy
+    End Sub
+
 End Class

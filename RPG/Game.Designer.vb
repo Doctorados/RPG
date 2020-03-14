@@ -32,7 +32,12 @@ Partial Class Game
         Me.Start = New System.Windows.Forms.Button()
         Me.Difficulty = New System.Windows.Forms.ComboBox()
         Me.manual = New System.Windows.Forms.TabPage()
+        Me.manualTextBox = New System.Windows.Forms.RichTextBox()
         Me.main = New System.Windows.Forms.TabPage()
+        Me.inventoryBox = New System.Windows.Forms.ListBox()
+        Me.item1 = New System.Windows.Forms.TextBox()
+        Me.item2 = New System.Windows.Forms.TextBox()
+        Me.item0 = New System.Windows.Forms.TextBox()
         Me.manualBtn = New System.Windows.Forms.Button()
         Me.charSkills2 = New System.Windows.Forms.ListBox()
         Me.charSkills1 = New System.Windows.Forms.ListBox()
@@ -65,7 +70,13 @@ Partial Class Game
         Me.outcomePage = New System.Windows.Forms.TabPage()
         Me.outcomeGoBack = New System.Windows.Forms.Button()
         Me.outcomeBox = New System.Windows.Forms.RichTextBox()
-        Me.manualTextBox = New System.Windows.Forms.RichTextBox()
+        Me.inventoryPage = New System.Windows.Forms.TabPage()
+        Me.ListBox2 = New System.Windows.Forms.ListBox()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.inventoryTitle = New System.Windows.Forms.TextBox()
         Me.TabControl.SuspendLayout()
         Me.splash.SuspendLayout()
         Me.newgame.SuspendLayout()
@@ -76,6 +87,7 @@ Partial Class Game
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.eventPage.SuspendLayout()
         Me.outcomePage.SuspendLayout()
+        Me.inventoryPage.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl
@@ -86,6 +98,7 @@ Partial Class Game
         Me.TabControl.Controls.Add(Me.main)
         Me.TabControl.Controls.Add(Me.eventPage)
         Me.TabControl.Controls.Add(Me.outcomePage)
+        Me.TabControl.Controls.Add(Me.inventoryPage)
         Me.TabControl.Location = New System.Drawing.Point(12, 12)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
@@ -172,9 +185,26 @@ Partial Class Game
         Me.manual.TabIndex = 1
         Me.manual.Text = "Anleitung"
         '
+        'manualTextBox
+        '
+        Me.manualTextBox.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.manualTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.manualTextBox.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.manualTextBox.ForeColor = System.Drawing.Color.White
+        Me.manualTextBox.Location = New System.Drawing.Point(6, 6)
+        Me.manualTextBox.Name = "manualTextBox"
+        Me.manualTextBox.Size = New System.Drawing.Size(712, 315)
+        Me.manualTextBox.TabIndex = 73
+        Me.manualTextBox.Text = "OUTCOMES"
+        '
         'main
         '
         Me.main.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.main.Controls.Add(Me.inventoryTitle)
+        Me.main.Controls.Add(Me.inventoryBox)
+        Me.main.Controls.Add(Me.item1)
+        Me.main.Controls.Add(Me.item2)
+        Me.main.Controls.Add(Me.item0)
         Me.main.Controls.Add(Me.manualBtn)
         Me.main.Controls.Add(Me.charSkills2)
         Me.main.Controls.Add(Me.charSkills1)
@@ -203,6 +233,62 @@ Partial Class Game
         Me.main.TabIndex = 2
         Me.main.Text = "main"
         '
+        'inventoryBox
+        '
+        Me.inventoryBox.AllowDrop = True
+        Me.inventoryBox.BackColor = System.Drawing.Color.White
+        Me.inventoryBox.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.inventoryBox.ForeColor = System.Drawing.Color.Black
+        Me.inventoryBox.FormattingEnabled = True
+        Me.inventoryBox.ItemHeight = 18
+        Me.inventoryBox.Items.AddRange(New Object() {"Stein", "Hammer", "Schnur", "Stock", "Stock"})
+        Me.inventoryBox.Location = New System.Drawing.Point(589, 86)
+        Me.inventoryBox.Name = "inventoryBox"
+        Me.inventoryBox.Size = New System.Drawing.Size(158, 202)
+        Me.inventoryBox.TabIndex = 77
+        '
+        'item1
+        '
+        Me.item1.AllowDrop = True
+        Me.item1.BackColor = System.Drawing.Color.Black
+        Me.item1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.item1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.item1.ForeColor = System.Drawing.Color.White
+        Me.item1.Location = New System.Drawing.Point(218, 323)
+        Me.item1.Name = "item1"
+        Me.item1.ReadOnly = True
+        Me.item1.Size = New System.Drawing.Size(158, 32)
+        Me.item1.TabIndex = 76
+        Me.item1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'item2
+        '
+        Me.item2.AllowDrop = True
+        Me.item2.BackColor = System.Drawing.Color.Black
+        Me.item2.Cursor = System.Windows.Forms.Cursors.Default
+        Me.item2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.item2.ForeColor = System.Drawing.Color.White
+        Me.item2.Location = New System.Drawing.Point(408, 323)
+        Me.item2.Name = "item2"
+        Me.item2.ReadOnly = True
+        Me.item2.Size = New System.Drawing.Size(158, 32)
+        Me.item2.TabIndex = 75
+        Me.item2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'item0
+        '
+        Me.item0.AllowDrop = True
+        Me.item0.BackColor = System.Drawing.Color.Black
+        Me.item0.Cursor = System.Windows.Forms.Cursors.Default
+        Me.item0.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.item0.ForeColor = System.Drawing.Color.White
+        Me.item0.Location = New System.Drawing.Point(30, 323)
+        Me.item0.Name = "item0"
+        Me.item0.ReadOnly = True
+        Me.item0.Size = New System.Drawing.Size(158, 32)
+        Me.item0.TabIndex = 74
+        Me.item0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'manualBtn
         '
         Me.manualBtn.BackColor = System.Drawing.Color.DarkSlateGray
@@ -224,9 +310,9 @@ Partial Class Game
         Me.charSkills2.ForeColor = System.Drawing.Color.White
         Me.charSkills2.FormattingEnabled = True
         Me.charSkills2.ItemHeight = 18
-        Me.charSkills2.Location = New System.Drawing.Point(562, 105)
+        Me.charSkills2.Location = New System.Drawing.Point(408, 83)
         Me.charSkills2.Name = "charSkills2"
-        Me.charSkills2.Size = New System.Drawing.Size(158, 238)
+        Me.charSkills2.Size = New System.Drawing.Size(158, 202)
         Me.charSkills2.TabIndex = 67
         '
         'charSkills1
@@ -237,9 +323,9 @@ Partial Class Game
         Me.charSkills1.FormattingEnabled = True
         Me.charSkills1.ItemHeight = 18
         Me.charSkills1.Items.AddRange(New Object() {""})
-        Me.charSkills1.Location = New System.Drawing.Point(296, 105)
+        Me.charSkills1.Location = New System.Drawing.Point(218, 83)
         Me.charSkills1.Name = "charSkills1"
-        Me.charSkills1.Size = New System.Drawing.Size(158, 238)
+        Me.charSkills1.Size = New System.Drawing.Size(158, 202)
         Me.charSkills1.TabIndex = 66
         '
         'charSkills0
@@ -249,9 +335,9 @@ Partial Class Game
         Me.charSkills0.ForeColor = System.Drawing.Color.White
         Me.charSkills0.FormattingEnabled = True
         Me.charSkills0.ItemHeight = 18
-        Me.charSkills0.Location = New System.Drawing.Point(30, 105)
+        Me.charSkills0.Location = New System.Drawing.Point(30, 83)
         Me.charSkills0.Name = "charSkills0"
-        Me.charSkills0.Size = New System.Drawing.Size(158, 238)
+        Me.charSkills0.Size = New System.Drawing.Size(158, 202)
         Me.charSkills0.TabIndex = 5
         '
         'foodCounter
@@ -260,13 +346,12 @@ Partial Class Game
         Me.foodCounter.Cursor = System.Windows.Forms.Cursors.Default
         Me.foodCounter.Font = New System.Drawing.Font("Consolas", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.foodCounter.ForeColor = System.Drawing.Color.Black
-        Me.foodCounter.Location = New System.Drawing.Point(194, 12)
+        Me.foodCounter.Location = New System.Drawing.Point(218, 3)
         Me.foodCounter.Name = "foodCounter"
         Me.foodCounter.ReadOnly = True
-        Me.foodCounter.Size = New System.Drawing.Size(181, 39)
+        Me.foodCounter.Size = New System.Drawing.Size(158, 39)
         Me.foodCounter.TabIndex = 71
-        Me.foodCounter.Text = "0 RATIONEN"
-        Me.foodCounter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.foodCounter.Text = "00Rationen"
         '
         'dayCounter
         '
@@ -274,7 +359,7 @@ Partial Class Game
         Me.dayCounter.Cursor = System.Windows.Forms.Cursors.Default
         Me.dayCounter.Font = New System.Drawing.Font("Consolas", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dayCounter.ForeColor = System.Drawing.Color.Black
-        Me.dayCounter.Location = New System.Drawing.Point(30, 12)
+        Me.dayCounter.Location = New System.Drawing.Point(30, 3)
         Me.dayCounter.Name = "dayCounter"
         Me.dayCounter.ReadOnly = True
         Me.dayCounter.Size = New System.Drawing.Size(158, 39)
@@ -289,7 +374,7 @@ Partial Class Game
         Me.task0.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.task0.ForeColor = System.Drawing.Color.White
         Me.task0.FormattingEnabled = True
-        Me.task0.Location = New System.Drawing.Point(30, 306)
+        Me.task0.Location = New System.Drawing.Point(30, 284)
         Me.task0.Name = "task0"
         Me.task0.Size = New System.Drawing.Size(158, 32)
         Me.task0.TabIndex = 69
@@ -301,9 +386,9 @@ Partial Class Game
         Me.GO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GO.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GO.ForeColor = System.Drawing.Color.Black
-        Me.GO.Location = New System.Drawing.Point(613, 347)
+        Me.GO.Location = New System.Drawing.Point(607, 361)
         Me.GO.Name = "GO"
-        Me.GO.Size = New System.Drawing.Size(138, 36)
+        Me.GO.Size = New System.Drawing.Size(158, 36)
         Me.GO.TabIndex = 68
         Me.GO.Text = "GO!"
         Me.GO.UseVisualStyleBackColor = False
@@ -316,7 +401,7 @@ Partial Class Game
         Me.task2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.task2.ForeColor = System.Drawing.Color.White
         Me.task2.FormattingEnabled = True
-        Me.task2.Location = New System.Drawing.Point(562, 306)
+        Me.task2.Location = New System.Drawing.Point(408, 284)
         Me.task2.Name = "task2"
         Me.task2.Size = New System.Drawing.Size(158, 32)
         Me.task2.TabIndex = 65
@@ -327,7 +412,7 @@ Partial Class Game
         Me.name2.Cursor = System.Windows.Forms.Cursors.Default
         Me.name2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.name2.ForeColor = System.Drawing.Color.White
-        Me.name2.Location = New System.Drawing.Point(562, 70)
+        Me.name2.Location = New System.Drawing.Point(408, 48)
         Me.name2.Name = "name2"
         Me.name2.ReadOnly = True
         Me.name2.Size = New System.Drawing.Size(158, 32)
@@ -341,7 +426,7 @@ Partial Class Game
         Me.hungerbar2.Cursor = System.Windows.Forms.Cursors.Default
         Me.hungerbar2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hungerbar2.ForeColor = System.Drawing.Color.White
-        Me.hungerbar2.Location = New System.Drawing.Point(562, 268)
+        Me.hungerbar2.Location = New System.Drawing.Point(408, 246)
         Me.hungerbar2.Name = "hungerbar2"
         Me.hungerbar2.ReadOnly = True
         Me.hungerbar2.Size = New System.Drawing.Size(158, 32)
@@ -354,7 +439,7 @@ Partial Class Game
         Me.healthBar2.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthBar2.ForeColor = System.Drawing.Color.Red
-        Me.healthBar2.Location = New System.Drawing.Point(562, 230)
+        Me.healthBar2.Location = New System.Drawing.Point(408, 208)
         Me.healthBar2.Name = "healthBar2"
         Me.healthBar2.ReadOnly = True
         Me.healthBar2.Size = New System.Drawing.Size(158, 32)
@@ -365,7 +450,7 @@ Partial Class Game
         '
         Me.charPic2.Image = CType(resources.GetObject("charPic2.Image"), System.Drawing.Image)
         Me.charPic2.InitialImage = CType(resources.GetObject("charPic2.InitialImage"), System.Drawing.Image)
-        Me.charPic2.Location = New System.Drawing.Point(562, 105)
+        Me.charPic2.Location = New System.Drawing.Point(408, 83)
         Me.charPic2.Name = "charPic2"
         Me.charPic2.Size = New System.Drawing.Size(158, 119)
         Me.charPic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -380,7 +465,7 @@ Partial Class Game
         Me.task1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.task1.ForeColor = System.Drawing.Color.White
         Me.task1.FormattingEnabled = True
-        Me.task1.Location = New System.Drawing.Point(296, 306)
+        Me.task1.Location = New System.Drawing.Point(218, 284)
         Me.task1.Name = "task1"
         Me.task1.Size = New System.Drawing.Size(158, 32)
         Me.task1.TabIndex = 60
@@ -391,7 +476,7 @@ Partial Class Game
         Me.name1.Cursor = System.Windows.Forms.Cursors.Default
         Me.name1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.name1.ForeColor = System.Drawing.Color.White
-        Me.name1.Location = New System.Drawing.Point(296, 70)
+        Me.name1.Location = New System.Drawing.Point(218, 48)
         Me.name1.Name = "name1"
         Me.name1.ReadOnly = True
         Me.name1.Size = New System.Drawing.Size(158, 32)
@@ -405,7 +490,7 @@ Partial Class Game
         Me.hungerBar1.Cursor = System.Windows.Forms.Cursors.Default
         Me.hungerBar1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hungerBar1.ForeColor = System.Drawing.Color.White
-        Me.hungerBar1.Location = New System.Drawing.Point(296, 268)
+        Me.hungerBar1.Location = New System.Drawing.Point(218, 246)
         Me.hungerBar1.Name = "hungerBar1"
         Me.hungerBar1.ReadOnly = True
         Me.hungerBar1.Size = New System.Drawing.Size(158, 32)
@@ -418,7 +503,7 @@ Partial Class Game
         Me.healthBar1.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthBar1.ForeColor = System.Drawing.Color.Red
-        Me.healthBar1.Location = New System.Drawing.Point(296, 230)
+        Me.healthBar1.Location = New System.Drawing.Point(218, 208)
         Me.healthBar1.Name = "healthBar1"
         Me.healthBar1.ReadOnly = True
         Me.healthBar1.Size = New System.Drawing.Size(158, 32)
@@ -429,7 +514,7 @@ Partial Class Game
         '
         Me.charPic1.Image = CType(resources.GetObject("charPic1.Image"), System.Drawing.Image)
         Me.charPic1.InitialImage = CType(resources.GetObject("charPic1.InitialImage"), System.Drawing.Image)
-        Me.charPic1.Location = New System.Drawing.Point(296, 105)
+        Me.charPic1.Location = New System.Drawing.Point(218, 83)
         Me.charPic1.Name = "charPic1"
         Me.charPic1.Size = New System.Drawing.Size(158, 119)
         Me.charPic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -442,7 +527,7 @@ Partial Class Game
         Me.name0.Cursor = System.Windows.Forms.Cursors.Default
         Me.name0.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.name0.ForeColor = System.Drawing.Color.White
-        Me.name0.Location = New System.Drawing.Point(30, 70)
+        Me.name0.Location = New System.Drawing.Point(30, 48)
         Me.name0.Name = "name0"
         Me.name0.ReadOnly = True
         Me.name0.Size = New System.Drawing.Size(158, 32)
@@ -456,7 +541,7 @@ Partial Class Game
         Me.hungerBar0.Cursor = System.Windows.Forms.Cursors.Default
         Me.hungerBar0.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hungerBar0.ForeColor = System.Drawing.Color.White
-        Me.hungerBar0.Location = New System.Drawing.Point(30, 268)
+        Me.hungerBar0.Location = New System.Drawing.Point(30, 246)
         Me.hungerBar0.Name = "hungerBar0"
         Me.hungerBar0.ReadOnly = True
         Me.hungerBar0.Size = New System.Drawing.Size(158, 32)
@@ -469,7 +554,7 @@ Partial Class Game
         Me.healthBar0.Cursor = System.Windows.Forms.Cursors.Default
         Me.healthBar0.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.healthBar0.ForeColor = System.Drawing.Color.Red
-        Me.healthBar0.Location = New System.Drawing.Point(30, 230)
+        Me.healthBar0.Location = New System.Drawing.Point(30, 208)
         Me.healthBar0.Name = "healthBar0"
         Me.healthBar0.ReadOnly = True
         Me.healthBar0.Size = New System.Drawing.Size(158, 32)
@@ -480,7 +565,7 @@ Partial Class Game
         '
         Me.charPic0.Image = CType(resources.GetObject("charPic0.Image"), System.Drawing.Image)
         Me.charPic0.InitialImage = CType(resources.GetObject("charPic0.InitialImage"), System.Drawing.Image)
-        Me.charPic0.Location = New System.Drawing.Point(30, 105)
+        Me.charPic0.Location = New System.Drawing.Point(30, 83)
         Me.charPic0.Name = "charPic0"
         Me.charPic0.Size = New System.Drawing.Size(158, 119)
         Me.charPic0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -586,7 +671,7 @@ Partial Class Game
         Me.outcomePage.Padding = New System.Windows.Forms.Padding(3)
         Me.outcomePage.Size = New System.Drawing.Size(768, 400)
         Me.outcomePage.TabIndex = 5
-        Me.outcomePage.Text = "TabPage1"
+        Me.outcomePage.Text = "outcomePage"
         '
         'outcomeGoBack
         '
@@ -614,17 +699,103 @@ Partial Class Game
         Me.outcomeBox.TabIndex = 72
         Me.outcomeBox.Text = "OUTCOMES"
         '
-        'manualTextBox
+        'inventoryPage
         '
-        Me.manualTextBox.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.manualTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.manualTextBox.Font = New System.Drawing.Font("Consolas", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.manualTextBox.ForeColor = System.Drawing.Color.White
-        Me.manualTextBox.Location = New System.Drawing.Point(6, 6)
-        Me.manualTextBox.Name = "manualTextBox"
-        Me.manualTextBox.Size = New System.Drawing.Size(712, 315)
-        Me.manualTextBox.TabIndex = 73
-        Me.manualTextBox.Text = "OUTCOMES"
+        Me.inventoryPage.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.inventoryPage.Controls.Add(Me.ListBox2)
+        Me.inventoryPage.Controls.Add(Me.ListBox1)
+        Me.inventoryPage.Controls.Add(Me.TextBox1)
+        Me.inventoryPage.Controls.Add(Me.TextBox2)
+        Me.inventoryPage.Controls.Add(Me.TextBox3)
+        Me.inventoryPage.Location = New System.Drawing.Point(4, 22)
+        Me.inventoryPage.Name = "inventoryPage"
+        Me.inventoryPage.Size = New System.Drawing.Size(768, 400)
+        Me.inventoryPage.TabIndex = 6
+        Me.inventoryPage.Text = "inventoryPage"
+        '
+        'ListBox2
+        '
+        Me.ListBox2.AllowDrop = True
+        Me.ListBox2.BackColor = System.Drawing.Color.Black
+        Me.ListBox2.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListBox2.ForeColor = System.Drawing.Color.White
+        Me.ListBox2.FormattingEnabled = True
+        Me.ListBox2.ItemHeight = 18
+        Me.ListBox2.Items.AddRange(New Object() {"LISBTOX21"})
+        Me.ListBox2.Location = New System.Drawing.Point(167, 41)
+        Me.ListBox2.Name = "ListBox2"
+        Me.ListBox2.Size = New System.Drawing.Size(158, 202)
+        Me.ListBox2.TabIndex = 69
+        '
+        'ListBox1
+        '
+        Me.ListBox1.AllowDrop = True
+        Me.ListBox1.BackColor = System.Drawing.Color.Black
+        Me.ListBox1.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListBox1.ForeColor = System.Drawing.Color.White
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.ItemHeight = 18
+        Me.ListBox1.Items.AddRange(New Object() {"LISTBOX11", "LISTBOX12"})
+        Me.ListBox1.Location = New System.Drawing.Point(3, 41)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(158, 202)
+        Me.ListBox1.TabIndex = 68
+        '
+        'TextBox1
+        '
+        Me.TextBox1.AllowDrop = True
+        Me.TextBox1.BackColor = System.Drawing.Color.Black
+        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.Default
+        Me.TextBox1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.ForeColor = System.Drawing.Color.White
+        Me.TextBox1.Location = New System.Drawing.Point(398, 279)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(158, 32)
+        Me.TextBox1.TabIndex = 67
+        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.Color.Black
+        Me.TextBox2.Cursor = System.Windows.Forms.Cursors.Default
+        Me.TextBox2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.ForeColor = System.Drawing.Color.White
+        Me.TextBox2.Location = New System.Drawing.Point(167, 3)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(158, 32)
+        Me.TextBox2.TabIndex = 66
+        Me.TextBox2.Text = "NODATA"
+        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BackColor = System.Drawing.Color.Black
+        Me.TextBox3.Cursor = System.Windows.Forms.Cursors.Default
+        Me.TextBox3.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.ForeColor = System.Drawing.Color.White
+        Me.TextBox3.Location = New System.Drawing.Point(3, 3)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(158, 32)
+        Me.TextBox3.TabIndex = 65
+        Me.TextBox3.Text = "NODATA"
+        Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'inventoryTitle
+        '
+        Me.inventoryTitle.BackColor = System.Drawing.Color.White
+        Me.inventoryTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.inventoryTitle.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.inventoryTitle.ForeColor = System.Drawing.Color.Black
+        Me.inventoryTitle.Location = New System.Drawing.Point(589, 48)
+        Me.inventoryTitle.Name = "inventoryTitle"
+        Me.inventoryTitle.ReadOnly = True
+        Me.inventoryTitle.Size = New System.Drawing.Size(158, 32)
+        Me.inventoryTitle.TabIndex = 78
+        Me.inventoryTitle.Text = "Inventar"
+        Me.inventoryTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Game
         '
@@ -646,6 +817,8 @@ Partial Class Game
         Me.eventPage.ResumeLayout(False)
         Me.eventPage.PerformLayout()
         Me.outcomePage.ResumeLayout(False)
+        Me.inventoryPage.ResumeLayout(False)
+        Me.inventoryPage.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -693,4 +866,15 @@ Partial Class Game
     Friend WithEvents outcomeGoBack As Button
     Friend WithEvents outcomeBox As RichTextBox
     Friend WithEvents manualTextBox As RichTextBox
+    Friend WithEvents item2 As TextBox
+    Friend WithEvents item0 As TextBox
+    Friend WithEvents item1 As TextBox
+    Friend WithEvents inventoryPage As TabPage
+    Friend WithEvents ListBox2 As ListBox
+    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents inventoryBox As ListBox
+    Friend WithEvents inventoryTitle As TextBox
 End Class
