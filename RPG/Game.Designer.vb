@@ -34,6 +34,9 @@ Partial Class Game
         Me.manual = New System.Windows.Forms.TabPage()
         Me.manualTextBox = New System.Windows.Forms.RichTextBox()
         Me.main = New System.Windows.Forms.TabPage()
+        Me.craftInfoTitle = New System.Windows.Forms.TextBox()
+        Me.craftingBox = New System.Windows.Forms.ListBox()
+        Me.inventoryTitle = New System.Windows.Forms.TextBox()
         Me.inventoryBox = New System.Windows.Forms.ListBox()
         Me.item1 = New System.Windows.Forms.TextBox()
         Me.item2 = New System.Windows.Forms.TextBox()
@@ -70,13 +73,6 @@ Partial Class Game
         Me.outcomePage = New System.Windows.Forms.TabPage()
         Me.outcomeGoBack = New System.Windows.Forms.Button()
         Me.outcomeBox = New System.Windows.Forms.RichTextBox()
-        Me.inventoryPage = New System.Windows.Forms.TabPage()
-        Me.ListBox2 = New System.Windows.Forms.ListBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.inventoryTitle = New System.Windows.Forms.TextBox()
         Me.TabControl.SuspendLayout()
         Me.splash.SuspendLayout()
         Me.newgame.SuspendLayout()
@@ -87,7 +83,6 @@ Partial Class Game
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.eventPage.SuspendLayout()
         Me.outcomePage.SuspendLayout()
-        Me.inventoryPage.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl
@@ -98,7 +93,6 @@ Partial Class Game
         Me.TabControl.Controls.Add(Me.main)
         Me.TabControl.Controls.Add(Me.eventPage)
         Me.TabControl.Controls.Add(Me.outcomePage)
-        Me.TabControl.Controls.Add(Me.inventoryPage)
         Me.TabControl.Location = New System.Drawing.Point(12, 12)
         Me.TabControl.Name = "TabControl"
         Me.TabControl.SelectedIndex = 0
@@ -200,6 +194,8 @@ Partial Class Game
         'main
         '
         Me.main.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.main.Controls.Add(Me.craftInfoTitle)
+        Me.main.Controls.Add(Me.craftingBox)
         Me.main.Controls.Add(Me.inventoryTitle)
         Me.main.Controls.Add(Me.inventoryBox)
         Me.main.Controls.Add(Me.item1)
@@ -227,11 +223,53 @@ Partial Class Game
         Me.main.Controls.Add(Me.hungerBar0)
         Me.main.Controls.Add(Me.healthBar0)
         Me.main.Controls.Add(Me.charPic0)
+        Me.main.ForeColor = System.Drawing.Color.Black
         Me.main.Location = New System.Drawing.Point(4, 22)
         Me.main.Name = "main"
         Me.main.Size = New System.Drawing.Size(768, 400)
         Me.main.TabIndex = 2
         Me.main.Text = "main"
+        '
+        'craftInfoTitle
+        '
+        Me.craftInfoTitle.BackColor = System.Drawing.Color.Black
+        Me.craftInfoTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.craftInfoTitle.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.craftInfoTitle.ForeColor = System.Drawing.Color.White
+        Me.craftInfoTitle.Location = New System.Drawing.Point(567, 10)
+        Me.craftInfoTitle.Name = "craftInfoTitle"
+        Me.craftInfoTitle.ReadOnly = True
+        Me.craftInfoTitle.Size = New System.Drawing.Size(158, 32)
+        Me.craftInfoTitle.TabIndex = 80
+        Me.craftInfoTitle.Text = "Crafting"
+        Me.craftInfoTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'craftingBox
+        '
+        Me.craftingBox.AllowDrop = True
+        Me.craftingBox.BackColor = System.Drawing.Color.White
+        Me.craftingBox.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.craftingBox.ForeColor = System.Drawing.Color.Black
+        Me.craftingBox.FormattingEnabled = True
+        Me.craftingBox.ItemHeight = 24
+        Me.craftingBox.Location = New System.Drawing.Point(589, 288)
+        Me.craftingBox.Name = "craftingBox"
+        Me.craftingBox.Size = New System.Drawing.Size(158, 28)
+        Me.craftingBox.TabIndex = 79
+        '
+        'inventoryTitle
+        '
+        Me.inventoryTitle.BackColor = System.Drawing.Color.Black
+        Me.inventoryTitle.Cursor = System.Windows.Forms.Cursors.Default
+        Me.inventoryTitle.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.inventoryTitle.ForeColor = System.Drawing.Color.White
+        Me.inventoryTitle.Location = New System.Drawing.Point(589, 48)
+        Me.inventoryTitle.Name = "inventoryTitle"
+        Me.inventoryTitle.ReadOnly = True
+        Me.inventoryTitle.Size = New System.Drawing.Size(158, 32)
+        Me.inventoryTitle.TabIndex = 78
+        Me.inventoryTitle.Text = "Inventar"
+        Me.inventoryTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'inventoryBox
         '
@@ -242,7 +280,7 @@ Partial Class Game
         Me.inventoryBox.FormattingEnabled = True
         Me.inventoryBox.ItemHeight = 18
         Me.inventoryBox.Items.AddRange(New Object() {"Stein", "Hammer", "Schnur", "Stock", "Stock"})
-        Me.inventoryBox.Location = New System.Drawing.Point(589, 86)
+        Me.inventoryBox.Location = New System.Drawing.Point(589, 83)
         Me.inventoryBox.Name = "inventoryBox"
         Me.inventoryBox.Size = New System.Drawing.Size(158, 202)
         Me.inventoryBox.TabIndex = 77
@@ -386,7 +424,7 @@ Partial Class Game
         Me.GO.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GO.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GO.ForeColor = System.Drawing.Color.Black
-        Me.GO.Location = New System.Drawing.Point(607, 361)
+        Me.GO.Location = New System.Drawing.Point(589, 352)
         Me.GO.Name = "GO"
         Me.GO.Size = New System.Drawing.Size(158, 36)
         Me.GO.TabIndex = 68
@@ -699,104 +737,6 @@ Partial Class Game
         Me.outcomeBox.TabIndex = 72
         Me.outcomeBox.Text = "OUTCOMES"
         '
-        'inventoryPage
-        '
-        Me.inventoryPage.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.inventoryPage.Controls.Add(Me.ListBox2)
-        Me.inventoryPage.Controls.Add(Me.ListBox1)
-        Me.inventoryPage.Controls.Add(Me.TextBox1)
-        Me.inventoryPage.Controls.Add(Me.TextBox2)
-        Me.inventoryPage.Controls.Add(Me.TextBox3)
-        Me.inventoryPage.Location = New System.Drawing.Point(4, 22)
-        Me.inventoryPage.Name = "inventoryPage"
-        Me.inventoryPage.Size = New System.Drawing.Size(768, 400)
-        Me.inventoryPage.TabIndex = 6
-        Me.inventoryPage.Text = "inventoryPage"
-        '
-        'ListBox2
-        '
-        Me.ListBox2.AllowDrop = True
-        Me.ListBox2.BackColor = System.Drawing.Color.Black
-        Me.ListBox2.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBox2.ForeColor = System.Drawing.Color.White
-        Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.ItemHeight = 18
-        Me.ListBox2.Items.AddRange(New Object() {"LISBTOX21"})
-        Me.ListBox2.Location = New System.Drawing.Point(167, 41)
-        Me.ListBox2.Name = "ListBox2"
-        Me.ListBox2.Size = New System.Drawing.Size(158, 202)
-        Me.ListBox2.TabIndex = 69
-        '
-        'ListBox1
-        '
-        Me.ListBox1.AllowDrop = True
-        Me.ListBox1.BackColor = System.Drawing.Color.Black
-        Me.ListBox1.Font = New System.Drawing.Font("Consolas", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListBox1.ForeColor = System.Drawing.Color.White
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 18
-        Me.ListBox1.Items.AddRange(New Object() {"LISTBOX11", "LISTBOX12"})
-        Me.ListBox1.Location = New System.Drawing.Point(3, 41)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(158, 202)
-        Me.ListBox1.TabIndex = 68
-        '
-        'TextBox1
-        '
-        Me.TextBox1.AllowDrop = True
-        Me.TextBox1.BackColor = System.Drawing.Color.Black
-        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.TextBox1.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.ForeColor = System.Drawing.Color.White
-        Me.TextBox1.Location = New System.Drawing.Point(398, 279)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(158, 32)
-        Me.TextBox1.TabIndex = 67
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox2
-        '
-        Me.TextBox2.BackColor = System.Drawing.Color.Black
-        Me.TextBox2.Cursor = System.Windows.Forms.Cursors.Default
-        Me.TextBox2.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.ForeColor = System.Drawing.Color.White
-        Me.TextBox2.Location = New System.Drawing.Point(167, 3)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(158, 32)
-        Me.TextBox2.TabIndex = 66
-        Me.TextBox2.Text = "NODATA"
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TextBox3
-        '
-        Me.TextBox3.BackColor = System.Drawing.Color.Black
-        Me.TextBox3.Cursor = System.Windows.Forms.Cursors.Default
-        Me.TextBox3.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.ForeColor = System.Drawing.Color.White
-        Me.TextBox3.Location = New System.Drawing.Point(3, 3)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.ReadOnly = True
-        Me.TextBox3.Size = New System.Drawing.Size(158, 32)
-        Me.TextBox3.TabIndex = 65
-        Me.TextBox3.Text = "NODATA"
-        Me.TextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'inventoryTitle
-        '
-        Me.inventoryTitle.BackColor = System.Drawing.Color.White
-        Me.inventoryTitle.Cursor = System.Windows.Forms.Cursors.Default
-        Me.inventoryTitle.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.inventoryTitle.ForeColor = System.Drawing.Color.Black
-        Me.inventoryTitle.Location = New System.Drawing.Point(589, 48)
-        Me.inventoryTitle.Name = "inventoryTitle"
-        Me.inventoryTitle.ReadOnly = True
-        Me.inventoryTitle.Size = New System.Drawing.Size(158, 32)
-        Me.inventoryTitle.TabIndex = 78
-        Me.inventoryTitle.Text = "Inventar"
-        Me.inventoryTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'Game
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -817,8 +757,6 @@ Partial Class Game
         Me.eventPage.ResumeLayout(False)
         Me.eventPage.PerformLayout()
         Me.outcomePage.ResumeLayout(False)
-        Me.inventoryPage.ResumeLayout(False)
-        Me.inventoryPage.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -869,12 +807,8 @@ Partial Class Game
     Friend WithEvents item2 As TextBox
     Friend WithEvents item0 As TextBox
     Friend WithEvents item1 As TextBox
-    Friend WithEvents inventoryPage As TabPage
-    Friend WithEvents ListBox2 As ListBox
-    Friend WithEvents ListBox1 As ListBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
     Friend WithEvents inventoryBox As ListBox
     Friend WithEvents inventoryTitle As TextBox
+    Friend WithEvents craftingBox As ListBox
+    Friend WithEvents craftInfoTitle As TextBox
 End Class

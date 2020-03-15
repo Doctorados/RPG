@@ -8,7 +8,7 @@
     Dim eventActionTaken As Boolean = False
     Dim inventoryIDs As New List(Of Short) 'Ids of items in inventory
     Dim charItemIDs As New Dictionary(Of Short, Short) 'IDs of chracters carying items 1. is chracterID 2. is ItemID
-
+    Dim craftingList As New Dictionary(Of String, List(Of String)) 'Key is ID of craftable item, second is ingredient name
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Console.WriteLine("Game_Load: Start of Sub")
         'generic
@@ -66,6 +66,7 @@
         Dim skillNames = New String() {"Intelligenz", "Geschick", "Stärke", "Wahrnehmung", "Mental"} 'human readable names for skills
         Dim rs As New ADODB.Recordset
         Dim rs_items As New ADODB.Recordset
+
         'update Character Values
         Dim k As Int16 'counter val to cycle through skills in rs
         charItemIDs.Clear()
@@ -144,6 +145,8 @@
             inventoryIDs.Add(rs.Fields("itemID").Value)
             rs.MoveNext()
         End While
+        craftingBox.Hide()
+        checkCraftable()
         rs.Close()
         Console.WriteLine("update_Fields: inventoryIDs: " & String.Join(", ", inventoryIDs))
 
@@ -759,18 +762,19 @@
 
     'Inventory Drag and Drop
     Dim dragdrop_source As Object 'control from which item is being dragged
-    Private Sub inventoryBox_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles inventoryBox.MouseDown
-        dragdrop_source = sender
-        sender.DoDragDrop(sender.SelectedItem, DragDropEffects.Copy)
-    End Sub
-    Private Sub item_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles item0.MouseDown, item1.MouseDown, item2.MouseDown
+    Private Sub item_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles item0.MouseDown, item1.MouseDown, item2.MouseDown, inventoryBox.MouseDown, craftingBox.MouseDown
         dragdrop_source = sender
         If sender.Text <> "" Then 'prevent drag and drop of nothing
             sender.DoDragDrop(sender.Text, DragDropEffects.Copy)
         End If
     End Sub
     Private Sub inventoryBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles inventoryBox.DragDrop
-        Dim sourceID As Short = Integer.Parse(dragdrop_source.Name(dragdrop_source.Name.Length - 1))
+        Dim sourceID As Short
+        Try
+            sourceID = Integer.Parse(dragdrop_source.Name(dragdrop_source.Name.Length - 1))
+        Catch
+            Console.WriteLine("DragDrop sourceID could not be detrmined")
+        End Try
         If dragdrop_source.Name <> sender.Name Then 'prevent self drop
             'add Item to Inventory
             sender.Items.Add(e.Data.GetData(DataFormats.Text).ToString)
@@ -782,6 +786,9 @@
             removeItemFromChar(sourceID)
             charItemIDs(sourceID) = 0
         End If
+        If dragdrop_source.Name = craftingBox.Name Then
+
+        End If
     End Sub
     Private Sub item_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragDrop, item1.DragDrop, item2.DragDrop
         Console.WriteLine("sender.name: " & sender.name)
@@ -789,7 +796,7 @@
         Dim targetID As Short = Integer.Parse(sender.Name(sender.Name.Length - 1)) 'ID of character recieving object
         Console.WriteLine("targetID: " & targetID)
 
-        If dragdrop_source.Name <> sender.Name Then 'prevent self drop
+        If dragdrop_source.Name <> sender.Name And dragdrop_source.Name <> craftingBox.Name Then 'prevent self drop
             If sender.Text <> "" Then 'if already item in textbox put back into inventory
                 If TypeOf (dragdrop_source) Is ListBox Then
                     'add to Inventory
@@ -811,6 +818,7 @@
 
             If TypeOf (dragdrop_source) Is ListBox Then
                 'add to character
+                Console.WriteLine("selected Index: " & inventoryBox.SelectedIndex)
                 addItemToChar(targetID, inventoryIDs(inventoryBox.SelectedIndex))
                 'remove from Inventory
                 removeFromInv(inventoryBox.SelectedIndex)
@@ -821,10 +829,24 @@
             sender.Text = e.Data.GetData(DataFormats.Text).ToString
         End If
     End Sub
-    Private Sub item_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragEnter, item1.DragEnter, item2.DragEnter, inventoryBox.DragEnter
+    Private Sub item_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragEnter, item1.DragEnter, item2.DragEnter
         e.Effect = e.AllowedEffect And DragDropEffects.Copy
     End Sub
-
+    Private Sub inventoryBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles inventoryBox.DragEnter
+        e.Effect = e.AllowedEffect And DragDropEffects.Copy
+        If dragdrop_source.Name = craftingBox.Name Then
+            For Each elem In craftingList(craftingBox.SelectedItem)
+                inventoryBox.Items.Remove(elem)
+            Next
+        End If
+    End Sub
+    Private Sub inventoryBox_DragLeave() Handles inventoryBox.DragLeave
+        If dragdrop_source.Name = craftingBox.Name Then
+            For Each elem In craftingList(craftingBox.SelectedItem)
+                inventoryBox.Items.Add(elem)
+            Next
+        End If
+    End Sub
     Sub removeFromInv(index) 'remove item form inventory in db
         Dim rs As New ADODB.Recordset
         rs.Open("SELECT * FROM [Inventory] WHERE itemID=" & inventoryIDs.Item(index), conn,
@@ -869,4 +891,54 @@
         rs.Close()
         charItemIDs(characterID) = itemID
     End Sub
+
+    Sub checkCraftable()
+        Dim rs_Items As New ADODB.Recordset
+        Dim inventoryCopy As New List(Of Short)
+        Dim craftable As Boolean = False 'if current selection is craftable with items in inventory
+        Dim ingredients As New List(Of String)
+        craftingList.Clear()
+        rs_Items.Open("SELECT * FROM [Items]", conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        While Not rs_Items.EOF
+            inventoryCopy.Clear()
+            ingredients.Clear()
+            For Each elem In inventoryIDs
+                inventoryCopy.Add(elem)
+            Next
+            For i = 0 To 2
+                If TypeOf rs_Items.Fields("ingredient" & i).Value Is Int32 Then
+                    If inventoryCopy.Contains(rs_Items.Fields("ingredient" & i).Value) Then
+                        inventoryCopy.Remove(rs_Items.Fields("ingredient" & i).Value) 'avoid items being counted doubled
+                        ingredients.Add(getNameOfItem(rs_Items.Fields("ingredient" & i).Value))
+                        craftable = True
+                    Else
+                        craftable = False
+                    End If
+                End If
+            Next
+            If craftable Then
+                craftingBox.Items.Add(rs_Items.Fields("itemName").Value)
+                craftingList.Add(getNameOfItem(rs_Items.Fields("ID").Value), ingredients)
+                craftable = False
+            End If
+            rs_Items.MoveNext()
+        End While
+
+        If craftingList.Count > 0 Then
+            craftingBox.Show()
+        End If
+
+        rs_Items.Close()
+    End Sub
+    Function getNameOfItem(ByVal ID)
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT itemName FROM [Items] WHERE ID=" & ID, conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        getNameOfItem = rs.Fields("itemName").Value
+    End Function
 End Class
