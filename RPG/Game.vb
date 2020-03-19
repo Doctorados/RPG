@@ -147,6 +147,7 @@
             rs.MoveNext()
         End While
         craftingBox.Hide()
+        craftInfoTitle.Hide()
         checkCraftable()
         rs.Close()
         Console.WriteLine("update_Fields: inventoryIDs: " & String.Join(", ", inventoryIDs))
@@ -461,11 +462,19 @@
                     rs_char.Fields(str).Value = 20
                 End If
             Case "item"
-                rs.Open("SELECT * FROM [Items] WHERE ID=" & num, conn,
+                If num = 0 Then '0 if found item not specified
+                    rs.Open("SELECT * FROM [Items] WHERE findable=TRUE", conn,
                    ADODB.CursorTypeEnum.adOpenStatic,
                    ADODB.LockTypeEnum.adLockPessimistic
            )
-                'addToInv(rs.Fields("ID").Value)
+                    randomRecord(rs)
+                Else
+                    rs.Open("SELECT * FROM [Items] WHERE ID=" & num, conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic
+            )
+                End If
+                addToInv(rs.Fields("ID").Value)
                 rs.Close()
         End Select
         rs_char.Update()
@@ -597,6 +606,7 @@
         'clear db
         conn.Execute("DELETE FROM [Day]")
         conn.Execute("DELETE FROM [Character]")
+        conn.Execute("DELETE FROM [Inventory]")
 
         Dim rs_day As New ADODB.Recordset
         Dim rs_char As New ADODB.Recordset
@@ -837,6 +847,7 @@
     Private Sub inventoryBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles inventoryBox.DragEnter
         e.Effect = e.AllowedEffect And DragDropEffects.Copy
         If dragdrop_source.Name = craftingBox.Name Then
+            craftInfoTitle.Show()
             For Each elem In craftingList(craftingBox.SelectedItem)
                 inventoryBox.Items.Remove(elem)
             Next
@@ -844,6 +855,7 @@
     End Sub
     Private Sub inventoryBox_DragLeave() Handles inventoryBox.DragLeave
         If dragdrop_source.Name = craftingBox.Name Then
+            craftInfoTitle.Hide()
             For Each elem In craftingList(craftingBox.SelectedItem)
                 inventoryBox.Items.Add(elem)
             Next
@@ -908,10 +920,10 @@
             rs.Delete()
         Next
         rs.AddNew()
-        rs.Fields("itemID").Value = ID
-        rs.Update()
-        rs.Close()
-        Call updateFields()
+            rs.Fields("itemID").Value = ID
+            rs.Update()
+            rs.Close()
+            Call updateFields()
     End Sub
     Sub checkCraftable()
         Dim rs_Items As New ADODB.Recordset
@@ -920,6 +932,7 @@
         Dim ingredients As New List(Of String)
         Dim ingredientIDs As New List(Of Short)
         craftingList.Clear()
+        craftingIDs.Clear()
         rs_Items.Open("SELECT * FROM [Items]", conn,
             ADODB.CursorTypeEnum.adOpenStatic,
             ADODB.LockTypeEnum.adLockPessimistic

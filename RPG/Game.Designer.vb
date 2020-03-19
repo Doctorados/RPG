@@ -236,7 +236,7 @@ Partial Class Game
         Me.craftInfoTitle.Cursor = System.Windows.Forms.Cursors.Default
         Me.craftInfoTitle.Font = New System.Drawing.Font("Consolas", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.craftInfoTitle.ForeColor = System.Drawing.Color.White
-        Me.craftInfoTitle.Location = New System.Drawing.Point(567, 10)
+        Me.craftInfoTitle.Location = New System.Drawing.Point(589, 48)
         Me.craftInfoTitle.Name = "craftInfoTitle"
         Me.craftInfoTitle.ReadOnly = True
         Me.craftInfoTitle.Size = New System.Drawing.Size(158, 32)
