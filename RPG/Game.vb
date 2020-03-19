@@ -8,7 +8,8 @@
     Dim eventActionTaken As Boolean = False
     Dim inventoryIDs As New List(Of Short) 'Ids of items in inventory
     Dim charItemIDs As New Dictionary(Of Short, Short) 'IDs of chracters carying items 1. is chracterID 2. is ItemID
-    Dim craftingList As New Dictionary(Of String, List(Of String)) 'Key is ID of craftable item, second is ingredient name
+    Dim craftingList As New Dictionary(Of String, List(Of String)) 'Key is name of craftable item, second is ingredient name
+    Dim craftingIDs As New Dictionary(Of Short, List(Of Short)) 'IDs of craftable Items, second is list of ingredient IDs
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Console.WriteLine("Game_Load: Start of Sub")
         'generic
@@ -464,7 +465,7 @@
                    ADODB.CursorTypeEnum.adOpenStatic,
                    ADODB.LockTypeEnum.adLockPessimistic
            )
-                addToInv(rs.Fields("ID").Value)
+                'addToInv(rs.Fields("ID").Value)
                 rs.Close()
         End Select
         rs_char.Update()
@@ -775,7 +776,10 @@
         Catch
             Console.WriteLine("DragDrop sourceID could not be detrmined")
         End Try
-        If dragdrop_source.Name <> sender.Name Then 'prevent self drop
+        If dragdrop_source.Name = craftingBox.Name Then
+            craft(craftingBox.SelectedItem)
+
+        ElseIf dragdrop_source.Name <> sender.Name Then 'prevent self drop
             'add Item to Inventory
             sender.Items.Add(e.Data.GetData(DataFormats.Text).ToString)
             inventoryIDs.Add(charItemIDs(sourceID))
@@ -786,9 +790,7 @@
             removeItemFromChar(sourceID)
             charItemIDs(sourceID) = 0
         End If
-        If dragdrop_source.Name = craftingBox.Name Then
 
-        End If
     End Sub
     Private Sub item_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles item0.DragDrop, item1.DragDrop, item2.DragDrop
         Console.WriteLine("sender.name: " & sender.name)
@@ -892,11 +894,31 @@
         charItemIDs(characterID) = itemID
     End Sub
 
+    Sub craft(name As String)
+        Dim ID As Short = getIDOfItem(name)
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Inventory]", conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        For Each ingID In craftingIDs(ID) 'remove ingredients from inventory
+            Console.WriteLine("Removing: " & ingID)
+            rs.MoveFirst()
+            rs.Find("[itemID]=" & ingID)
+            rs.Delete()
+        Next
+        rs.AddNew()
+        rs.Fields("itemID").Value = ID
+        rs.Update()
+        rs.Close()
+        Call updateFields()
+    End Sub
     Sub checkCraftable()
         Dim rs_Items As New ADODB.Recordset
         Dim inventoryCopy As New List(Of Short)
         Dim craftable As Boolean = False 'if current selection is craftable with items in inventory
         Dim ingredients As New List(Of String)
+        Dim ingredientIDs As New List(Of Short)
         craftingList.Clear()
         rs_Items.Open("SELECT * FROM [Items]", conn,
             ADODB.CursorTypeEnum.adOpenStatic,
@@ -905,6 +927,7 @@
         While Not rs_Items.EOF
             inventoryCopy.Clear()
             ingredients.Clear()
+            ingredientIDs.Clear()
             For Each elem In inventoryIDs
                 inventoryCopy.Add(elem)
             Next
@@ -913,6 +936,7 @@
                     If inventoryCopy.Contains(rs_Items.Fields("ingredient" & i).Value) Then
                         inventoryCopy.Remove(rs_Items.Fields("ingredient" & i).Value) 'avoid items being counted doubled
                         ingredients.Add(getNameOfItem(rs_Items.Fields("ingredient" & i).Value))
+                        ingredientIDs.Add(rs_Items.Fields("ingredient" & i).Value)
                         craftable = True
                     Else
                         craftable = False
@@ -922,6 +946,7 @@
             If craftable Then
                 craftingBox.Items.Add(rs_Items.Fields("itemName").Value)
                 craftingList.Add(getNameOfItem(rs_Items.Fields("ID").Value), ingredients)
+                craftingIDs.Add(rs_Items.Fields("ID").Value, ingredientIDs)
                 craftable = False
             End If
             rs_Items.MoveNext()
@@ -940,5 +965,13 @@
             ADODB.LockTypeEnum.adLockPessimistic
     )
         getNameOfItem = rs.Fields("itemName").Value
+    End Function
+    Function getIDOfItem(ByVal name)
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT * FROM [Items] WHERE itemName='" & name & "'", conn,
+            ADODB.CursorTypeEnum.adOpenStatic,
+            ADODB.LockTypeEnum.adLockPessimistic
+    )
+        getIDOfItem = rs.Fields("ID").Value
     End Function
 End Class
