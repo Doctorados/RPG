@@ -175,33 +175,6 @@
             getBar = Replace(Space(num), " ", str)
         End If
     End Function
-
-    Private Function skillWords(ByRef value)
-        Dim words(20) As String
-        words = {
-        "unfähig",
-        "grauenhaft",
-        "furchtbar",
-        "sehr schlecht",
-        "schlecht",
-        "gering",
-        "mangelhaft",
-        "unterdurchschnittlich",
-        "mittelmäßig",
-        "durchschnittlich",
-        "gut",
-        "sehr gut",
-        "außergewöhnlich",
-        "beeindruckend",
-        "exzellent",
-        "fantastisch",
-        "unglaublich",
-        "übermenschlich",
-        "episch",
-        "legendär",
-        "gottgleich"}
-        skillWords = words(value)
-    End Function
     Private Sub calcDay()
         Console.WriteLine("calcDay: Start of Sub")
         Dim rs As New ADODB.Recordset
@@ -317,7 +290,7 @@
         Console.WriteLine("calcRations: End of Sub")
     End Function
 
-    Function sumArray(ByVal arr)
+    Function sumArray(ByVal arr) 'gives the sum of an array of booleans
         Dim num As Int16
         num = 0
         For Each elem In arr
@@ -349,6 +322,7 @@
         Dim result As Int16
         Dim msgString As String 'displayed string for result of task
         Dim resultList As String() = {"", "", ""} 'list for output
+        Dim itemBonus As Short
         rs_char.Open("SELECT * FROM [Character]", conn,
                     ADODB.CursorTypeEnum.adOpenDynamic,
                     ADODB.LockTypeEnum.adLockOptimistic
@@ -370,8 +344,9 @@
                 skillLevel = rs_char.Fields(relSkill).Value
                 Console.WriteLine("calcTasks: relevant skill: " & relSkill)
                 Console.WriteLine("calcTasks skilllevel: " & skillLevel)
+                itemBonus = calcItemBonus(rs_char.Fields("itemID").Value, relSkill)
 
-                result = getOutcome(skillLevel) 'calculate outcome
+                result = getOutcome(skillLevel + itemBonus) 'calculate outcome
                 Console.WriteLine("calcTasks: result: " & result)
 
                 If rs_tasks.Fields("outcome" & result).Value = "event" Then
@@ -410,7 +385,18 @@
         rs_char.Close()
         Console.WriteLine("calcTasks: End of Sub")
     End Sub
-
+    Function calcItemBonus(ByVal itemID, ByVal relSkill)
+        Dim rs As New ADODB.Recordset
+        rs.Open("SELECT bonus FROM [Items] WHERE [ID]=" & itemID & "AND [stat]='" & relSkill & "'", conn,
+                    ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockReadOnly
+            ) 'only retursn record if item equipped is relevant to skill given
+        If rs.RecordCount > 0 Then
+            calcItemBonus = rs.Fields("bonus").Value
+        Else
+            calcItemBonus = 0
+        End If
+    End Function
     Function arrToStr(ByRef arr, ByVal sep) 'convert array to string
         Dim str As String
         str = ""
@@ -808,7 +794,7 @@
         Dim targetID As Short = Integer.Parse(sender.Name(sender.Name.Length - 1)) 'ID of character recieving object
         Console.WriteLine("targetID: " & targetID)
 
-        If dragdrop_source.Name <> sender.Name And dragdrop_source.Name <> craftingBox.Name Then 'prevent self drop
+        If dragdrop_source.Name <> sender.Name And dragdrop_source.Name <> craftingBox.Name Then 'prevent self drop, don't allow crafting direct to character
             If sender.Text <> "" Then 'if already item in textbox put back into inventory
                 If TypeOf (dragdrop_source) Is ListBox Then
                     'add to Inventory
@@ -821,11 +807,14 @@
 
             If TypeOf (dragdrop_source) Is TextBox Then 'treat exchange between textboxes
                 Dim sourceID As Short = Integer.Parse(dragdrop_source.Name(dragdrop_source.Name.Length - 1)) 'ID of character giving object
+                Dim sourceItem As Short = charItemIDs(sourceID)
+                Dim targetItem As Short = charItemIDs(targetID)
                 dragdrop_source.Text = sender.Text
+
                 'add item to source character
-                addItemToChar(sourceID, charItemIDs(targetID))
+                addItemToChar(sourceID, targetItem)
                 'add item to target character
-                addItemToChar(targetID, charItemIDs(sourceID))
+                addItemToChar(targetID, sourceItem)
             End If
 
             If TypeOf (dragdrop_source) Is ListBox Then
