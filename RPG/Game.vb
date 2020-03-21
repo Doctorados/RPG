@@ -168,7 +168,7 @@
         Dim num As Int16
         Dim str As String
         str = "░"
-        num = (value / 100) * 15
+        num = (value / 100) * 13
         If num = 0 Then
             getBar = zeroWord
         Else
@@ -515,12 +515,6 @@
         outcome = outcome + (action * 2)
         Console.WriteLine("eventCalcOutcome: Outcome: " & outcome)
 
-        'rs_string.Open("SELECT * FROM [EventResultString] WHERE [eventID]=" & eventID & "AND [outcome]=" & outcome, conn,
-        'ADODB.CursorTypeEnum.adOpenStatic,
-        'ADODB.LockTypeEnum.adLockReadOnly
-        ')
-        'randomRecord(rs_string)
-
         eventOutcomeBox.Text = rs_char.Fields("fullName").Value & " " & rs_event.Fields("str" & outcome).Value
         parseOutcome(rs_event.Fields("outcome" & outcome).Value, rs_char)
 
@@ -596,22 +590,33 @@
 
         Dim rs_day As New ADODB.Recordset
         Dim rs_char As New ADODB.Recordset
+        Dim rs_name As New ADODB.Recordset
+        Dim nameArr(3) As String
         rs_day.Open("SELECT * FROM [Day]", conn, ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic)
         rs_char.Open("SELECT * FROM [Character]", conn, ADODB.CursorTypeEnum.adOpenStatic,
                     ADODB.LockTypeEnum.adLockPessimistic)
-
+        rs_name.Open("SELECT NameStr FROM [Names]", conn, ADODB.CursorTypeEnum.adOpenStatic,
+                    ADODB.LockTypeEnum.adLockPessimistic)
         rs_day.AddNew()
         rs_day.Fields("rations").Value = 5
         rs_day.Fields("counter").Value = 1
         rs_day.Update()
 
         For i = 0 To 2
+            randomRecord(rs_name)
+            While nameArr.Contains(rs_name.Fields(0).Value) 'prevent duplicates
+                randomRecord(rs_name)
+            End While
+            nameArr(i) = (rs_name.Fields(0).Value)
+        Next
+        For i = 0 To 2
             Dim x As Short = 4
             Dim skills As Int16() = newSkills(Difficulty.SelectedIndex)
             rs_char.AddNew()
             rs_char.Fields(0).Value = i
-            rs_char.Fields(1).Value = "NONAME " & i
+            MsgBox(nameArr(i))
+            rs_char.Fields(1).Value = nameArr(i)
             rs_char.Fields(2).Value = 100
             rs_char.Fields(3).Value = 100
             For Each elem In skills
@@ -976,4 +981,5 @@
     )
         getIDOfItem = rs.Fields("ID").Value
     End Function
+
 End Class
