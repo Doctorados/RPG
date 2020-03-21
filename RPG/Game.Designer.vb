@@ -53,16 +53,13 @@ Partial Class Game
         Me.name2 = New System.Windows.Forms.TextBox()
         Me.hungerbar2 = New System.Windows.Forms.TextBox()
         Me.healthBar2 = New System.Windows.Forms.TextBox()
-        Me.charPic2 = New System.Windows.Forms.PictureBox()
         Me.task1 = New System.Windows.Forms.ComboBox()
         Me.name1 = New System.Windows.Forms.TextBox()
         Me.hungerBar1 = New System.Windows.Forms.TextBox()
         Me.healthBar1 = New System.Windows.Forms.TextBox()
-        Me.charPic1 = New System.Windows.Forms.PictureBox()
         Me.name0 = New System.Windows.Forms.TextBox()
         Me.hungerBar0 = New System.Windows.Forms.TextBox()
         Me.healthBar0 = New System.Windows.Forms.TextBox()
-        Me.charPic0 = New System.Windows.Forms.PictureBox()
         Me.eventPage = New System.Windows.Forms.TabPage()
         Me.eventGoBack = New System.Windows.Forms.Button()
         Me.eventOutcomeBox = New System.Windows.Forms.RichTextBox()
@@ -73,16 +70,19 @@ Partial Class Game
         Me.outcomePage = New System.Windows.Forms.TabPage()
         Me.outcomeGoBack = New System.Windows.Forms.Button()
         Me.outcomeBox = New System.Windows.Forms.RichTextBox()
+        Me.charPic2 = New System.Windows.Forms.PictureBox()
+        Me.charPic1 = New System.Windows.Forms.PictureBox()
+        Me.charPic0 = New System.Windows.Forms.PictureBox()
         Me.TabControl.SuspendLayout()
         Me.splash.SuspendLayout()
         Me.newgame.SuspendLayout()
         Me.manual.SuspendLayout()
         Me.main.SuspendLayout()
+        Me.eventPage.SuspendLayout()
+        Me.outcomePage.SuspendLayout()
         CType(Me.charPic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.charPic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.eventPage.SuspendLayout()
-        Me.outcomePage.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl
@@ -101,6 +101,7 @@ Partial Class Game
         '
         'splash
         '
+        Me.splash.BackColor = System.Drawing.Color.DarkSlateGray
         Me.splash.Controls.Add(Me.newGameBtn)
         Me.splash.Controls.Add(Me.loadGameBtn)
         Me.splash.Location = New System.Drawing.Point(4, 22)
@@ -109,28 +110,36 @@ Partial Class Game
         Me.splash.Size = New System.Drawing.Size(768, 400)
         Me.splash.TabIndex = 0
         Me.splash.Text = "Start"
-        Me.splash.UseVisualStyleBackColor = True
         '
         'newGameBtn
         '
+        Me.newGameBtn.BackColor = System.Drawing.Color.White
+        Me.newGameBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.newGameBtn.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.newGameBtn.ForeColor = System.Drawing.Color.Black
         Me.newGameBtn.Location = New System.Drawing.Point(29, 157)
         Me.newGameBtn.Name = "newGameBtn"
         Me.newGameBtn.Size = New System.Drawing.Size(297, 86)
         Me.newGameBtn.TabIndex = 3
         Me.newGameBtn.Text = "Neues Spiel"
-        Me.newGameBtn.UseVisualStyleBackColor = True
+        Me.newGameBtn.UseVisualStyleBackColor = False
         '
         'loadGameBtn
         '
+        Me.loadGameBtn.BackColor = System.Drawing.Color.White
+        Me.loadGameBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.loadGameBtn.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.loadGameBtn.ForeColor = System.Drawing.Color.Black
         Me.loadGameBtn.Location = New System.Drawing.Point(442, 157)
         Me.loadGameBtn.Name = "loadGameBtn"
         Me.loadGameBtn.Size = New System.Drawing.Size(297, 86)
         Me.loadGameBtn.TabIndex = 2
         Me.loadGameBtn.Text = "Spiel laden"
-        Me.loadGameBtn.UseVisualStyleBackColor = True
+        Me.loadGameBtn.UseVisualStyleBackColor = False
         '
         'newgame
         '
+        Me.newgame.BackColor = System.Drawing.Color.DarkSlateGray
         Me.newgame.Controls.Add(Me.Back)
         Me.newgame.Controls.Add(Me.Start)
         Me.newgame.Controls.Add(Me.Difficulty)
@@ -139,33 +148,44 @@ Partial Class Game
         Me.newgame.Size = New System.Drawing.Size(768, 400)
         Me.newgame.TabIndex = 3
         Me.newgame.Text = "start"
-        Me.newgame.UseVisualStyleBackColor = True
         '
         'Back
         '
+        Me.Back.BackColor = System.Drawing.Color.White
+        Me.Back.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Back.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.Back.ForeColor = System.Drawing.Color.Black
         Me.Back.Location = New System.Drawing.Point(29, 244)
         Me.Back.Name = "Back"
         Me.Back.Size = New System.Drawing.Size(297, 86)
         Me.Back.TabIndex = 7
         Me.Back.Text = "Zurück"
-        Me.Back.UseVisualStyleBackColor = True
+        Me.Back.UseVisualStyleBackColor = False
         '
         'Start
         '
+        Me.Start.BackColor = System.Drawing.Color.White
+        Me.Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Start.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.Start.ForeColor = System.Drawing.Color.Black
         Me.Start.Location = New System.Drawing.Point(442, 244)
         Me.Start.Name = "Start"
         Me.Start.Size = New System.Drawing.Size(297, 86)
         Me.Start.TabIndex = 6
         Me.Start.Text = "Spiel starten"
-        Me.Start.UseVisualStyleBackColor = True
+        Me.Start.UseVisualStyleBackColor = False
         '
         'Difficulty
         '
+        Me.Difficulty.BackColor = System.Drawing.Color.White
+        Me.Difficulty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Difficulty.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold)
+        Me.Difficulty.ForeColor = System.Drawing.Color.Black
         Me.Difficulty.FormattingEnabled = True
         Me.Difficulty.Items.AddRange(New Object() {"Leicht (Ø Skill =15)", "Mittel (Ø Skill =10)", "Schwer (Ø Skill = 5)", "Unmöglich (Alle Skills = 0)"})
-        Me.Difficulty.Location = New System.Drawing.Point(442, 70)
+        Me.Difficulty.Location = New System.Drawing.Point(442, 61)
         Me.Difficulty.Name = "Difficulty"
-        Me.Difficulty.Size = New System.Drawing.Size(297, 21)
+        Me.Difficulty.Size = New System.Drawing.Size(297, 36)
         Me.Difficulty.TabIndex = 5
         '
         'manual
@@ -484,17 +504,6 @@ Partial Class Game
         Me.healthBar2.TabIndex = 62
         Me.healthBar2.Text = "NODATA"
         '
-        'charPic2
-        '
-        Me.charPic2.Image = CType(resources.GetObject("charPic2.Image"), System.Drawing.Image)
-        Me.charPic2.InitialImage = CType(resources.GetObject("charPic2.InitialImage"), System.Drawing.Image)
-        Me.charPic2.Location = New System.Drawing.Point(408, 83)
-        Me.charPic2.Name = "charPic2"
-        Me.charPic2.Size = New System.Drawing.Size(158, 119)
-        Me.charPic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.charPic2.TabIndex = 61
-        Me.charPic2.TabStop = False
-        '
         'task1
         '
         Me.task1.BackColor = System.Drawing.Color.Black
@@ -548,17 +557,6 @@ Partial Class Game
         Me.healthBar1.TabIndex = 57
         Me.healthBar1.Text = "NODATA"
         '
-        'charPic1
-        '
-        Me.charPic1.Image = CType(resources.GetObject("charPic1.Image"), System.Drawing.Image)
-        Me.charPic1.InitialImage = CType(resources.GetObject("charPic1.InitialImage"), System.Drawing.Image)
-        Me.charPic1.Location = New System.Drawing.Point(218, 83)
-        Me.charPic1.Name = "charPic1"
-        Me.charPic1.Size = New System.Drawing.Size(158, 119)
-        Me.charPic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.charPic1.TabIndex = 56
-        Me.charPic1.TabStop = False
-        '
         'name0
         '
         Me.name0.BackColor = System.Drawing.Color.Black
@@ -598,17 +596,6 @@ Partial Class Game
         Me.healthBar0.Size = New System.Drawing.Size(158, 32)
         Me.healthBar0.TabIndex = 33
         Me.healthBar0.Text = "NODATA"
-        '
-        'charPic0
-        '
-        Me.charPic0.Image = CType(resources.GetObject("charPic0.Image"), System.Drawing.Image)
-        Me.charPic0.InitialImage = CType(resources.GetObject("charPic0.InitialImage"), System.Drawing.Image)
-        Me.charPic0.Location = New System.Drawing.Point(30, 83)
-        Me.charPic0.Name = "charPic0"
-        Me.charPic0.Size = New System.Drawing.Size(158, 119)
-        Me.charPic0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.charPic0.TabIndex = 2
-        Me.charPic0.TabStop = False
         '
         'eventPage
         '
@@ -737,6 +724,39 @@ Partial Class Game
         Me.outcomeBox.TabIndex = 72
         Me.outcomeBox.Text = "OUTCOMES"
         '
+        'charPic2
+        '
+        Me.charPic2.Image = Global.RPG.My.Resources.Resources.face3
+        Me.charPic2.InitialImage = CType(resources.GetObject("charPic2.InitialImage"), System.Drawing.Image)
+        Me.charPic2.Location = New System.Drawing.Point(408, 83)
+        Me.charPic2.Name = "charPic2"
+        Me.charPic2.Size = New System.Drawing.Size(158, 119)
+        Me.charPic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.charPic2.TabIndex = 61
+        Me.charPic2.TabStop = False
+        '
+        'charPic1
+        '
+        Me.charPic1.Image = Global.RPG.My.Resources.Resources.face0
+        Me.charPic1.InitialImage = CType(resources.GetObject("charPic1.InitialImage"), System.Drawing.Image)
+        Me.charPic1.Location = New System.Drawing.Point(218, 83)
+        Me.charPic1.Name = "charPic1"
+        Me.charPic1.Size = New System.Drawing.Size(158, 119)
+        Me.charPic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.charPic1.TabIndex = 56
+        Me.charPic1.TabStop = False
+        '
+        'charPic0
+        '
+        Me.charPic0.Image = Global.RPG.My.Resources.Resources.face4
+        Me.charPic0.InitialImage = CType(resources.GetObject("charPic0.InitialImage"), System.Drawing.Image)
+        Me.charPic0.Location = New System.Drawing.Point(30, 83)
+        Me.charPic0.Name = "charPic0"
+        Me.charPic0.Size = New System.Drawing.Size(158, 119)
+        Me.charPic0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.charPic0.TabIndex = 2
+        Me.charPic0.TabStop = False
+        '
         'Game
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -751,12 +771,12 @@ Partial Class Game
         Me.manual.ResumeLayout(False)
         Me.main.ResumeLayout(False)
         Me.main.PerformLayout()
-        CType(Me.charPic2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.charPic1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.charPic0, System.ComponentModel.ISupportInitialize).EndInit()
         Me.eventPage.ResumeLayout(False)
         Me.eventPage.PerformLayout()
         Me.outcomePage.ResumeLayout(False)
+        CType(Me.charPic2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.charPic1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.charPic0, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

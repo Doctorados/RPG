@@ -13,7 +13,7 @@
     Private Sub Game_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Console.WriteLine("Game_Load: Start of Sub")
         'generic
-        conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=C:\Users\Damion\Google Drive\Studium\4. Semester\Informatik\main.accdb")
+        conn.Open("Provider=Microsoft.ACE.OLEDB.12.0;" & "Data Source=../resources/main.accdb")
         'hide the tab control bar
         TabControl.Appearance = TabAppearance.FlatButtons
         TabControl.ItemSize = New Size(0, 1)
@@ -83,7 +83,7 @@
             )
             TabControl.TabPages(3).Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value)) 'fill name boxes with names
             TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD")) 'fill healthbar
-            TabControl.TabPages(3).Controls("item" & i).Text = (rs_items.Fields("itemName").Value) 'fill item field
+            TabControl.TabPages(3).Controls("item" & i).Text = (rs_items.Fields("itemName").Value) 'fill item field.
             charItemIDs.Add(i, rs.Fields("itemID").Value)
 
             If rs.Fields("health").Value = 0 Then
@@ -843,6 +843,7 @@
         If dragdrop_source.Name = craftingBox.Name Then
             craftInfoTitle.Show()
             For Each elem In craftingList(craftingBox.SelectedItem)
+                Console.WriteLine("HIDE :" & elem)
                 inventoryBox.Items.Remove(elem)
             Next
         End If
@@ -923,8 +924,6 @@
         Dim rs_Items As New ADODB.Recordset
         Dim inventoryCopy As New List(Of Short)
         Dim craftable As Boolean = False 'if current selection is craftable with items in inventory
-        Dim ingredients As New List(Of String)
-        Dim ingredientIDs As New List(Of Short)
         craftingList.Clear()
         craftingIDs.Clear()
         rs_Items.Open("SELECT * FROM [Items]", conn,
@@ -933,8 +932,8 @@
     )
         While Not rs_Items.EOF
             inventoryCopy.Clear()
-            ingredients.Clear()
-            ingredientIDs.Clear()
+            Dim ingredients As New List(Of String)
+            Dim ingredientIDs As New List(Of Short)
             For Each elem In inventoryIDs
                 inventoryCopy.Add(elem)
             Next
@@ -947,6 +946,7 @@
                         craftable = True
                     Else
                         craftable = False
+                        Exit For 'break if one ingredient is missing
                     End If
                 End If
             Next

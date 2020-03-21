@@ -185,6 +185,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\resources\face4.png" />
+    <None Include="bin\resources\face0.png" />
+    <None Include="bin\resources\face3.png" />
     <Content Include="main.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
