@@ -64,7 +64,7 @@
 
     Private Sub updateFields() 'update the main menu fields
         Console.WriteLine("updateFields: Start of Sub")
-        Dim skillNames = New String() {"Intelligenz", "Geschick", "Stärke", "Wahrnehmung", "Mental"} 'human readable names for skills
+        Dim skillNames = New String() {"Intelligenz", "Beweglichkeit", "Stärke", "Wahrnehmung", "Mental"} 'human readable names for skills
         Dim rs As New ADODB.Recordset
         Dim rs_items As New ADODB.Recordset
 
@@ -82,14 +82,14 @@
                     ADODB.LockTypeEnum.adLockReadOnly
             )
             TabControl.TabPages(3).Controls("name" & i).Text = (CStr(rs.Fields("fullName").Value)) 'fill name boxes with names
-            TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "DEAD")) 'fill healthbar
+            TabControl.TabPages(3).Controls("healthBar" & i).Text = (getBar(rs.Fields("health").Value, "TOT")) 'fill healthbar
             TabControl.TabPages(3).Controls("item" & i).Text = (rs_items.Fields("itemName").Value) 'fill item field.
             charItemIDs.Add(i, rs.Fields("itemID").Value)
 
             If rs.Fields("health").Value = 0 Then
                 killChar(i) 'self explanatory
             Else
-                TabControl.TabPages(3).Controls("hungerBar" & i).Text = (getBar(rs.Fields("hunger").Value, "STARVING"))
+                TabControl.TabPages(3).Controls("hungerBar" & i).Text = (getBar(rs.Fields("hunger").Value, "HUNGERT"))
             End If
             Console.WriteLine("update_Fields: Updating Skills for Character " & i)
             k = 4
@@ -615,7 +615,6 @@
             Dim skills As Int16() = newSkills(Difficulty.SelectedIndex)
             rs_char.AddNew()
             rs_char.Fields(0).Value = i
-            MsgBox(nameArr(i))
             rs_char.Fields(1).Value = nameArr(i)
             rs_char.Fields(2).Value = 100
             rs_char.Fields(3).Value = 100
@@ -733,7 +732,7 @@
         charSkills2.Hide()
     End Sub
 
-    Private Sub manualBtn_Click(sender As Object, e As EventArgs) Handles manualBtn.Click
+    Private Sub manualBtn_Click(sender As Object, e As EventArgs)
         TabControl.SelectedIndex = 2
     End Sub
 

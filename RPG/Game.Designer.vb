@@ -41,7 +41,6 @@ Partial Class Game
         Me.item1 = New System.Windows.Forms.TextBox()
         Me.item2 = New System.Windows.Forms.TextBox()
         Me.item0 = New System.Windows.Forms.TextBox()
-        Me.manualBtn = New System.Windows.Forms.Button()
         Me.charSkills2 = New System.Windows.Forms.ListBox()
         Me.charSkills1 = New System.Windows.Forms.ListBox()
         Me.charSkills0 = New System.Windows.Forms.ListBox()
@@ -53,36 +52,36 @@ Partial Class Game
         Me.name2 = New System.Windows.Forms.TextBox()
         Me.hungerbar2 = New System.Windows.Forms.TextBox()
         Me.healthBar2 = New System.Windows.Forms.TextBox()
+        Me.charPic2 = New System.Windows.Forms.PictureBox()
         Me.task1 = New System.Windows.Forms.ComboBox()
         Me.name1 = New System.Windows.Forms.TextBox()
         Me.hungerBar1 = New System.Windows.Forms.TextBox()
         Me.healthBar1 = New System.Windows.Forms.TextBox()
+        Me.charPic1 = New System.Windows.Forms.PictureBox()
         Me.name0 = New System.Windows.Forms.TextBox()
         Me.hungerBar0 = New System.Windows.Forms.TextBox()
         Me.healthBar0 = New System.Windows.Forms.TextBox()
+        Me.charPic0 = New System.Windows.Forms.PictureBox()
         Me.eventPage = New System.Windows.Forms.TabPage()
         Me.eventGoBack = New System.Windows.Forms.Button()
         Me.eventOutcomeBox = New System.Windows.Forms.RichTextBox()
         Me.eventTextBox = New System.Windows.Forms.RichTextBox()
         Me.eventAction1 = New System.Windows.Forms.Button()
-        Me.eventAction0 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.outcomePage = New System.Windows.Forms.TabPage()
         Me.outcomeGoBack = New System.Windows.Forms.Button()
         Me.outcomeBox = New System.Windows.Forms.RichTextBox()
-        Me.charPic2 = New System.Windows.Forms.PictureBox()
-        Me.charPic1 = New System.Windows.Forms.PictureBox()
-        Me.charPic0 = New System.Windows.Forms.PictureBox()
+        Me.eventAction0 = New System.Windows.Forms.Button()
         Me.TabControl.SuspendLayout()
         Me.splash.SuspendLayout()
         Me.newgame.SuspendLayout()
         Me.manual.SuspendLayout()
         Me.main.SuspendLayout()
-        Me.eventPage.SuspendLayout()
-        Me.outcomePage.SuspendLayout()
         CType(Me.charPic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.charPic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.eventPage.SuspendLayout()
+        Me.outcomePage.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl
@@ -197,7 +196,7 @@ Partial Class Game
         Me.manual.Padding = New System.Windows.Forms.Padding(3)
         Me.manual.Size = New System.Drawing.Size(768, 400)
         Me.manual.TabIndex = 1
-        Me.manual.Text = "Anleitung"
+        Me.manual.Text = "none"
         '
         'manualTextBox
         '
@@ -221,7 +220,6 @@ Partial Class Game
         Me.main.Controls.Add(Me.item1)
         Me.main.Controls.Add(Me.item2)
         Me.main.Controls.Add(Me.item0)
-        Me.main.Controls.Add(Me.manualBtn)
         Me.main.Controls.Add(Me.charSkills2)
         Me.main.Controls.Add(Me.charSkills1)
         Me.main.Controls.Add(Me.charSkills0)
@@ -346,20 +344,6 @@ Partial Class Game
         Me.item0.Size = New System.Drawing.Size(158, 32)
         Me.item0.TabIndex = 74
         Me.item0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'manualBtn
-        '
-        Me.manualBtn.BackColor = System.Drawing.Color.DarkSlateGray
-        Me.manualBtn.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.manualBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.manualBtn.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.manualBtn.ForeColor = System.Drawing.Color.White
-        Me.manualBtn.Location = New System.Drawing.Point(731, 3)
-        Me.manualBtn.Name = "manualBtn"
-        Me.manualBtn.Size = New System.Drawing.Size(34, 36)
-        Me.manualBtn.TabIndex = 72
-        Me.manualBtn.Text = "?"
-        Me.manualBtn.UseVisualStyleBackColor = False
         '
         'charSkills2
         '
@@ -504,6 +488,17 @@ Partial Class Game
         Me.healthBar2.TabIndex = 62
         Me.healthBar2.Text = "NODATA"
         '
+        'charPic2
+        '
+        Me.charPic2.Image = Global.RPG.My.Resources.Resources.face3
+        Me.charPic2.InitialImage = CType(resources.GetObject("charPic2.InitialImage"), System.Drawing.Image)
+        Me.charPic2.Location = New System.Drawing.Point(408, 83)
+        Me.charPic2.Name = "charPic2"
+        Me.charPic2.Size = New System.Drawing.Size(158, 119)
+        Me.charPic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.charPic2.TabIndex = 61
+        Me.charPic2.TabStop = False
+        '
         'task1
         '
         Me.task1.BackColor = System.Drawing.Color.Black
@@ -557,6 +552,17 @@ Partial Class Game
         Me.healthBar1.TabIndex = 57
         Me.healthBar1.Text = "NODATA"
         '
+        'charPic1
+        '
+        Me.charPic1.Image = Global.RPG.My.Resources.Resources.face0
+        Me.charPic1.InitialImage = CType(resources.GetObject("charPic1.InitialImage"), System.Drawing.Image)
+        Me.charPic1.Location = New System.Drawing.Point(218, 83)
+        Me.charPic1.Name = "charPic1"
+        Me.charPic1.Size = New System.Drawing.Size(158, 119)
+        Me.charPic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.charPic1.TabIndex = 56
+        Me.charPic1.TabStop = False
+        '
         'name0
         '
         Me.name0.BackColor = System.Drawing.Color.Black
@@ -597,14 +603,25 @@ Partial Class Game
         Me.healthBar0.TabIndex = 33
         Me.healthBar0.Text = "NODATA"
         '
+        'charPic0
+        '
+        Me.charPic0.Image = Global.RPG.My.Resources.Resources.face4
+        Me.charPic0.InitialImage = CType(resources.GetObject("charPic0.InitialImage"), System.Drawing.Image)
+        Me.charPic0.Location = New System.Drawing.Point(30, 83)
+        Me.charPic0.Name = "charPic0"
+        Me.charPic0.Size = New System.Drawing.Size(158, 119)
+        Me.charPic0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.charPic0.TabIndex = 2
+        Me.charPic0.TabStop = False
+        '
         'eventPage
         '
         Me.eventPage.BackColor = System.Drawing.Color.DarkSlateGray
+        Me.eventPage.Controls.Add(Me.eventAction1)
+        Me.eventPage.Controls.Add(Me.eventAction0)
         Me.eventPage.Controls.Add(Me.eventGoBack)
         Me.eventPage.Controls.Add(Me.eventOutcomeBox)
         Me.eventPage.Controls.Add(Me.eventTextBox)
-        Me.eventPage.Controls.Add(Me.eventAction1)
-        Me.eventPage.Controls.Add(Me.eventAction0)
         Me.eventPage.Controls.Add(Me.Label3)
         Me.eventPage.Location = New System.Drawing.Point(4, 22)
         Me.eventPage.Name = "eventPage"
@@ -657,26 +674,12 @@ Partial Class Game
         Me.eventAction1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.eventAction1.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.eventAction1.ForeColor = System.Drawing.Color.Black
-        Me.eventAction1.Location = New System.Drawing.Point(232, 314)
+        Me.eventAction1.Location = New System.Drawing.Point(232, 277)
         Me.eventAction1.Name = "eventAction1"
-        Me.eventAction1.Size = New System.Drawing.Size(199, 36)
+        Me.eventAction1.Size = New System.Drawing.Size(199, 73)
         Me.eventAction1.TabIndex = 70
         Me.eventAction1.Text = "Action 1"
         Me.eventAction1.UseVisualStyleBackColor = False
-        '
-        'eventAction0
-        '
-        Me.eventAction0.BackColor = System.Drawing.Color.White
-        Me.eventAction0.Cursor = System.Windows.Forms.Cursors.Arrow
-        Me.eventAction0.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.eventAction0.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.eventAction0.ForeColor = System.Drawing.Color.Black
-        Me.eventAction0.Location = New System.Drawing.Point(27, 314)
-        Me.eventAction0.Name = "eventAction0"
-        Me.eventAction0.Size = New System.Drawing.Size(199, 36)
-        Me.eventAction0.TabIndex = 69
-        Me.eventAction0.Text = "Action 0"
-        Me.eventAction0.UseVisualStyleBackColor = False
         '
         'Label3
         '
@@ -724,38 +727,19 @@ Partial Class Game
         Me.outcomeBox.TabIndex = 72
         Me.outcomeBox.Text = "OUTCOMES"
         '
-        'charPic2
+        'eventAction0
         '
-        Me.charPic2.Image = Global.RPG.My.Resources.Resources.face3
-        Me.charPic2.InitialImage = CType(resources.GetObject("charPic2.InitialImage"), System.Drawing.Image)
-        Me.charPic2.Location = New System.Drawing.Point(408, 83)
-        Me.charPic2.Name = "charPic2"
-        Me.charPic2.Size = New System.Drawing.Size(158, 119)
-        Me.charPic2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.charPic2.TabIndex = 61
-        Me.charPic2.TabStop = False
-        '
-        'charPic1
-        '
-        Me.charPic1.Image = Global.RPG.My.Resources.Resources.face0
-        Me.charPic1.InitialImage = CType(resources.GetObject("charPic1.InitialImage"), System.Drawing.Image)
-        Me.charPic1.Location = New System.Drawing.Point(218, 83)
-        Me.charPic1.Name = "charPic1"
-        Me.charPic1.Size = New System.Drawing.Size(158, 119)
-        Me.charPic1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.charPic1.TabIndex = 56
-        Me.charPic1.TabStop = False
-        '
-        'charPic0
-        '
-        Me.charPic0.Image = Global.RPG.My.Resources.Resources.face4
-        Me.charPic0.InitialImage = CType(resources.GetObject("charPic0.InitialImage"), System.Drawing.Image)
-        Me.charPic0.Location = New System.Drawing.Point(30, 83)
-        Me.charPic0.Name = "charPic0"
-        Me.charPic0.Size = New System.Drawing.Size(158, 119)
-        Me.charPic0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.charPic0.TabIndex = 2
-        Me.charPic0.TabStop = False
+        Me.eventAction0.BackColor = System.Drawing.Color.White
+        Me.eventAction0.Cursor = System.Windows.Forms.Cursors.Arrow
+        Me.eventAction0.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.eventAction0.Font = New System.Drawing.Font("Consolas", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.eventAction0.ForeColor = System.Drawing.Color.Black
+        Me.eventAction0.Location = New System.Drawing.Point(27, 277)
+        Me.eventAction0.Name = "eventAction0"
+        Me.eventAction0.Size = New System.Drawing.Size(199, 73)
+        Me.eventAction0.TabIndex = 74
+        Me.eventAction0.Text = "Action 0"
+        Me.eventAction0.UseVisualStyleBackColor = False
         '
         'Game
         '
@@ -771,12 +755,12 @@ Partial Class Game
         Me.manual.ResumeLayout(False)
         Me.main.ResumeLayout(False)
         Me.main.PerformLayout()
-        Me.eventPage.ResumeLayout(False)
-        Me.eventPage.PerformLayout()
-        Me.outcomePage.ResumeLayout(False)
         CType(Me.charPic2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.charPic1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.charPic0, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.eventPage.ResumeLayout(False)
+        Me.eventPage.PerformLayout()
+        Me.outcomePage.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -812,11 +796,9 @@ Partial Class Game
     Friend WithEvents task0 As ComboBox
     Friend WithEvents foodCounter As TextBox
     Friend WithEvents dayCounter As TextBox
-    Friend WithEvents manualBtn As Button
     Friend WithEvents eventPage As TabPage
     Friend WithEvents eventTextBox As RichTextBox
     Friend WithEvents eventAction1 As Button
-    Friend WithEvents eventAction0 As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents eventOutcomeBox As RichTextBox
     Friend WithEvents eventGoBack As Button
@@ -831,4 +813,5 @@ Partial Class Game
     Friend WithEvents inventoryTitle As TextBox
     Friend WithEvents craftingBox As ListBox
     Friend WithEvents craftInfoTitle As TextBox
+    Friend WithEvents eventAction0 As Button
 End Class
